@@ -1,0 +1,73 @@
+#inputelem{
+	border-radius:5px;
+	border-width:3px;
+	background-color:#efefef;
+	border-color:#efefef;
+	color:#000;
+	width:43vw;
+	height:20px;
+}
+
+#submitelem{
+	width:20px;
+	height:20px;
+}
+
+#outputelem{
+	overflow:auto;
+	padding:5px;
+	width:45vw;
+	height:60vh;
+	background-color:#dfdfdf;
+	border-width:3px;
+	border-radius:5px;
+	z-index:10;
+	font-size:14px;
+}
+
+#retryelem{
+	width:auto;
+	height:auto;
+	background-color:#efefef;
+	border-color:#efefef;
+	border-width:3px;
+	border-radius: 5px;
+	color:#000;
+	font-size:30px;
+}
+
+#itemelem{
+	width:45vw;
+	height:32px;
+	background-color:#cda732;
+	border-width:3px;
+	border-radius:5px;
+	z-index:10;
+}
+
+#effectselem{
+	width:45vw;
+	height:32px;
+	background-color:#76dbf8;
+	border-width:3px;
+	border-radius:5px;
+	z-index:10;
+}
+
+#submitelem{
+	width:auto;
+	height:25px;
+	background-color:#efefef;
+	border-color:#efefef;
+	border-width:3px;
+	border-radius: 5px;
+	color:#000;
+}
+
+#premsg #checkload {
+	z-index:-20;
+}
+
+#jsout {
+	z-index:-20;
+}
