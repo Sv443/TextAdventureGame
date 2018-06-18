@@ -203,19 +203,22 @@ function incscore(increment) { //item: 100, discovered thing: 150, structure: 20
 	document.getElementById("current_score").innerHTML=parseInt(currentscore);
 }
 
-document.addEventListener("keydown", function () {document.getElementById("inputelem").focus();});
+setTimeout(function (){
 
-document.addEventListener("DOMContentLoaded", function (){ //master initialization
-	document.getElementById("checkload").innerHTML="";
-	document.getElementById("checkload").outerHTML="";
-	setInterval(dncycletimer, daynightcycle_delay);
-	currentscore = 0;
-	startupdater();
-	sendmsg("Type " + '"' + "save" + '"' + " to save or " + '"' + "load" + '"' + " to load the game.<br>&gt;&nbsp;You start out stranded on a small island.<br>&gt;&nbsp;All you've got on you is an army knife.<br>&gt;&nbsp;Also you are starving. Find something to eat to survive!<br><br>");
-	setTimeout(function () {
-		console.log("initialized " + modulecount + "/" + max_modules + " modules");
-	}, module_load_time);
-});
+	document.addEventListener("keydown", function () {document.getElementById("inputelem").focus();});
+
+	//document.addEventListener("DOMContentLoaded", function (){ //master initialization
+		document.getElementById("checkload").innerHTML="";
+		document.getElementById("checkload").outerHTML="";
+		setInterval(dncycletimer, daynightcycle_delay);
+		currentscore = 0;
+		startupdater();
+		sendmsg("Type " + '"' + "save" + '"' + " to save or " + '"' + "load" + '"' + " to load the game.<br>&gt;&nbsp;You start out stranded on a small island.<br>&gt;&nbsp;All you've got on you is an army knife.<br>&gt;&nbsp;Also you are starving. Find something to eat to survive!<br><br>");
+		setTimeout(function () {
+			console.log("initialized " + modulecount + "/" + max_modules + " modules");
+		}, module_load_time);
+	//});
+}, 200);
 
 function startupdater() {
     setTimeout(function () {
