@@ -1,4 +1,4 @@
-#inputelem{
+/*#inputelem{
 	border-radius:5px;
 	border-width:3px;
 	background-color:#efefef;
@@ -6,14 +6,35 @@
 	color:#000;
 	width:43vw;
 	height:20px;
+}*/
+
+#inputelem {
+    background-color:#cecece;
+    border:solid 1px #cecece;
+    color:#000000;
+    height:2vw;
+    padding-left:10px;
+    width:43vw;
+    box-shadow:2px 2px 0 #828181 inset;
+	
+    border: 0;
+    border-radius:5px;
+	font-family: Courier;
 }
 
-#submitelem{
-	width:20px;
-	height:20px;
+/*#submitelem{
+	background-color: white;
+    color: black;
+    border: 2px solid #555555;
+}*/
+
+.hoverhelp{
+	background-color:#fff493;
+	cursor:help;
 }
 
 #outputelem{
+	box-shadow:5px 5px 10px grey;
 	overflow:auto;
 	padding:5px;
 	width:45vw;
@@ -22,7 +43,7 @@
 	border-width:3px;
 	border-radius:5px;
 	z-index:10;
-	font-size:14px;
+	font-size:0.9vw;
 }
 
 #retryelem{
@@ -33,21 +54,33 @@
 	border-width:3px;
 	border-radius: 5px;
 	color:#000;
-	font-size:30px;
+	font-size:1.5vw;
 }
 
 #itemelem{
+	box-shadow:5px 5px 10px grey;
 	width:45vw;
-	height:32px;
+	height:2vw;
 	background-color:#cda732;
 	border-width:3px;
 	border-radius:5px;
 	z-index:10;
 }
 
-#effectselem{
+#structureelem{
+	box-shadow:5px 5px 10px grey;
 	width:45vw;
-	height:32px;
+	height:2vw;
+	background-color:#cecece;
+	border-width:3px;
+	border-radius:5px;
+	z-index:10;
+}
+
+#effectselem{
+	box-shadow:5px 5px 10px grey;
+	width:45vw;
+	height:2vw;
 	background-color:#76dbf8;
 	border-width:3px;
 	border-radius:5px;
@@ -56,7 +89,7 @@
 
 #submitelem{
 	width:auto;
-	height:25px;
+	height:2vw;
 	background-color:#efefef;
 	border-color:#efefef;
 	border-width:3px;

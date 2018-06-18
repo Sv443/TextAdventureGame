@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <head>
-<title>Text Adventure Game</title>
+<title>[B] Text Island (Loading...)</title>
 <meta charset="UTF-8"/>
 <link rel="icon" type="image/vnd.microsoft.icon" href="https://raw.githubusercontent.com/Sv443/TextAdventureGame/master/icon_160x160.ico">
 <link rel="stylesheet" href="TAG_CSS.css">
@@ -32,39 +32,47 @@ window.cookieconsent.initialise({
 </script>
 
 </head>
-<body style="font-family:Consolas;">
-<div align="center" style="font-family:Consolas;">
+<body style="font-family:Courier;">
+<div align="center" style="font-family:Courier;">
 <div id="outputelem" align="left">
 
 
-<span id="premsg">Text Adventure Game<script>document.write(" v" + curversion);</script> by <a href="https://github.com/Sv443" style="text-decoration:none; color:blue;" title="Sv443 on GitHub">Sv443</a><br></span>
-<span>Type <span style="background-color:#fff493;cursor:help;" title="Use the input text field at the bottom to type 'tutorial' and click 'Submit' or press 'Enter'">tutorial</span> if you want an introduction.<br><br></span>
-<span id="checkload">Couldn't load script! Either you are using Internet Explorer which isn't supported yet or you didn't enable JavaScript. Else <a href='https://github.com/Sv443'>contact me</a> if you are sure that it is already activated and you checked it on another browser. Thanks!</span>
+<span id="premsg">(<a style="text-decoration:none;color:blue;" href="https://en.wikipedia.org/wiki/Adventure_game#Text_adventures_and_interactive_fiction" target="_blank" title="What is a Text Adventure Game?">TAG</a>) Text Island<script>document.write(" v" + curversion);</script> by <a href="https://github.com/Sv443" style="text-decoration:none; color:blue;" target="blank_" title="Sv443 on GitHub">Sv443</a><br></span>
+<span>Type <span class="hoverhelp" title="Use the input text field at the bottom to type 'tutorial' and click 'Submit' or press 'Enter'">tutorial</span> if you want an introduction or <span title="Use the input text field at the bottom to type 'list' and click 'Submit' or press 'Enter'" class="hoverhelp">list</span> to see all unlocked commands<br><br></span>
+<span id="checkload">Couldn't load script! Either you are using Internet Explorer 11 or lower which isn't supported yet or you didn't enable JavaScript. Else <a href='https://github.com/Sv443'>contact me</a> if you are sure that it is already activated and you checked it on another browser. Thanks!<br><br></span>
 <span id="out"></span>
 
 </div>
-<br>
+<div id="retryelem" style="background-color:#ffffff;"></div>
+<div style="height:0.8vw;"></div>
 <div id="itemelem" title="Inventory">
-<abbr id="itemabbr" style="cursor:help;" title="Army Knife - 'Don't eat' is printed on one side"><img id="item_army_knife_elem" src="https://raw.githubusercontent.com/Sv443/TextAdventureGame/master/army_knife_16x16.png" width="32px" height="32px"></img></abbr>
+<abbr id="itemabbr" style="cursor:help;" title="Army Knife - 'Don't eat' is printed on one side"><img id="item_army_knife_elem" src="https://raw.githubusercontent.com/Sv443/TextAdventureGame/master/army_knife_16x16.png" style="width:2vw;height:2vw;"></img></abbr>
 <span id="appenditem"></span>
 
 </div>
-<br>
+<div style="height:0.8vw;"></div>
+<div id="structureelem" title="Structures">
+<span id="appendstructure"></span>
+
+</div>
+<div style="height:0.8vw;"></div>
 <div id="effectselem" title="Status Effects">
-<abbr id="effectabbr" style="cursor:help;" title="Hunger - You are starving! Eat something ASAP else you'll die at the 10 minute mark!"><img id="effect_hunger" src="https://raw.githubusercontent.com/Sv443/code/master/resources/images/hunger_16x16.png" width="32px" height="32px"></img></abbr>
+<abbr id="effectabbr" style="cursor:help;" title="Hunger - You are starving! Eat something ASAP else you'll die at the 10 minute mark!"><img id="effect_hunger" src="https://raw.githubusercontent.com/Sv443/code/master/resources/images/hunger_16x16.png" style="width:2vw;height:2vw;"></img></abbr>
 <span id="appendeffect"></span>
 </div>
-<br>
-<div id="inputcontainer"><input id="inputelem" type="text" placeholder=">_" title="Type your actions here"></input><button id="submitelem" onclick="submit();" title="Submit">&gt;</button></div>
+<div style="height:0.8vw;"></div>
+<div id="inputcontainer"><input id="inputelem" type="text" placeholder=">_" title="Type your actions here"></input><button id="submitelem" onclick="submit();" title="Click to Submit or press Enter">&gt;</button></div>
 </div>
 <div style="position:absolute;top:10px;left:10px;">
-<img src="https://sv443.github.io/TextAdventureGame/icon_160x160.png" style="width:12vw;height:12vw;border-radius:10px;"></img>
-<div id="timercontainer" style="position:fixed;z-index:11;font-family:Consolas;font-size:14px;">
+<img id="TAG_cycle" data-nbr="11" src="https://raw.githubusercontent.com/Sv443/TextAdventureGame/master/daynightcycle%20-%20320x160/time_0_320x160.png" style="box-shadow:5px 5px 10px grey;width:18vw;height:9vw;border-radius:10px;"></img><!--cycle has to start at 11 because the script increases it by 1, so it overflows and starts at 0-->
+<div id="timercontainer" style="position:absolute;z-index:11;font-family:Courier;font-size:0.9vw;">
 <br>
-Game Timer: <span id="game_timer">00:00</span><br>
-Last Entered: "<span id="last_entered"></span>"<br>
-Last Save State: "<span id="last_save_string">none - type save</span>"<br>
-Loaded Modules: <span id="module_counter">0</span>/4<br>
+Timer:<br><span id="game_timer">00:00</span><br><br>
+In-Game Time:<br>Day <span id="ingame_day">1</span>, <span id="ingame_time">12:00</span><br><br>
+Current Score:<br><span id="current_score">0</span><br><br>
+Last Entered:<br>"<span id="last_entered"></span>"<br><br>
+Last Save State:<br>"<span id="last_save_string">the save module was disabled</span>"<br><br>
+Loaded Modules:<br><span id="module_counter">0</span>/<span id="max_modules">0</span><br><br>
 </div>
 </div>
 </body>
