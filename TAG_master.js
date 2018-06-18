@@ -12,7 +12,7 @@ code incompatible with Internet Explorer 1-11
 
 
 // Settings
-var curversion = "[B]-0.0.3";
+var curversion = "[B]-0.0.4";
 var death_enabled = true; //enable / disable death - default true
 var dbg = false; //debug to the html output - default false
 var module_load_time = 500; //time buffer for the modules to load / reload. increase if they don't load correctly or decrease if they load too slowly
@@ -211,6 +211,7 @@ document.addEventListener("DOMContentLoaded", function (){ //master initializati
 	setInterval(dncycletimer, daynightcycle_delay);
 	currentscore = 0;
 	startupdater();
+	sendmsg("Type " + '"' + "save" + '"' + " to save or " + '"' + "load" + '"' + " to load the game.<br>&gt;&nbsp;You start out stranded on a small island.<br>&gt;&nbsp;All you've got on you is an army knife.<br>&gt;&nbsp;Also you are starving. Find something to eat to survive!<br><br>");
 	setTimeout(function () {
 		console.log("initialized " + modulecount + "/" + max_modules + " modules");
 	}, module_load_time);
