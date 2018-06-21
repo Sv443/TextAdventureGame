@@ -15,7 +15,6 @@ document.addEventListener("DOMContentLoaded", function(){
 	getuserdata();
 	document.getElementById("inputelem").focus();
 	document.getElementById("inputelem").value="";
-	sendmsg("Type " + '"' + "save" + '"' + " to save or " + '"' + "load" + '"' + " to load the game.<br>&gt;&nbsp;You start out stranded on a small island.<br>&gt;&nbsp;All you've got on you is an army knife.<br>&gt;&nbsp;Also you are starving. Find something to eat to survive!<br><br>");
 	document.getElementById("TAG_cycle").title="(TAG) Text Island v" + curversion;
 });
 

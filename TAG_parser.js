@@ -22,11 +22,27 @@ function compareival(inputval) {
 		case "retry":
 			window.location.reload();
 			break;
+		case "credits":
+			credits();
+			break;
+		case "credit":
+			credits();
+			break;
 		case "restart":
 			window.location.reload();
 			break;
 		case "dev_ua":
 			sendmsg("u_agent    : " + ua);sendmsg("browser    : " + browser);
+			break;
+		case "dev_soundtest1":
+			var anbr = Math.floor(Math.random()*2);
+			sendmsg(anbr);
+			playaudio("ambient_" + anbr, 1);
+			break;
+		case "dev_soundtest2":
+			var anbr = Math.floor(Math.random()*2) + 2;
+			sendmsg(anbr);
+			playaudio("ambient_" + anbr, 1);
 			break;
 		case "dev_test":
 			sendmsg("dbg: " + dbg + " - v" + curversion + " - sendkey: " + key_send + " - repeatkey: " + key_repeat + " - time_starving: " + time_starving + " - time_died_of_hunger: " + time_died_of_hunger);
@@ -98,7 +114,7 @@ function compareival(inputval) {
 		case "":
 			break;
 		default:
-			if(lcival.includes("swim") || lcival.includes("look") || lcival.includes("get") || lcival.includes("harvest") || lcival.includes("retrieve") || lcival.includes("take") || lcival.includes("eat") || lcival.includes("kill") || lcival.includes("load") || lcival.includes("craft") || lcival.includes("create") || lcival.includes("make") || lcival.includes("build") || lcival.includes("explore")){
+			if(lcival.includes("swim") || lcival.includes("chop") || lcival.includes("look") || lcival.includes("get") || lcival.includes("harvest") || lcival.includes("retrieve") || lcival.includes("take") || lcival.includes("eat") || lcival.includes("kill") || lcival.includes("load") || lcival.includes("craft") || lcival.includes("create") || lcival.includes("make") || lcival.includes("build") || lcival.includes("explore")){
 				multiaction(lcival);
 			}
 			else if(lcival.includes("fuck")){
@@ -133,6 +149,7 @@ function multiaction(lcival) { // actions that consist of multiple variations an
 		if(lcival.includes("coconut") && !document.body.innerHTML.includes('img id="item_coconut_elem"') && document.body.innerHTML.includes('One of the coconuts is hanging very low')){
 			if(dbg){sendmsg("got item: coconut");}
 			if(!document.body.innerHTML.includes("cut the low hanging coconut off")){incscore(100);}
+			playaudio("item_knife", 1);
 			sendmsg("You take your knife and cut the low hanging coconut off.");
 			getitem("item_coconut_elem", "Coconut - Useful if you are hungry (Consumable Effects: provides saturation)", "https://sv443.github.io/TextAdventureGame/coconut_16x16.png", "appenditem");
 		}
@@ -145,7 +162,7 @@ function multiaction(lcival) { // actions that consist of multiple variations an
 		
 		
 		// flint stone
-		if(lcival.includes("flint") && !document.body.innerHTML.includes('img id="item_flint_stone_elem"') && document.body.innerHTML.includes('find some flint stones beneath a cliff')){
+		else if(lcival.includes("flint") && !document.body.innerHTML.includes('img id="item_flint_stone_elem"') && document.body.innerHTML.includes('find some flint stones beneath a cliff')){
 			if(dbg){sendmsg("got item: flint stone");}
 			if(!document.body.innerHTML.includes("discovered and take one of the flint stones")){incscore(100);}
 			sendmsg("You get to the cliff you discovered and take one of the flint stones.");
@@ -163,6 +180,7 @@ function multiaction(lcival) { // actions that consist of multiple variations an
 			if(dbg){sendmsg("got item: lianas");}
 			if(!document.body.innerHTML.includes("cut some of the lianas off")){incscore(100);}
 			sendmsg("You take your knife and cut some of the lianas off.");
+			playaudio("item_knife", 1);
 			getitem("item_lianas_elem", "Lianas - Maybe you can craft something with these, Tarzan", "https://sv443.github.io/TextAdventureGame/lianas_16x16.png", "appenditem");
 		}
 		else if(lcival.includes("liana") && !document.body.innerHTML.includes('img id="item_lianas_elem"')){
@@ -207,6 +225,7 @@ function multiaction(lcival) { // actions that consist of multiple variations an
 			if(!document.body.innerHTML.includes("and get a basic shelter")){incscore(200);}
 			sendmsg("You tie some trees together with the rope, light a fire with your flint stone and get a basic shelter that'll protect you against rain and freezing.");
 			removeitem("item_rope_elem");
+			playaudio("crafting", 1);
 			removeitem("item_flint_stone_elem");
 			if(document.body.innerHTML.includes('title="Raining')){
 				removeitem("effect_rain");
@@ -216,7 +235,10 @@ function multiaction(lcival) { // actions that consist of multiple variations an
 		else if(lcival.includes("shelter") && document.body.innerHTML.includes("take one of the flint stones") && document.body.innerHTML.includes('img id="structure_shelter_elem"') && document.body.innerHTML.includes('You tie the lianas together and get a rope')) {
 			sendmsg("You already have a shelter.");
 		}
-		else if(lcival.includes("shelter") && !document.body.innerHTML.includes("take one of the flint stones") || !document.body.innerHTML.includes('img id="structure_shelter_elem"') && !document.body.innerHTML.includes('You tie the lianas together and get a rope')) {
+		else if(lcival.includes("shelter") && !document.body.innerHTML.includes("take one of the flint stones")) {
+			sendmsg("You'll need some rope and a flint stone to build a shelter!");
+		}
+		else if(lcival.includes("shelter") && !document.body.innerHTML.includes('img id="structure_shelter_elem"') && !document.body.innerHTML.includes('You tie the lianas together and get a rope')){
 			sendmsg("You'll need some rope and a flint stone to build a shelter!");
 		}
 		
@@ -228,6 +250,7 @@ function multiaction(lcival) { // actions that consist of multiple variations an
 	else if(lcival.includes("eat") || lcival.includes("consume")){
 		if(lcival.includes("coconut") && document.body.innerHTML.includes('item_coconut_elem')){
 			sendmsg("You ate the coconut and feel saturated. If you didn't eat it, you may have died.");
+			playaudio("eating", 1);
 			removeitem("effect_hunger");
 			removeitem("item_coconut_elem");
 		}
@@ -291,6 +314,19 @@ function multiaction(lcival) { // actions that consist of multiple variations an
 			else {
 				sendmsg("Explore what?");
 			}
+	}
+	else if(lcival.includes("chop") && document.body.innerHTML.includes("Maybe you can now cut down some trees!")){
+		if(lcival.includes("tree")){
+			sendmsg("You chopped down a tree and got some logs.");
+			getitem("item_logs_elem", "Logs - Sturdy building material", "https://raw.githubusercontent.com/Sv443/TextAdventureGame/master/logs_16x16.png", "appenditem");
+			playaudio("tree_falling", 1);
+		}
+		else {
+			sendmsg("Chop down what?");
+		}
+	}
+	else if(lcival.includes("chop") && !document.body.innerHTML.includes("Maybe you can now cut down some trees!")){
+		sendmsg("You have nothing to chop down a tree with!");
 	}
 	else if(lcival.includes("load")){
 		var loadstring = lcival.replace(/[load ]/g, "");

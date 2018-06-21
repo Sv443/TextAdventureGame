@@ -8,6 +8,7 @@ function timedevent(t_event){
 			case "starving":
 				if(!document.body.innerHTML.includes("ate the coconut")){
 					sendmsg("You are starving! If you don't eat in three minutes, you'll die!");
+					playaudio("starving", 1);
 				}
 				break;
 			case "died_of_hunger":
@@ -71,17 +72,24 @@ function startTimer(duration, display) { //timer code from https://stackoverflow
 			timerval = minutes + ":" + seconds;
 			savetime = minutes + "-" + seconds;
 			
-			if(minutes == time_starving && seconds == 00){							timedevent("starving");}
-			else if(minutes == time_died_of_hunger && seconds == 00){				timedevent("died_of_hunger");}
-			else if(minutes == time_raining && seconds == 00){						timedevent("raining");}
-			else if(minutes == time_raining_again && seconds == 00){				timedevent("raining_again");}
-			else if(minutes == time_died_of_freezing && seconds == 00){				timedevent("died_of_freezing");}
-			else if(minutes == time_died_of_freezing_again && seconds == 00){		timedevent("died_of_freezing");}
-			else if(minutes == 999 && seconds == 59){								sendmsg("Good job. You just wasted 16 hours, 38 minutes and 59 seconds of your life.")}
-			else if(minutes == time_found_boat && seconds == 00){					timedevent("found_shipwreck");}
-			//dncycle(Math.floor(seconds/5));
+			if(minutes == time_starving && seconds == 00){																			timedevent("starving");}
+			else if(minutes == time_died_of_hunger && seconds == 00){																timedevent("died_of_hunger");}
+			else if(minutes == time_raining && seconds == 00){																		timedevent("raining");}
+			else if(minutes == time_raining_again && seconds == 00){																timedevent("raining_again");}
+			else if(minutes == time_died_of_freezing && seconds == 00){																timedevent("died_of_freezing");}
+			else if(minutes == time_died_of_freezing_again && seconds == 00){														timedevent("died_of_freezing");}
+			else if(minutes == 999 && seconds == 59){																				sendmsg("Good job. You just wasted 16 hours, 38 minutes and 59 seconds of your life.")}
+			else if(minutes == 15 && seconds == 38){																				playaudio("ambient_0", 1)}
+			else if(!document.body.innerHTML.includes("discovered a shipwreck") && minutes == time_found_boat && seconds == 00){	timedevent("found_shipwreck");}
 			
-			document.title="[B] Text Island (" + minutes + ":" + seconds + ")";
+			else if(unlock_all_timed && !document.body.innerHTML.includes("discovered a shipwreck")){timedevent("found_shipwreck");}
+			
+			if(document.getElementById("muteelem").dataset.muted == 0){
+				document.title="[B] Text Island (" + minutes + ":" + seconds + ")";
+			}
+			else {
+				document.title="[B] Text Island (" + minutes + ":" + seconds + ") 🔇";
+			}
 		}
     }, timer_dur);
 }

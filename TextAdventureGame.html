@@ -8,6 +8,8 @@
 
 <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.3/cookieconsent.min.css" />
 <script src="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.3/cookieconsent.min.js"></script>
+
+
 <script>
 window.addEventListener("load", function(){
 window.cookieconsent.initialise({
@@ -25,15 +27,50 @@ window.cookieconsent.initialise({
   "theme": "edgeless",
   "position": "bottom-left",
   "content": {
-    "message": "By typing 'save' you agree that this website stores your current game progress in your browser's cookies to make it easier to load your progress afterwards.",
+    "message": "By typing 'save' you agree that this website stores your current game progress in your browser's cookies to make it easier to load your progress afterwards. (Note: this will be one small text string, so it won't take up too much space)",
     "dismiss": "Got it!"
   }
 })});
 </script>
+<script>
+// better image preloading @ https://perishablepress.com/press/2009/12/28/3-ways-preload-images-css-javascript-ajax/
+function preloader() {
+	if (document.getElementById) {
+		document.getElementById("preload-01").style.background = "url(https://raw.githubusercontent.com/Sv443/TextAdventureGame/master/daynightcycle%20-%20320x160/time_0_320x160.png) no-repeat -9999px -9999px";
+		document.getElementById("preload-02").style.background = "url(https://raw.githubusercontent.com/Sv443/TextAdventureGame/master/daynightcycle%20-%20320x160/time_1_320x160.png) no-repeat -9999px -9999px";
+		document.getElementById("preload-03").style.background = "url(https://raw.githubusercontent.com/Sv443/TextAdventureGame/master/daynightcycle%20-%20320x160/time_2_320x160.png) no-repeat -9999px -9999px";
+		document.getElementById("preload-04").style.background = "url(https://raw.githubusercontent.com/Sv443/TextAdventureGame/master/daynightcycle%20-%20320x160/time_3_320x160.png) no-repeat -9999px -9999px";
+		document.getElementById("preload-05").style.background = "url(https://raw.githubusercontent.com/Sv443/TextAdventureGame/master/daynightcycle%20-%20320x160/time_4_320x160.png) no-repeat -9999px -9999px";
+		document.getElementById("preload-06").style.background = "url(https://raw.githubusercontent.com/Sv443/TextAdventureGame/master/daynightcycle%20-%20320x160/time_5_320x160.png) no-repeat -9999px -9999px";
+		document.getElementById("preload-07").style.background = "url(https://raw.githubusercontent.com/Sv443/TextAdventureGame/master/daynightcycle%20-%20320x160/time_6_320x160.png) no-repeat -9999px -9999px";
+		document.getElementById("preload-08").style.background = "url(https://raw.githubusercontent.com/Sv443/TextAdventureGame/master/daynightcycle%20-%20320x160/time_7_320x160.png) no-repeat -9999px -9999px";
+		document.getElementById("preload-09").style.background = "url(https://raw.githubusercontent.com/Sv443/TextAdventureGame/master/daynightcycle%20-%20320x160/time_8_320x160.png) no-repeat -9999px -9999px";
+		document.getElementById("preload-10").style.background = "url(https://raw.githubusercontent.com/Sv443/TextAdventureGame/master/daynightcycle%20-%20320x160/time_9_320x160.png) no-repeat -9999px -9999px";
+		document.getElementById("preload-11").style.background = "url(https://raw.githubusercontent.com/Sv443/TextAdventureGame/master/daynightcycle%20-%20320x160/time_10_320x160.png) no-repeat -9999px -9999px";
+		document.getElementById("preload-12").style.background = "url(https://raw.githubusercontent.com/Sv443/TextAdventureGame/master/daynightcycle%20-%20320x160/time_11_320x160.png) no-repeat -9999px -9999px";
+	}
+}
+function addLoadEvent(func) {
+	var oldonload = window.onload;
+	if (typeof window.onload != 'function') {
+		window.onload = func;
+	} else {
+		window.onload = function() {
+			if (oldonload) {
+				oldonload();
+			}
+			func();
+		}
+	}
+}
+document.addEventListener("DOMContentLoaded", function () {addLoadEvent(preloader);});
+</script>
 
 </head>
-<body style="font-family:Courier;">
-<div align="center" style="font-family:Courier;">
+<body style="font-family:Courier;" data-nbr="11">
+<div align="center">
+<br>
+<div id="uicontainer">
 <div id="outputelem" align="left">
 
 
@@ -61,19 +98,59 @@ window.cookieconsent.initialise({
 <span id="appendeffect"></span>
 </div>
 <div style="height:0.8vw;"></div>
-<div id="inputcontainer"><input id="inputelem" type="text" placeholder=">_" title="Type your actions here"></input><button id="submitelem" onclick="submit();" title="Click to Submit or press Enter">&gt;</button></div>
+<div id="inputcontainer"><input id="inputelem" type="text" placeholder=">_" title="Type your actions here"></input><button id="submitelem" onclick="submit();" title="Click to submit or press Enter">&gt;</button></div>
+</div>
 </div>
 <div style="position:absolute;top:10px;left:10px;">
-<img id="TAG_cycle" data-nbr="11" src="https://raw.githubusercontent.com/Sv443/TextAdventureGame/master/daynightcycle%20-%20320x160/time_0_320x160.png" style="box-shadow:5px 5px 10px grey;width:18vw;height:9vw;border-radius:10px;"></img><!--cycle has to start at 11 because the script increases it by 1, so it overflows and starts at 0-->
-<div id="timercontainer" style="position:absolute;z-index:11;font-family:Courier;font-size:0.9vw;">
+<!--<img id="TAG_cycle" data-nbr="11" src="" style="box-shadow:5px 5px 10px grey;width:18vw;height:9vw;border-radius:10px;"></img> --><!--cycle has to start at 11 because the script increases it by 1, so it overflows and starts at 0-->
+<span id="TAG_cycle" data-nbr="11"></span>
+<div id="timercontainer">
 <br>
 Timer:<br><span id="game_timer">00:00</span><br><br>
 In-Game Time:<br>Day <span id="ingame_day">1</span>, <span id="ingame_time">12:00</span><br><br>
 Current Score:<br><span id="current_score">0</span><br><br>
 Last Entered:<br>"<span id="last_entered"></span>"<br><br>
-Last Save State:<br>"<span id="last_save_string">the save module was disabled</span>"<br><br>
+Last Saved at:<br>"<span id="last_saved">the save module was disabled</span>"<br><br>
 Loaded Modules:<br><span id="module_counter">0</span>/<span id="max_modules">0</span><br><br>
 </div>
+</div>
+<div id="changelogcontainer" style="top:10px;right:10px;position:absolute;">
+<div align="right">
+<div id="controlpanelcontainer" align="center">
+<img id="muteelem" title="Mute/Unmute audio" style="width:2vw;height:2vw;top:0px;cursor:pointer;" onclick="togglemute();" data-muted="0" src="https://raw.githubusercontent.com/Sv443/TextAdventureGame/master/mute_0_128x128.png"></img>&nbsp;
+<img id="changelogarrow" title="Changelog - Click to show/hide" src="https://raw.githubusercontent.com/Sv443/TextAdventureGame/master/arrow_left_160x160.png" style="width:2vw;height:2vw;cursor:pointer;" onclick="togglechangelog();"></img><br>
+</div></div><br>
+<div id="changelogelem" data-opened="0"></div>
+</div>
+
+
+
+
+<!-- preload audio and day/night cycle images -->
+
+<audio id="audio0elem" preload><source src="tropicalforest0.mp3" type="audio/mpeg"></source></audio><!-- audio by audiomicro.com -->
+<audio id="audio1elem" preload><source src="tropicalforest1.mp3" type="audio/mpeg"></source></audio><!-- audio by audiomicro.com -->
+<audio id="audio2elem" preload><source src="knife0.mp3" type="audio/mpeg"></source></audio><!-- audio by freesound.org -->
+<audio id="audio3elem" preload><source src="crafting0.mp3" type="audio/mpeg"></source></audio><!-- audio by freesound.org -->
+<audio id="audio4elem" preload><source src="eating0.mp3" type="audio/mpeg"></source></audio><!-- audio by freesound.org -->
+<audio id="audio5elem" preload><source src="starving0.mp3" type="audio/mpeg"></source></audio><!-- audio by freesound.org -->
+<audio id="audio6elem" preload><source src="fallingtree0.mp3" type="audio/mpeg"></source></audio><!-- audio by freesound.org -->
+<audio id="audio7elem" preload><source src="tropicalforest2.mp3" type="audio/mpeg"></source></audio><!-- audio by freesound.org -->
+<audio id="audio8elem" preload><source src="tropicalforest3.mp3" type="audio/mpeg"></source></audio><!-- audio by freesound.org -->
+
+<div style="position:fixed;z-index:-1;top:50px;left:45vw;">
+<img id="preload-01" src="https://raw.githubusercontent.com/Sv443/TextAdventureGame/master/daynightcycle%20-%20320x160/time_0_320x160.png" width="1px" height="1px"/>
+<img id="preload-02" src="https://raw.githubusercontent.com/Sv443/TextAdventureGame/master/daynightcycle%20-%20320x160/time_1_320x160.png" width="1px" height="1px"/>
+<img id="preload-03" src="https://raw.githubusercontent.com/Sv443/TextAdventureGame/master/daynightcycle%20-%20320x160/time_2_320x160.png" width="1px" height="1px"/>
+<img id="preload-04" src="https://raw.githubusercontent.com/Sv443/TextAdventureGame/master/daynightcycle%20-%20320x160/time_3_320x160.png" width="1px" height="1px"/>
+<img id="preload-05" src="https://raw.githubusercontent.com/Sv443/TextAdventureGame/master/daynightcycle%20-%20320x160/time_4_320x160.png" width="1px" height="1px"/>
+<img id="preload-06" src="https://raw.githubusercontent.com/Sv443/TextAdventureGame/master/daynightcycle%20-%20320x160/time_5_320x160.png" width="1px" height="1px"/>
+<img id="preload-07" src="https://raw.githubusercontent.com/Sv443/TextAdventureGame/master/daynightcycle%20-%20320x160/time_6_320x160.png" width="1px" height="1px"/>
+<img id="preload-08" src="https://raw.githubusercontent.com/Sv443/TextAdventureGame/master/daynightcycle%20-%20320x160/time_7_320x160.png" width="1px" height="1px"/>
+<img id="preload-09" src="https://raw.githubusercontent.com/Sv443/TextAdventureGame/master/daynightcycle%20-%20320x160/time_8_320x160.png" width="1px" height="1px"/>
+<img id="preload-10" src="https://raw.githubusercontent.com/Sv443/TextAdventureGame/master/daynightcycle%20-%20320x160/time_9_320x160.png" width="1px" height="1px"/>
+<img id="preload-11" src="https://raw.githubusercontent.com/Sv443/TextAdventureGame/master/daynightcycle%20-%20320x160/time_10_320x160.png" width="1px" height="1px"/>
+<img id="preload-12" src="https://raw.githubusercontent.com/Sv443/TextAdventureGame/master/daynightcycle%20-%20320x160/time_11_320x160.png" width="1px" height="1px"/>
 </div>
 </body>
 </html>

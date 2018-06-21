@@ -14,9 +14,11 @@ code incompatible with Internet Explorer 1-11
 // Settings
 var curversion = "[B]-0.0.4";
 var death_enabled = true; //enable / disable death - default true
+var max_volume = 0.2; //maximum volume level of played audios - default 0.2 - min 0 - max 1
 var dbg = false; //debug to the html output - default false
 var module_load_time = 500; //time buffer for the modules to load / reload. increase if they don't load correctly or decrease if they load too slowly
-var daynightcycle_delay = 30000; /*time in ms between the day/night cycle states (12 states/day) (entered time in seconds * 12 / 60 = duration of a full day/night cycle) (or uncomment the following and look in the console to see the duration)*/       //console.log("daynightcycle - full cycle duration: " + daynightcycle_delay/1000*12/60 + " minutes or " + daynightcycle_delay/1000*12 + " seconds");
+var daynightcycle_delay = 3000; /*time in ms between the day/night cycle states (12 states/day) (entered time in seconds * 12 / 60 = duration of a full day/night cycle) (or uncomment the following and look in the console to see the duration)*/       //console.log("daynightcycle - full cycle duration: " + daynightcycle_delay/1000*12/60 + " minutes or " + daynightcycle_delay/1000*12 + " seconds");
+var unlock_all_timed = true; //unlocks all positive timed events (eg. finding the wreck) - default false
 
 var key_send = 13; //key to send action - default 13 (enter)
 var key_repeat = 38; //key to paste the last action to the <input> - default 38 (arrow_up)
@@ -38,7 +40,7 @@ var timer_multiplier = 1; //timer multiplier, make timer faster / slower (2 for 
 
 //load all modules, comment out a module if you don't want it loaded and decrease the max_modules variable by 1 (if you need it to) to update the UI accordingly
 //listeners and parser modules are needed, else the script will either not work or error
-var modulecount = 0;var max_modules = 4;
+var modulecount = 0;var max_modules = 5;
 
 
 
@@ -54,8 +56,17 @@ module_tag_timer = document.createElement('script');module_tag_timer.src="TAG_ti
 //input parsing and processing module - comment out to completely disable all user input processing
 module_tag_parser = document.createElement('script');module_tag_parser.src="TAG_parser.js";module_tag_parser.id="script_tag_parser";document.getElementById("script_tag_master").appendChild(module_tag_parser);
 
+//audio playback module - comment out to disable audio
+module_tag_audio = document.createElement('script');module_tag_audio.src="TAG_audio.js";module_tag_audio.id="script_tag_audio";document.getElementById("script_tag_master").appendChild(module_tag_audio);
 
 
+
+// changelog
+
+/* 0.0.1 */   var changelogcontent =  "<br><br><br><span style='font-size:0.75vw;'><b>[B]-0.0.1</b></span><br><div style='width:100%;border-top-style:solid;border-width:2px;'></div><br>- basic framework and beginning of story added<br><br>- added coocnut item<br>"
+/* 0.0.2 */ 						+ "<br><br><br><span style='font-size:0.75vw;'><b>[B]-0.0.2</b></span><br><div style='width:100%;border-top-style:solid;border-width:2px;'></div><br>- completely reworked UI<br><br>- added status effects, inventory and crafting system<br><br>- added timed events<br><br>- added sidebar with infos<br><br>- added saving and loading mechanism (although loading is disabled)<br>"
+/* 0.0.3 */ 						+ "<br><br><br><span style='font-size:0.75vw;'><b>[B]-0.0.3</b></span><br><div style='width:100%;border-top-style:solid;border-width:2px;'></div><br>- added structure system, added basic shelter and explorable shipwreck<br><br>- renamed to Text Island<br><br>- tons and tons of fixes to improve convenience<br><br>- added flint stone and hatchet<br><br>- changed retry button<br><br>- modified sidebar<br><br>- fixed incompatibility errors<br><br>- added score system<br><br>- added many synonyms<br><br>- added day/night cycle with ingame time and time display (currently very fast and with no function)<br><br>- improved scaling of all elements<br>"
+/* 0.0.4 */ 						+ "<br><br><br><span style='font-size:0.75vw;'><b>[B]-0.0.4</b></span><br><div style='width:100%;border-top-style:solid;border-width:2px;'></div><br>- added audio system, added some basic placeholder-sounds<br><br>- added ambient sound that plays on load<br><br>- added mute/unmute button<br><br>- redesigned retry button<br><br>- added tree chopping with logs item drop<br><br>- improved day/night cycle and made it independent from game timer<br><br>- added this collapsable ingame changelog display<br><br>- added day/night dependant ambient sounds<br><br>- fixed bug of 'make' always executing the not enough material to build shelter message<br><br>- fixed bug of 'what do you want to get?' message executed after coconut was taken<br><br>- changed position of mute button to the left of the changelog arrow<br><br>- fixed position changes of top right control panel when changelog is opened<br><br>- reformatted changelog a bit<br><br>- removed image display of day/night cycle and made it so the background displays it instead<br><br>- added background underlay behind in/output elements, info panel and control panel<br><br>- changed last save string in the info panel to last saved at (ingame time)<br>";
 
 
 
@@ -217,6 +228,9 @@ setTimeout(function (){
 		setTimeout(function () {
 			console.log("initialized " + modulecount + "/" + max_modules + " modules");
 		}, module_load_time);
+		setTimeout(function () {
+			if(unlock_all_timed){sendmsg("All positive timed events will now be unlocked through the script settings...");}
+		}, 100);
 	//});
 }, 200);
 
@@ -230,6 +244,39 @@ function startupdater() {
 
 function dncycle(nbr) {
 	var path = "https://raw.githubusercontent.com/Sv443/TextAdventureGame/master/daynightcycle%20-%20320x160/time_" + nbr + "_320x160.png";
-	document.getElementById("TAG_cycle").src=path;
+	document.body.background=path;
+	document.body.style="background-size: " + window.innerWidth + "px " + window.innerHeight + "px;";
 	document.getElementById("TAG_cycle").dataset.nbr=nbr;
+}
+
+function togglechangelog() {
+	var cl = document.getElementById("changelogelem")
+	if(cl.dataset.opened == parseInt(1)){
+		cl.innerHTML="";
+		cl.dataset.opened="0";
+		cl.style="padding:0px;";
+		document.getElementById("changelogarrow").src="https://raw.githubusercontent.com/Sv443/TextAdventureGame/master/arrow_left_160x160.png";
+	}
+	else {
+		cl.innerHTML="<span style='font-size:1vw;'><b>Changelog:</b></span><span style='font-size:0.75vw;'>" + changelogcontent + "</span><br><br>";
+		cl.style="background-color:white;box-shadow:5px 5px 10px grey;border-radius:15px;padding:1vw;overflow:auto;height:50vh;width:22vw;";
+		document.getElementById("changelogarrow").src="https://raw.githubusercontent.com/Sv443/TextAdventureGame/master/arrow_right_160x160.png";
+		cl.scrollTop = cl.scrollHeight - cl.getBoundingClientRect().height;
+		cl.dataset.opened="1";
+	}
+}
+
+function general_game_ending() {
+	credits();
+}
+
+function credits(){
+	sendmsg("<span style='font-size:1vw;'><b>Credits:</b></span><br><br>"
+	+ "&nbsp;&nbsp;&nbsp;Programming:&nbsp;&nbsp;<a href='https://www.github.com/Sv443' target='blank_' style='text-decoration:none;color:blue;'>Sv443 / Sven Fehler</a><br>"
+	+ "&nbsp;&nbsp;&nbsp;Art Design:&nbsp;&nbsp;&nbsp;<a href='https://www.github.com/Sv443' target='blank_' style='text-decoration:none;color:blue;'>Sv443 / Sven Fehler</a><br>"
+	+ "&nbsp;&nbsp;&nbsp;Audio:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href='https://www.freesound.org' target='blank_' style='text-decoration:none;color:blue;'>Freesound</a> and <a href='https://www.audiomicro.com' target='blank_' style='text-decoration:none;color:blue;'>AudioMicro</a><br>"
+	+ "<br><br>&gt;&nbsp;<span style='font-size:1vw;'><b>Special Thanks to:</b></span><br><br>"
+	+ "&nbsp;&nbsp;&nbsp;<a href='https://stackoverflow.com/questions/20618355/the-simplest-possible-javascript-countdown-timer/20618517#20618517' target='blank_' style='text-decoration:none;color:blue;'>This</a> StackOverflow answer for inspiration for the timer code<br>"
+	+ "&nbsp;&nbsp;&nbsp;LordHamdi for reporting a bug<br>"
+	+ "<br>&nbsp;&nbsp;&nbsp;<b title='Thank you :)'><i>You</i></b>&nbsp;&nbsp;&nbsp;for playing this game :)");
 }

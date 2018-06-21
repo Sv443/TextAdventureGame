@@ -22,6 +22,36 @@
 	font-family: Courier;
 }
 
+#timercontainer {
+	background-color:rgba(50,50,50,0.5);
+	border-radius:5px;
+	padding:5px;
+	color:white;
+	position:absolute;
+	z-index:11;
+	font-family:Courier;
+	font-size:0.9vw;
+	width:11vw;
+}
+
+#uicontainer {
+	font-family:Courier;
+	background-color:rgba(50,50,50,0.5);
+	border-radius:5px;
+	padding:10px;
+	z-index:11;
+	width:46vw;
+}
+
+#controlpanelcontainer {
+	font-family:Courier;
+	background-color:rgba(50,50,50,0.5);
+	border-radius:5px;
+	padding:5px;
+	z-index:11;
+	width:6vw;
+}
+
 /*#submitelem{
 	background-color: white;
     color: black;
@@ -32,6 +62,8 @@
 	background-color:#fff493;
 	cursor:help;
 }
+
+div#preload { display: none; }
 
 #outputelem{
 	box-shadow:5px 5px 10px grey;

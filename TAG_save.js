@@ -1,7 +1,7 @@
 // Text Island save/load module
 // (c) Sv443 / Sven Fehler 2018 - licensed under MIT license
 
-document.addEventListener("DOMContentLoaded", function () {document.getElementById("last_save_string").innerHTML="none - type save";});
+document.addEventListener("DOMContentLoaded", function () {document.getElementById("last_saved").innerHTML="never - type save";});
 
 var savestring;
 function savegame() {
@@ -17,7 +17,7 @@ function savegame() {
 	if(document.body.innerHTML.includes("effect_hunger")){ savestring += "1-" } else { savestring += "0-" }
 	if(document.body.innerHTML.includes("effect_rain")){ savestring += "1" } else { savestring += "0" }
 
-	document.getElementById("last_save_string").innerHTML=savestring;
+	document.getElementById("last_saved").innerHTML=timerval;
 	sendmsg("You saved the game to your browser cookies. They will expire on January 1st, 2030. Enter 'load' to load your game. But don't delete the cookies or you'll have to start over!");
 	sendmsg("<span style='color:red;'>LOADING DOESN'T WORK CURRENTLY!</span>");
 	savetocookies();
@@ -38,7 +38,7 @@ function loadgame(loadstring) { // [browser_minutes-seconds_item1-item2-item3...
 	else {
 		sendmsg("Couldn't find load string in your browser cookies!");
 	}
-	sendmsg("Loading is currently disabled!");
+	sendmsg("<span style='color:red;'>Loading is currently disabled!</span>");
 }
 
 console.log("initialized TAG_save.js");
