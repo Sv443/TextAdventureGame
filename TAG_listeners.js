@@ -12,6 +12,7 @@ document.addEventListener("keyup", function (e){
 });
 
 document.addEventListener("DOMContentLoaded", function(){
+	scenechange();
 	getuserdata();
 	document.getElementById("inputelem").focus();
 	document.getElementById("inputelem").value="";
@@ -19,11 +20,21 @@ document.addEventListener("DOMContentLoaded", function(){
 });
 
 window.onload = function () {
-	if(dbg){sendmsg("window loaded");}
     var display = document.querySelector('#game_timer');
     startTimer(0, display);
 	dncycletimer(0, display);
 };
 
+window.onresize = function(event) {
+	dncycle(document.getElementById("TAG_cycle").dataset.nbr); // instantly resizes background image if window size is changed
+	scenechange(1);
+}
+
+document.addEventListener("orientationchange", function (){
+	dncycle(document.getElementById("TAG_cycle").dataset.nbr); // instantly resizes background image if window orientation is changed
+	scenechange(1);
+});
+
 console.log("initialized TAG_listeners.js");
 modulecount += 1;
+modules_displayname += ", TAG_listeners";

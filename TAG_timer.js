@@ -53,7 +53,7 @@ var timer_dur = 1000 / timer_multiplier;
 var minutes;var seconds;var savetime;
 var timerval = "10:00";
 function startTimer(duration, display) { //timer code from https://stackoverflow.com/a/20618517
-	if(dbg){sendmsg("starting timer");}
+	if(dbg){sendmsg("starting timer", "orange");}
     var timer = duration, minutes, seconds;
     setInterval(function () {
 		if(!document.body.innerHTML.includes("You died")){
@@ -96,9 +96,8 @@ function startTimer(duration, display) { //timer code from https://stackoverflow
 
 function dncycletimer() {
 	var nbr2 = parseInt(document.getElementById("TAG_cycle").dataset.nbr) + 1;
-	if(nbr2 == 0 || nbr2 == 12){dncycle(0)}
+	if(nbr2 == 0 || nbr2 == 12){dncycle(0);document.getElementById("ingame_time").innerHTML="12:00";}
 	else {
-		if(dbg){sendmsg("day/night cycle position: " + nbr2);}
 		dncycle(parseInt(nbr2));
 		var nbrt2 = nbr2 * 2 + 12;
 		if(nbrt2 >= 24){
@@ -123,3 +122,4 @@ function dncycletimer() {
 
 console.log("initialized TAG_timer.js");
 modulecount += 1;
+modules_displayname += ", TAG_timer";

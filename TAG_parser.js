@@ -23,7 +23,7 @@ function compareival(inputval) {
 			window.location.reload();
 			break;
 		case "credits":
-			credits();
+			game_ending();
 			break;
 		case "credit":
 			credits();
@@ -46,6 +46,9 @@ function compareival(inputval) {
 			break;
 		case "dev_test":
 			sendmsg("dbg: " + dbg + " - v" + curversion + " - sendkey: " + key_send + " - repeatkey: " + key_repeat + " - time_starving: " + time_starving + " - time_died_of_hunger: " + time_died_of_hunger);
+			break;
+		case "dev_wh":
+			sendmsg("width: " + window.innerWidth + " - height: " + window.innerHeight);
 			break;
 		case "ping":
 			sendmsg("Pong!");
@@ -130,7 +133,7 @@ function compareival(inputval) {
 
 var item_coconut;var item_lianas;var item_rope;
 function multiaction(lcival) { // actions that consist of multiple variations and/or attributes
-	if(dbg){sendmsg("multiaction triggered");}
+	if(dbg){sendmsg("multiaction triggered", "orange");}
 	if(lcival.includes("look")){
 		if(lcival.includes("look at")){
 			if(lcival.includes("island") && !document.body.innerHTML.includes('You look around on the small island.')){ incscore(150); sendmsg("You look around on the small island. You see a bunch of coconut palm trees. One of the coconuts is hanging very low. Maybe you can get it.");localStorage.setItem("coconut", true); }
@@ -147,7 +150,7 @@ function multiaction(lcival) { // actions that consist of multiple variations an
 		
 		// coconut
 		if(lcival.includes("coconut") && !document.body.innerHTML.includes('img id="item_coconut_elem"') && document.body.innerHTML.includes('One of the coconuts is hanging very low')){
-			if(dbg){sendmsg("got item: coconut");}
+			if(dbg){sendmsg("got item: coconut", "orange");}
 			if(!document.body.innerHTML.includes("cut the low hanging coconut off")){incscore(100);}
 			playaudio("item_knife", 1);
 			sendmsg("You take your knife and cut the low hanging coconut off.");
@@ -163,7 +166,7 @@ function multiaction(lcival) { // actions that consist of multiple variations an
 		
 		// flint stone
 		else if(lcival.includes("flint") && !document.body.innerHTML.includes('img id="item_flint_stone_elem"') && document.body.innerHTML.includes('find some flint stones beneath a cliff')){
-			if(dbg){sendmsg("got item: flint stone");}
+			if(dbg){sendmsg("got item: flint stone", "orange");}
 			if(!document.body.innerHTML.includes("discovered and take one of the flint stones")){incscore(100);}
 			sendmsg("You get to the cliff you discovered and take one of the flint stones.");
 			getitem("item_flint_stone_elem", "Flint Stone - MISSING DESCRIPTION", "https://raw.githubusercontent.com/Sv443/TextAdventureGame/master/flint_stone_16x16.png", "appenditem");
@@ -177,7 +180,7 @@ function multiaction(lcival) { // actions that consist of multiple variations an
 		
 		// lianas
 		else if(lcival.includes("liana") && !document.body.innerHTML.includes('img id="item_lianas_elem"') && document.body.innerHTML.includes('find a bunch of lianas.')){
-			if(dbg){sendmsg("got item: lianas");}
+			if(dbg){sendmsg("got item: lianas", "orange");}
 			if(!document.body.innerHTML.includes("cut some of the lianas off")){incscore(100);}
 			sendmsg("You take your knife and cut some of the lianas off.");
 			playaudio("item_knife", 1);
@@ -205,7 +208,7 @@ function multiaction(lcival) { // actions that consist of multiple variations an
 		
 		// rope
 		else if(lcival.includes("rope") && !document.body.innerHTML.includes('img id="item_rope_elem"') && document.body.innerHTML.includes('You take your knife and cut some of the lianas off')){
-			if(dbg){sendmsg("got item: rope");}
+			if(dbg){sendmsg("got item: rope", "orange");}
 			if(!document.body.innerHTML.includes("and get a rope")){incscore(100);}
 			sendmsg("You tie the lianas together and get a rope.");
 			removeitem("item_lianas_elem");
@@ -221,7 +224,7 @@ function multiaction(lcival) { // actions that consist of multiple variations an
 		
 		// shelter
 		else if(lcival.includes("shelter") && !document.body.innerHTML.includes('img id="structure_shelter_elem"') && document.body.innerHTML.includes('You tie the lianas together and get a rope') && document.body.innerHTML.includes("take one of the flint stones")){
-			if(dbg){sendmsg("built structure: shelter");}
+			if(dbg){sendmsg("built structure: shelter", "orange");}
 			if(!document.body.innerHTML.includes("and get a basic shelter")){incscore(200);}
 			sendmsg("You tie some trees together with the rope, light a fire with your flint stone and get a basic shelter that'll protect you against rain and freezing.");
 			removeitem("item_rope_elem");
@@ -339,3 +342,4 @@ function multiaction(lcival) { // actions that consist of multiple variations an
 
 console.log("initialized TAG_parse.js");
 modulecount += 1;
+modules_displayname += ", TAG_parser";

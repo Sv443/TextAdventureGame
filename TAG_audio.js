@@ -2,17 +2,18 @@
 // (c) Sv443 / Sven Fehler 2018 - licensed under MIT license
 
 
-var muteelem = document.getElementById("muteelem");
-var mutedstate = muteelem.dataset.muted;
-var audiovolume;
+var muteelem;var mutedstate;var audiovolume;
 
 function playaudio(name, volume) {
 	if(volume >= max_volume || volume === undefined || volume === null || volume == ""){
 		volume = 0.2;
 	}
 	
-	if(dbg){sendmsg("playing audio " + name + " with volume " + volume);}
+	if(dbg){sendmsg("playing audio " + name + " with volume " + volume, "orange");}
 	console.log("playing audio " + name + " with volume " + volume);
+	
+	muteelem = document.getElementById("muteelem");
+	mutedstate = muteelem.dataset.muted;
 	
 	if(mutedstate != 1){
 		switch(name){
@@ -50,7 +51,10 @@ function playaudio(name, volume) {
 
 function togglemute() {
 	
-	if(dbg){sendmsg(mutedstate);}
+	muteelem = document.getElementById("muteelem");
+	mutedstate = muteelem.dataset.muted;
+	
+	if(dbg){sendmsg(mutedstate, "orange");}
 	
 	if(mutedstate == 0){
 		muteelem.src="https://raw.githubusercontent.com/Sv443/TextAdventureGame/master/mute_1_128x128.png";
@@ -79,7 +83,7 @@ function togglemute() {
 function ambientsounds() {
 	var delay = Math.floor(Math.random()*120000); //120000
 	if(delay < 60000){delay+=60000;}
-	if(dbg){sendmsg("ambient sound interval: " + delay);}
+	if(dbg){sendmsg("ambient sound interval: " + delay, "orange");}
 	console.log("ambient sound interval: " + Math.floor(delay/1000));
 	setInterval(function (){
 		if(document.getElementById().dataset.nbr >= 4 && document.getElementById().dataset.nbr <= 8){
@@ -99,3 +103,4 @@ setTimeout(function () {playaudio("ambient_" + Math.floor(Math.random()*2), 1);}
 
 console.log("initialized TAG_audio.js");
 modulecount += 1;
+modules_displayname += ", TAG_audio";
