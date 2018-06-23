@@ -61,7 +61,7 @@
 		D- (DONE - had to be "else if" but only was "if") fix bug of "what do you want to get?" appearing after coconut was taken
 		D- (DONE - also added load delay) fix bug of "the save module was disabled" being shown no matter if it was loaded correctly or not
 		D- (DONE - made the script not focus if CTRL and/or ALT are being pressed) make the script not focus on the <input> when CTRL is pressed
-		- modules and init still not loading correctly on Edge
+		- module count display and init still not loading correctly (slowly starts to piss me off now) (this bug is not game breaking but it makes the displays not work and sometimes even the prologue messages don't show up at all and it displays the couldn't load script error even though everything works fine)
 		D- (DONE - made the background color transparent) graphical error of retry button not having a transparent container
 		D- (DONE - resizing underlay after death) graphical error of underlay between in/output elements not resizing correctly after death
 		WIP- finally fix the damn submit button scaling issues and its bad design that bugged me since 0.0.1

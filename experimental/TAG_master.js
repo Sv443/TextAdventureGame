@@ -233,7 +233,7 @@ setTimeout(function (){
 	//document.addEventListener("DOMContentLoaded", function (){ //master initialization
 		document.getElementById("checkload").innerHTML="";
 		document.getElementById("checkload").outerHTML="";
-		setInterval(dncycletimer, daynightcycle_delay);
+		setInterval(dncycletimer(), daynightcycle_delay);
 		currentscore = 0;
 		startupdater();
 		sendmsg("Type " + '"' + "save" + '"' + " to save or " + '"' + "load" + '"' + " to load the game.<br>&gt;&nbsp;You start out stranded on a small island.<br>&gt;&nbsp;All you've got on you is an army knife.<br>&gt;&nbsp;Also you are starving. Find something to eat to survive!<br><br>");
@@ -260,7 +260,7 @@ function startupdater() {
 			document.getElementById("moduletitle").title=modules_displayname;
 			saveinit();
 			if(!document.body.innerHTML.includes("You start out stranded")){
-					window.location.reload();
+				window.location.reload();
 			}
 		}, module_load_time);
     }, module_load_time);

@@ -5,7 +5,9 @@ function saveinit() {document.getElementById("last_saved").innerHTML="never - ty
 
 var savestring;
 function savegame() {
-	savestring = browser + "_"; // save browser to account for incompatibility reasons that may occur some time in the future
+	getuserdata();
+	sendmsg(browser);
+	savestring = browser + "_"; // save browser for incompatibility reasons that may occur some time in the future
 	savestring += savetime + "_";
 	savestring += document.getElementById("current_score").innerHTML + "_";
 	if(document.body.innerHTML.includes("item_army_knife_elem")){ savestring += "1-" } else { savestring += "0-" }
@@ -19,14 +21,14 @@ function savegame() {
 	if(document.body.innerHTML.includes("effect_rain")){ savestring += "1" } else { savestring += "0" }
 
 	document.getElementById("last_saved").innerHTML=timerval;
-	sendmsg("You saved the game to your browser cookies. They will expire on January 1st, 2030. Enter 'load' to load your game. But don't delete the cookies or you'll have to start over!");
+	sendmsg("You saved the game to your browser cookies. They will expire in exactly 10 years. Enter 'load' to load your game. But don't delete the cookies or you'll have to start over!");
 	sendmsg("<span style='color:red;'>LOADING DOESN'T WORK CURRENTLY!</span>");
 	savetocookies();
 }
 
 function savetocookies() {
 	if(dbg){sendmsg("saving to cookies: " + savestring, "orange");}
-	Cookies.set('sstr', savestring, { expires: 3650 });
+	Cookies.set('sstr', savestring, { expires: 3650 }); // save savestring to cookies that expire in 10 years
 }
 
 function loadgame(loadstring) { // [browser_minutes-seconds_score_item1-item2-item3..._structure1-structure2..._status1-status2-status3...]
