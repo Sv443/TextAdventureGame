@@ -12,7 +12,7 @@ code incompatible with Internet Explorer 1-11
 
 
 // Settings
-var curversion = "[B]-0.0.5";
+var curversion = "[B]-0.0.5 (experimental)";
 var death_enabled = true; //enable / disable death - default true
 var max_volume = 0.2; //maximum volume level of played audios - default and recommended 0.2 - min 0 - max 1
 var dbg = false; //debug to the html output - default false
