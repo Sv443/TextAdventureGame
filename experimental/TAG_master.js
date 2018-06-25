@@ -74,9 +74,6 @@ module_tag_scenes = document.createElement('script');module_tag_scenes.src="TAG_
 
 
 
-var qstr = window.location.search;
-qstr = qstr.substring(1);
-if(dbg){sendmsg("QueryString: " + qstr, "orange");}
 
 function submit() {
 	if(!document.body.innerHTML.includes("You died") && document.getElementById("inputelem").value != ""){
@@ -249,6 +246,9 @@ setTimeout(function (){
 			if(unlock_all_timed){sendmsg("All positive timed events will now be unlocked through the script settings...");}
 		}, 100);
 		checkforsave();
+		var qstr = window.location.search;
+		qstr = qstr.substring(1);
+		if(dbg){sendmsg("QueryString: " + qstr, "orange");}
 	//});
 }, 300);
 
