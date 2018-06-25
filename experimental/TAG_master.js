@@ -12,13 +12,13 @@ code incompatible with Internet Explorer 1-11
 
 
 // Settings
-var curversion = "[B]-0.0.5";
+var curversion = "[B]-0.0.5 (experimental)";
 var death_enabled = true; //enable / disable death - default true
 var max_volume = 0.2; //maximum volume level of played audios - default and recommended 0.2 - min 0 - max 1
 var dbg = false; //debug to the html output - default false
 var module_load_time = 500; //time buffer for the modules to load / reload. increase if they don't load correctly or decrease if they load too slowly
-var daynightcycle_delay = 3000; /*time in ms between the day/night cycle states (12 states/day) (entered time in seconds * 12 / 60 = duration of a full day/night cycle) (or uncomment the following and look in the console to see the duration)*/       //console.log("daynightcycle - full cycle duration: " + daynightcycle_delay/1000*12/60 + " minutes or " + daynightcycle_delay/1000*12 + " seconds");
-var unlock_all_timed = true; //unlocks all positive timed events (eg. finding the wreck) - default false
+var daynightcycle_delay = 30000; /*time in ms between the day/night cycle states (12 states/day) (entered time in seconds * 12 / 60 = duration of a full day/night cycle) (or uncomment the following and look in the console to see the duration)*/       //console.log("daynightcycle - full cycle duration: " + daynightcycle_delay/1000*12/60 + " minutes or " + daynightcycle_delay/1000*12 + " seconds");
+var unlock_all_timed = false; //unlocks all positive timed events (eg. finding the wreck) - default false
 
 var key_send = 13; //key to send action - default 13 (enter)
 var key_repeat = 38; //key to paste the last action to the <input> - default 38 (arrow_up)
