@@ -9,6 +9,9 @@ document.addEventListener("keyup", function (e){
 	else if(e.keyCode == key_repeat){
 		repeat();
 	}
+	else if(e.keyCode == key_next_scene){
+		nextscene();
+	}
 });
 
 document.addEventListener("DOMContentLoaded", function(){

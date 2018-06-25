@@ -18,7 +18,7 @@ var max_volume = 0.2; //maximum volume level of played audios - default and reco
 var dbg = false; //debug to the html output - default false
 var module_load_time = 500; //time buffer for the modules to load / reload. increase if they don't load correctly or decrease if they load too slowly
 var daynightcycle_delay = 3000; /*time in ms between the day/night cycle states (12 states/day) (entered time in seconds * 12 / 60 = duration of a full day/night cycle) (or uncomment the following and look in the console to see the duration)*/       //console.log("daynightcycle - full cycle duration: " + daynightcycle_delay/1000*12/60 + " minutes or " + daynightcycle_delay/1000*12 + " seconds");
-var unlock_all_timed = false; //unlocks all positive timed events (eg. finding the wreck) - default false
+var unlock_all_timed = true; //unlocks all positive timed events (eg. finding the wreck) - default false
 
 var key_send = 13; //key to send action - default 13 (enter)
 var key_repeat = 38; //key to paste the last action to the <input> - default 38 (arrow_up)
@@ -40,9 +40,12 @@ var timer_multiplier = 1; //timer multiplier, make timer faster / slower (2 for 
 
 //load all modules, comment out a module if you don't want it loaded and decrease the max_modules variable by 1 (if you need it to) to update the UI accordingly
 //listeners and parser modules are needed, else the script will either not work or error
-var modulecount = 0;var max_modules = 6;var modules_displayname = "TAG_master";
+var modulecount = 0;var max_modules = 7;var modules_displayname = "TAG_master";
 
 
+
+//scenes module - comment out to disable different scenes (inventory, structures and status effects cannot be accessed!)
+module_tag_scenes = document.createElement('script');module_tag_scenes.src="TAG_scenes.js";module_tag_scenes.id="script_tag_scenes";document.getElementById("script_tag_master").appendChild(module_tag_scenes);
 
 //listener and initialization module - comment out to partially break the script (have fun)
 module_tag_listeners = document.createElement('script');module_tag_listeners.src="TAG_listeners.js";module_tag_listeners.id="script_tag_listeners";document.getElementById("script_tag_master").appendChild(module_tag_listeners);
@@ -59,8 +62,8 @@ module_tag_parser = document.createElement('script');module_tag_parser.src="TAG_
 //audio playback module - comment out to disable audio
 module_tag_audio = document.createElement('script');module_tag_audio.src="TAG_audio.js";module_tag_audio.id="script_tag_audio";document.getElementById("script_tag_master").appendChild(module_tag_audio);
 
-//scenes module - comment out to disable different scenes (inventory, structures and status effects cannot be accessed!)
-module_tag_scenes = document.createElement('script');module_tag_scenes.src="TAG_scenes.js";module_tag_scenes.id="script_tag_scenes";document.getElementById("script_tag_master").appendChild(module_tag_scenes);
+//localization module - comment out to disable language changing
+module_tag_lang = document.createElement('script');module_tag_lang.src="TAG_lang.js";module_tag_lang.id="script_tag_lang";document.getElementById("script_tag_master").appendChild(module_tag_lang);
 
 
 
@@ -70,7 +73,7 @@ module_tag_scenes = document.createElement('script');module_tag_scenes.src="TAG_
 /* 0.0.2 */ 						+ "<br><br><br><span style='font-size:0.75vw;'><b>[B]-0.0.2</b></span><br><div style='width:100%;border-top-style:solid;border-width:2px;'></div><br>- completely reworked UI<br><br>- added status effects, inventory and crafting system<br><br>- added timed events<br><br>- added sidebar with infos<br><br>- added saving and loading mechanism (although loading is disabled)<br>"
 /* 0.0.3 */ 						+ "<br><br><br><span style='font-size:0.75vw;'><b>[B]-0.0.3</b></span><br><div style='width:100%;border-top-style:solid;border-width:2px;'></div><br>- added structure system, added basic shelter and explorable shipwreck<br><br>- renamed to Text Island<br><br>- tons and tons of fixes to improve convenience<br><br>- added flint stone and hatchet<br><br>- changed retry button<br><br>- modified sidebar<br><br>- fixed incompatibility errors<br><br>- added score system<br><br>- added many synonyms<br><br>- added day/night cycle with ingame time and time display (currently very fast and with no function)<br><br>- improved scaling of all elements<br>"
 /* 0.0.4 */ 						+ "<br><br><br><span style='font-size:0.75vw;'><b>[B]-0.0.4</b></span><br><div style='width:100%;border-top-style:solid;border-width:2px;'></div><br>- added audio system, added some basic placeholder-sounds<br><br>- added ambient sound that plays on load<br><br>- added mute/unmute button<br><br>- redesigned retry button<br><br>- added tree chopping with logs item drop<br><br>- improved day/night cycle and made it independent from game timer<br><br>- added this collapsable ingame changelog display<br><br>- added day/night dependant ambient sounds<br><br>- fixed bug of 'make' always executing the not enough material to build shelter message<br><br>- fixed bug of 'what do you want to get?' message executed after coconut was taken<br><br>- changed position of mute button to the left of the changelog arrow<br><br>- fixed position changes of top right control panel when changelog is opened<br><br>- reformatted changelog a bit<br><br>- removed image display of day/night cycle and made it so the background displays it instead<br><br>- added background underlay behind in/output elements, info panel and control panel<br><br>- changed last save string in the info panel to last saved at (ingame time)<br>"
-/* 0.0.5 */                         + "<br><br><br><span style='font-size:0.75vw;'><b>[B]-0.0.5</b></span><br><div style='width:100%;border-top-style:solid;border-width:2px;'></div><br>- made it so the modules will be loaded twice for more stability in the UI<br><br>- telling the user if they are using a mobile device because they are currently unsupported<br><br>- hovering over the loaded modules indicator will show all loaded modules<br><br>- added css to remove antialiasing on all images which makes them very crisp (background day/night cycle included)<br><br>- added ui shortening / hiding / expanding button<br><br>- added scene switching which also accordingly changes the positions of the UI<br><br>- fixed some bugs<br><br>- added cookie API to make my life a whole lot easier<br><br>- added score and item saving and loading<br><br>- game autosaves every minute<br>";
+/* 0.0.5 */                         + "<br><br><br><span style='font-size:0.75vw;'><b>[B]-0.0.5</b></span><br><div style='width:100%;border-top-style:solid;border-width:2px;'></div><br>- made it so the modules will be loaded twice for more stability in the UI<br><br>- telling the user if they are using a mobile device because they are currently unsupported<br><br>- hovering over the loaded modules indicator will show all loaded modules<br><br>- added css to remove antialiasing on all images which makes them very crisp (background day/night cycle included)<br><br>- added ui shortening / hiding / expanding button<br><br>- added scene switching which also accordingly changes the positions of the UI<br><br>- fixed some bugs<br><br>- added cookie API to make my life a whole lot easier<br><br>- added score and item saving and loading<br><br>- game autosaves every minute<br><br>- adding a ?cmd=XY or ?command=XY after the URL can now execute a command on page load<br><br>- items, structures and statuses are now being displayed in their respective scenes<br>";
 
 
 
@@ -143,14 +146,16 @@ function getitem(elemid, title, src, append){
 	if(dbg){sendmsg("giving item: id: " + elemid + " - title: " + title + " - src: " + src + " - append: " + append, "orange");}
 	
 	var newelem = document.createElement('span');
-	newelem.innerHTML='<abbr id="abbr" style="cursor:help;" title="' + title + '"><img id="' + elemid + '" src="' + src + '" style="width:2vw;height:2vw;"></img></abbr>';
+	newelem.innerHTML='<abbr id="abbr" style="cursor:help;" title="' + title + '"><img id="' + elemid + '" src="' + src + '" style="width:3vw;height:3vw;"></img></abbr>';
 	document.getElementById("" + append).appendChild(newelem);
+	scenechange(1);
 }
 
 function removeitem(id) {
 	if(dbg){sendmsg("removing item: " + id, "orange");}
 	document.getElementById(id).innerHTML="";
 	document.getElementById(id).outerHTML="";
+	scenechange(1);
 }
 
 var browser;
@@ -168,6 +173,9 @@ function getuserdata() {
 		}
 		else if(ua.includes("Chrome/") && ua.includes("Edge/")){
 			browser = "ie12";
+		}
+		else if(!ua.includes("Chrome/") || ua.includes("Safari/")){
+			browser = "sfr";
 		}
 		else {
 			browser = "incompatible";
@@ -246,10 +254,10 @@ setTimeout(function (){
 			document.getElementById("checkload").innerHTML="";
 			document.getElementById("checkload").outerHTML="";
 		}
-		setInterval(dncycletimer(), daynightcycle_delay);
+		setInterval(dncycletimer, daynightcycle_delay);
 		currentscore = 0;
 		startupdater();
-		sendmsg("Type " + '"' + "save" + '"' + " to save or " + '"' + "load" + '"' + " to load the game.<br>&gt;&nbsp;You start out stranded on a small island.<br>&gt;&nbsp;All you've got on you is an army knife.<br>&gt;&nbsp;Also you are starving. Find something to eat to survive!<br><br>");
+		sendmsg("You start out stranded on a small island.<br>&gt;&nbsp;All you've got on you is an army knife.<br>&gt;&nbsp;Also you are starving. Find something to eat to survive!<br><br>");
 		setTimeout(function () {
 			console.log("initialized " + modulecount + "/" + max_modules + " modules");
 		}, module_load_time);
@@ -360,7 +368,7 @@ function collapseui(){
 
 function checkqstr() {
 	var qstr = window.location.search;
-	qstr = qstr.substring(1);
+	qstr = qstr.substring(1).replace(/%20/g, " ");;
 	if(dbg){sendmsg("QueryString: " + qstr, "orange");}
 	var qstra = qstr.split("&");
 	for(var i = 0; i < qstra.length; i++) {

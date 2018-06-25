@@ -66,6 +66,10 @@ function preloader() {
 		document.getElementById("preload-10").style.background = "url(https://raw.githubusercontent.com/Sv443/TextAdventureGame/master/daynightcycle%20-%20320x160/time_9_320x160.png) no-repeat -9999px -9999px";
 		document.getElementById("preload-11").style.background = "url(https://raw.githubusercontent.com/Sv443/TextAdventureGame/master/daynightcycle%20-%20320x160/time_10_320x160.png) no-repeat -9999px -9999px";
 		document.getElementById("preload-12").style.background = "url(https://raw.githubusercontent.com/Sv443/TextAdventureGame/master/daynightcycle%20-%20320x160/time_11_320x160.png) no-repeat -9999px -9999px";
+		document.getElementById("preload-13").style.background = "url(https://raw.githubusercontent.com/Sv443/TextAdventureGame/master/scenes/camp_320x160.png) no-repeat -9999px -9999px";
+		document.getElementById("preload-14").style.background = "url(https://raw.githubusercontent.com/Sv443/TextAdventureGame/master/scenes/structures_320x160.png) no-repeat -9999px -9999px";
+		document.getElementById("preload-15").style.background = "url(https://raw.githubusercontent.com/Sv443/TextAdventureGame/master/scenes/inventory_320x160.png) no-repeat -9999px -9999px";
+		document.getElementById("preload-16").style.background = "url(https://raw.githubusercontent.com/Sv443/TextAdventureGame/master/scenes/status_320x160.png) no-repeat -9999px -9999px";
 	}
 }
 function addLoadEvent(func) {
@@ -86,73 +90,85 @@ document.addEventListener("DOMContentLoaded", function () {addLoadEvent(preloade
 
 </head>
 <body style="font-family:Courier;" data-nbr="11">
-<div align="center">
-<br>
-<div id="uicontainer">
-<div id="outputelem" align="left">
+	<span id="appendtest"></span>
+	<div align="center">
+		<br>
+		<div id="uicontainer">
+			<div id="outputelem" align="left">
 
 
-<span id="premsg">(<a style="text-decoration:none;color:blue;" href="https://en.wikipedia.org/wiki/Adventure_game#Text_adventures_and_interactive_fiction" target="_blank" title="What is a Text Adventure Game?">TAG</a>) Text Island<script>document.write(" v" + curversion);</script> by <a href="https://github.com/Sv443" style="text-decoration:none; color:blue;" target="blank_" title="Sv443 on GitHub">Sv443</a><br></span>
-<span>Currently there is no ending and the game is in Beta, so please don't expect too much! If you have scaling issues try holding CTRL and scroll up and down.</span><br>
-<span>Type <span class="hoverhelp" title="Use the input text field at the bottom to type 'tutorial' and click 'Submit' or press 'Enter'">tutorial</span> if you want an introduction or <span title="Use the input text field at the bottom to type 'list' and click 'Submit' or press 'Enter'" class="hoverhelp">list</span> to see all unlocked commands<br><br></span>
-<span id="checkload">Couldn't load script! Either you are using Internet Explorer 11 or lower which isn't supported yet or you didn't enable JavaScript. Else <a href='https://github.com/Sv443'>contact me</a> if you are sure that it is already activated and you checked it on another browser. Thanks!<br><br></span>
-<span id="out"></span>
+				<span id="premsg">(<a style="text-decoration:none;color:blue;" href="https://en.wikipedia.org/wiki/Adventure_game#Text_adventures_and_interactive_fiction" target="_blank" title="What is a Text Adventure Game?">TAG</a>) Text Island<script>document.write(" v" + curversion);</script> by <a href="https://github.com/Sv443" style="text-decoration:none; color:blue;" target="blank_" title="Sv443 on GitHub">Sv443</a><br></span>
+				<span>Currently there is no ending and the game is in Beta, so please don't expect too much! If you have scaling issues try holding CTRL and scroll up and down.</span><br>
+				<span>Type <span class="hoverhelp" title="Use the input text field at the bottom to type 'tutorial' and click 'Submit' or press 'Enter'">tutorial</span> if you want an introduction or <span title="Use the input text field at the bottom to type 'list' and click 'Submit' or press 'Enter'" class="hoverhelp">list</span> to see all unlocked commands.</span><br>
+				<span>Click the save or load buttons in the top right to save or load the game!</span><br><br>
+				<span id="checkload">Couldn't load script! Either you are using Internet Explorer 11 or lower which isn't supported yet or you didn't enable JavaScript. Else <a href='https://github.com/Sv443'>contact me</a> if you are sure that it is already activated and you checked it on another browser. Thanks!<br><br></span>
+				<span id="out"></span>
 
-</div>
-<div id="retryelem" style="background-color:rgba(0,0,0,0);"></div>
-<div style="height:0.8vw;"></div>
-<div id="itemelem" title="Inventory">
-<abbr id="itemabbr" style="cursor:help;" title="Army Knife - 'Don't eat' is printed on one side"><img id="item_army_knife_elem" src="https://raw.githubusercontent.com/Sv443/TextAdventureGame/master/army_knife_16x16.png" style="width:2vw;height:2vw;"></img></abbr>
-<span id="appenditem"></span>
-
-</div>
-<div style="height:0.8vw;"></div>
-<div id="structureelem" title="Structures">
-<span id="appendstructure"></span>
-
-</div>
-<div style="height:0.8vw;"></div>
-<div id="effectselem" title="Status Effects">
-<abbr id="effectabbr" style="cursor:help;" title="Hunger - You are starving! Eat something ASAP else you'll die at the 10 minute mark!"><img id="effect_hunger" src="https://raw.githubusercontent.com/Sv443/code/master/resources/images/hunger_16x16.png" style="width:2vw;height:2vw;"></img></abbr>
-<span id="appendeffect"></span>
-</div>
-<div style="height:0.8vw;"></div>
-<div id="inputcontainer">
-<table><tr><th>
-<input id="inputelem" type="text" placeholder=">_" title="Type your actions here"></input>
-</th><th>
-<button id="submitelem" onclick="submit();" title="Click to submit or press Enter">&gt;</button>
-</th></tr></table>
-</div>
-</div>
-</div>
-<div style="position:absolute;top:10px;left:10px;">
-<!--<img id="TAG_cycle" data-nbr="11" src="" style="box-shadow:5px 5px 10px grey;width:18vw;height:9vw;border-radius:10px;"></img> --><!--cycle has to start at 11 because the script increases it by 1, so it overflows and starts at 0-->
-<span id="TAG_cycle" data-nbr="11" title="This is an invisible data storage for the d/n cycle"></span>
-<div id="timercontainer" title="Info Panel">
-Timer:<br><span id="game_timer">00:00</span><br><br>
-In-Game Time:<br>Day <span id="ingame_day">1</span>, <span id="ingame_time">12:00</span><br><br>
-Current Score:<br><span id="current_score">0</span><br><br>
-Last Entered:<br>"<span id="last_entered"></span>"<br><br>
-Last Saved at:<br>"<span id="last_saved">the save module is loading or was disabled</span>"<br><br>
-Loaded Modules:<br><span id="moduletitle" style="cursor:help;"><span id="module_counter">0</span>/<span id="max_modules">0</span></span><br>
-</div>
-</div>
-<div id="changelogcontainer" style="top:10px;right:10px;position:absolute;">
-<div align="right">
-<div id="controlpanelcontainer" align="center" title="Control Panel">
-	<img id="collapseelem" title="Shorten / Hide / Expand user interface" data-state="normal" onclick="collapseui();" style="width:2vw;height:2vw;cursor:pointer;" src="https://raw.githubusercontent.com/Sv443/TextAdventureGame/master/uisize_normal.png"></img>
-	<img id="muteelem" title="Mute/Unmute audio" style="width:2vw;height:2vw;cursor:pointer;" onclick="togglemute();" data-muted="0" src="https://raw.githubusercontent.com/Sv443/TextAdventureGame/master/mute_0_128x128.png"></img>
-	<img id="changelogarrow" title="Changelog - Click to show/hide" src="https://raw.githubusercontent.com/Sv443/TextAdventureGame/master/arrow_left_160x160.png" style="width:2vw;height:2vw;cursor:pointer;" onclick="togglechangelog();"></img><br>
+			</div>
+			<div id="retryelem" style="background-color:rgba(0,0,0,0);"></div>
+			<div style="height:0.8vw;"></div>
+			<div id="inputcontainer">
+				<table><tr><th>
+					<input id="inputelem" type="text" placeholder=">_" title="Type your actions here"></input>
+				</th><th>
+					<button id="submitelem" onclick="submit();" title="Click to submit or press Enter">&gt;</button>
+				</th></tr></table>
+			</div>
+		</div>
+	</div>
+	<div id="isecontainer">
 	
-	<img id="saveelem" title="Save your game state to your browser cookies" data-state="normal" onclick="savegame();" style="width:2vw;height:2vw;cursor:pointer;" src="https://raw.githubusercontent.com/Sv443/TextAdventureGame/master/save_16x16.png"></img>
-	<img id="placeholder" title="Placeholder" style="width:2vw;height:0px;cursor:pointer;" onclick="sendmsg('Placeholder!');" src="https://raw.githubusercontent.com/Sv443/TextAdventureGame/master/placeholder.png"></img>
-	<img id="loadelem" title="Load your game state from your browser cookies" src="https://raw.githubusercontent.com/Sv443/TextAdventureGame/master/load_16x16.png" style="width:2vw;height:2vw;cursor:pointer;" onclick="loadgame();"></img><br>
+		<div id="itemelem" title="Inventory">
+			<abbr id="itemabbr" style="cursor:help;" title="Army Knife - 'Don't eat' is printed on one side"><img id="item_army_knife_elem" src="https://raw.githubusercontent.com/Sv443/TextAdventureGame/master/army_knife_16x16.png" style="width:3vw;height:3vw;"></img></abbr>
+			<span id="appenditem"></span>
+		</div>
+		
+		<div style="height:0.8vw;"></div>
+		
+		<div id="structureelem" title="Structures">
+			<span id="appendstructure"></span>
+		</div>
+		
+		<div style="height:0.8vw;"></div>
+		
+		<div id="effectselem" title="Status Effects">
+			<abbr id="effectabbr" style="cursor:help;" title="Hunger - You are starving! Eat something ASAP else you'll die at the 10 minute mark!"><img id="effect_hunger" src="https://raw.githubusercontent.com/Sv443/code/master/resources/images/hunger_16x16.png" style="width:2vw;height:2vw;"></img></abbr>
+			<span id="appendeffect"></span>
+		</div>
+		
+		<div style="height:0.8vw;"></div>
+		
+	</div>
 	
-	<select id="sceneselector" onchange="scenechange();" title="Change Scene"><option value="dncycle">Beach</option><option value="camp">Camp</option><option value="inventory">Inventory</option><option value="status">Status</option></select> 
-</div></div><br>
-<div id="changelogelem" data-opened="0"></div>
-</div>
+	<div style="position:absolute;top:10px;left:10px;">
+		<!--<img id="TAG_cycle" data-nbr="11" src="" style="box-shadow:5px 5px 10px grey;width:18vw;height:9vw;border-radius:10px;"></img> --><!--cycle has to start at 11 because the script increases it by 1, so it overflows and starts at 0-->
+		<span id="TAG_cycle" data-nbr="11" title="This is an invisible data storage for the d/n cycle"></span>
+		<div id="timercontainer" title="Info Panel">
+			Timer:<br><span id="game_timer">00:00</span><br><br>
+			In-Game Time:<br>Day <span id="ingame_day">1</span>, <span id="ingame_time">12:00</span><br><br>
+			Current Score:<br><span id="current_score">0</span><br><br>
+			Last Entered:<br>"<span id="last_entered"></span>"<br><br>
+			Last Saved at:<br>"<span id="last_saved">the save module is loading or was disabled</span>"<br><br>
+			Loaded Modules:<br><span id="moduletitle" style="cursor:help;"><span id="module_counter">0</span>/<span id="max_modules">0</span></span><br>
+		</div>
+	</div>
+	<div id="changelogcontainer" style="top:10px;right:10px;position:absolute;">
+		<div align="right">
+			<div id="controlpanelcontainer" align="center" title="Control Panel">
+				<img id="collapseelem" title="Shorten / Hide / Expand user interface" data-state="normal" onclick="collapseui();" style="width:2vw;height:2vw;cursor:pointer;" src="https://raw.githubusercontent.com/Sv443/TextAdventureGame/master/uisize_normal.png"></img>
+				<img id="muteelem" title="Mute/Unmute audio" style="width:2vw;height:2vw;cursor:pointer;" onclick="togglemute();" data-muted="0" src="https://raw.githubusercontent.com/Sv443/TextAdventureGame/master/mute_0_128x128.png"></img>
+				<img id="changelogarrow" title="Changelog - Click to show/hide" src="https://raw.githubusercontent.com/Sv443/TextAdventureGame/master/arrow_left_160x160.png" style="width:2vw;height:2vw;cursor:pointer;" onclick="togglechangelog();"></img><br>
+	
+				<img id="saveelem" title="Save your game state to your browser cookies" data-state="normal" onclick="savegame();" style="width:2vw;height:2vw;cursor:pointer;" src="https://raw.githubusercontent.com/Sv443/TextAdventureGame/master/save_16x16.png"></img>
+				<img id="placeholder" title="PLACEHOLDER" src="https://raw.githubusercontent.com/Sv443/TextAdventureGame/master/placeholder.png" style="width:2vw;height:0px;"></img>
+				<img id="loadelem" title="Load your game state from your browser cookies" src="https://raw.githubusercontent.com/Sv443/TextAdventureGame/master/load_16x16.png" style="width:2vw;height:2vw;cursor:pointer;" onclick="loadgame();"></img><br>
+	
+				<select id="sceneselector" onchange="scenechange();" title="Change Scene"><option value="dncycle">Beach</option><option value="camp">Camp</option><option value="structures">Camp 2</option><option value="inventory">Inventory</option><option value="status">Status</option></select><span style="color:rgba(0,0,0,0);">-</span><select id="langselector" style="width:2vw;" onchange="langchange();" title="Change Language"><option value="en">EN</option><option value="de">DE</option></select>
+			</div>
+		</div>
+		<br>
+		<div id="changelogelem" data-opened="0"></div>
+	</div>
 
 
 
@@ -182,6 +198,10 @@ Loaded Modules:<br><span id="moduletitle" style="cursor:help;"><span id="module_
 <img class="imgpreload" id="preload-10" src="https://raw.githubusercontent.com/Sv443/TextAdventureGame/master/daynightcycle%20-%20320x160/time_9_320x160.png" width="1px" height="1px"/>
 <img class="imgpreload" id="preload-11" src="https://raw.githubusercontent.com/Sv443/TextAdventureGame/master/daynightcycle%20-%20320x160/time_10_320x160.png" width="1px" height="1px"/>
 <img class="imgpreload" id="preload-12" src="https://raw.githubusercontent.com/Sv443/TextAdventureGame/master/daynightcycle%20-%20320x160/time_11_320x160.png" width="1px" height="1px"/>
+<img class="imgpreload" id="preload-13" src="https://raw.githubusercontent.com/Sv443/TextAdventureGame/master/scenes/camp_320x160.png" width="1px" height="1px"/>
+<img class="imgpreload" id="preload-14" src="https://raw.githubusercontent.com/Sv443/TextAdventureGame/master/scenes/structures_320x160.png" width="1px" height="1px"/>
+<img class="imgpreload" id="preload-15" src="https://raw.githubusercontent.com/Sv443/TextAdventureGame/master/scenes/inventory_320x160.png" width="1px" height="1px"/>
+<img class="imgpreload" id="preload-16" src="https://raw.githubusercontent.com/Sv443/TextAdventureGame/master/scenes/status_320x160.png" width="1px" height="1px"/>
 </div>
 </body>
 </html>

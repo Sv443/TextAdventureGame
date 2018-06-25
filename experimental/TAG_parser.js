@@ -270,6 +270,8 @@ function multiaction(lcival) { // actions that consist of multiple variations an
 		else {
 			sendmsg("Eat what?");
 		}
+		if(document.body.innerHTML.includes("bg_sc_effect_hunger")){removescitem("sc_effect_hunger");}
+		scenechange(1);
 	}
 	else if(lcival.includes("kill")){
 		if(lcival.includes("myself") || lcival.includes("yourself")){

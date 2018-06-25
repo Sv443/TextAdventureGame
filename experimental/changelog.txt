@@ -50,11 +50,13 @@
 		- added cookie API to make my life a whole lot easier
 		- added score and item saving and loading which was in and of itself a hard job. I don't know how in the hell I'm going to implement the time loading without completely rewriting the TAG_timer script and probably everything else though...
 		- game autosaves every minute
+		- adding a ?cmd=XY or ?command=XY after the URL can now execute a command on page load (example: "?cmd=dev_ua" will execute the command dev_ua on page load and will display the user agent info)
+		- items, structures and statuses are now being displayed in their respective scenes
 }
 { TODO / BUGS >
 
 		NOTE: please send any bugs, errors, glitches or suggestions (please look at the planned features (at the bottom) first to not make a duplicate)
-		through the github issue tracker to help improving the game! You'll also be mentioned in the credits :) (https://github.com/Sv443/TextAdventureGame/issues)
+		through the github issue tracker to help improve the game! You'll also be mentioned in the credits :) (https://github.com/Sv443/TextAdventureGame/issues)
 
 
 		D- (DONE - added load delay to allow for functions to load before getting called) fix bug of modules not loading correctly on a public website (works fine locally via file:///)
@@ -63,27 +65,30 @@
 		D- (DONE - had to be "else if" but only was "if") fix bug of "what do you want to get?" appearing after coconut was taken
 		D- (DONE - also added load delay) fix bug of "the save module was disabled" being shown no matter if it was loaded correctly or not
 		D- (DONE - made the script not focus if CTRL and/or ALT are being pressed) make the script not focus on the <input> when CTRL is pressed
-		- module count display and init still not loading correctly on external URL (not file:///) (slowly starts to piss me off now) (this bug is not game breaking but it makes the displays not work and sometimes even the prologue messages don't show up at all and it displays the couldn't load script error even though everything works fine)
 		D- (DONE - made the background color transparent) graphical error of retry button not having a transparent container
 		D- (DONE - resizing underlay after death) graphical error of underlay between in/output elements not resizing correctly after death
-		WIP- finally fix the damn submit button scaling issues and its bad design that bugged me since 0.0.1
-		- sort the github repo and put all resources in a dedicated folder like the day/night cycle images already are
 		D- (DONE - variable was being initialized but didn't get set correctly) mute element not found
-		- bad scaling on mobile devices
-		- add save/load buttons
-		- ui scales and positions incorrectly after death
-		- ui shows up (info panel doesn't) after the scene was switched even if it was disabled before
+		D- (DONE - added them to the control panel) add save/load buttons
+		D- (DONE - script was stalling at some points because elements couldn't be found - now the script is just skipping them if they couldn't be found) module count display and init still not loading correctly on external URL (not file:///) (slowly starts to piss me off now) (this bug is not game breaking but it makes the displays not work and sometimes even the prologue messages don't show up at all and it displays the couldn't load script error even though everything works fine)
+		D- (DONE - called setInterval function in the wrong way) day/night cycle somehow stopped working
+		D- (DONE - added condition so it skips the erroring part if the elements cannot be found) script can't find some elements and just stalls without running through the other code which breaks everything
 		D- (DONE - added a button to the control panel) make the UI collapsable or maybe even completely togglable to get a "cinematic" view
 		D- (DONE - info panel updater which was in an if statement couldn't be reached while the d/n cycle state was 0) 10:00 being displayed instead of 12:00
+		WIP- (WORK IN PROGRESS) finally fix the damn submit button scaling issues and its bad design that bugged me since 0.0.1
+		- bad scaling on mobile devices
+		- ui scales and positions incorrectly after death
+		- sort the github repo and put all resources in a dedicated folder like the day/night cycle images already are
+		- ui shows up (info panel doesn't) after the scene was switched if it was disabled in another scene before
 }
 { PLANNED >
-		WIP- change through different scenes (backgrounds) to see your structures, your inventory, your health and status effects, the day/night cycle, settings, and so on
-		WIP- unique soundtrack (currently work in progress)
+		WIP- (WORK IN PROGRESS) change through different scenes (backgrounds) to see your structures, your inventory, your health and status effects, the day/night cycle, settings, and so on
+		WIP- (WORK IN PROGRESS) unique soundtrack
 		- multi-language support
 		- multiple bad and good endings
 		- more discoverable and explorable structures with unique items
 		- butterfly-effect
-		- completely rework the parser and loading script (very very hard-coded)
+		- achievement system
+		- completely rework the parser and saving/loading script (very very hard-coded)
 		- allow people to make their own text adventure game only through the usage of arrays and variables in a new module (no fiddly coding at all          (except for me            yay                       i'm already excited))
 		- add multiple themes for the UI
 }

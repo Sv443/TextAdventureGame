@@ -16,8 +16,8 @@ function savegame(auto) {
 	if(document.body.innerHTML.includes("item_lianas_elem")){ savestring += "1-" } else { savestring += "0-" }
 	if(document.body.innerHTML.includes("item_rope_elem")){ savestring += "1-" } else { savestring += "0-" }
 	if(document.body.innerHTML.includes("item_flint_stone_elem")){ savestring += "1-" } else { savestring += "0-" }
-	if(document.body.innerHTML.includes("item_logs_elem")){ savestring += "1-" } else { savestring += "0-" }
-	if(document.body.innerHTML.includes("item_hatchet_elem")){ savestring += "1_" } else { savestring += "0_" }
+	if(document.body.innerHTML.includes("item_hatchet_elem")){ savestring += "1-" } else { savestring += "0-" }
+	if(document.body.innerHTML.includes("item_logs_elem")){ savestring += "1_" } else { savestring += "0_" }
 	if(document.body.innerHTML.includes("structure_shipwreck")){ savestring += "1-" } else { savestring += "0-" }
 	if(document.body.innerHTML.includes("structure_shelter")){ savestring += "1_" } else { savestring += "0_" }
 	if(document.body.innerHTML.includes("effect_hunger")){ savestring += "1-" } else { savestring += "0-" }

@@ -1,11 +1,17 @@
-var queryString = window.location.search;
-queryString = queryString.substring(1);
-
-var URLhost = window.location.host;
-var URLpath = window.location.pathname;
-var curURL = URLhost + "" + URLpath;
+// Text Island localization module
+// (c) Sv443 / Sven Fehler 2018 - licensed under MIT license
 
 
+var queryString = window.location.search.substring(1);
+var URLhost = window.location.host;var URLpath = window.location.pathname;var curURL = URLhost + "" + URLpath;
+
+function langchange() {
+	var ls = document.getElementById("langselector");
+	sendmsg("Changing Language to: " + ls.value);
+	sendmsg("the language change feature is currently in work!", "red");
+}
+
+/*
 function chen() { //change to english
 	console.log("changed to EN");
 	document.title = "";
@@ -51,3 +57,8 @@ if(queryString.includes("lang=de")) { //change to german
 if(queryString.includes("lang=en") || !queryString.includes("lang=de")) { //change to english
 	chen();
 }
+*/
+
+console.log("initialized TAG_lang.js");
+modulecount += 1;
+modules_displayname += ", TAG_lang";

@@ -79,7 +79,6 @@ function startTimer(duration, display) { //timer code from https://stackoverflow
 			else if(minutes == time_died_of_freezing && seconds == 00){																timedevent("died_of_freezing");}
 			else if(minutes == time_died_of_freezing_again && seconds == 00){														timedevent("died_of_freezing");}
 			else if(minutes == 999 && seconds == 59){																				sendmsg("Good job. You just wasted 16 hours, 38 minutes and 59 seconds of your life.")}
-			else if(minutes == 15 && seconds == 38){																				playaudio("ambient_0", 1)}
 			else if(!document.body.innerHTML.includes("discovered a shipwreck") && minutes == time_found_boat && seconds == 00){	timedevent("found_shipwreck");}
 			
 			//if(seconds == 00 && !document.body.innerHTML.includes('id="status_dead"')){savegame("autosave");}
@@ -97,6 +96,7 @@ function startTimer(duration, display) { //timer code from https://stackoverflow
 }
 
 function dncycletimer() {
+	if(document.getElementById("TAG_cycle") != null || document.getElementById("TAG_cycle") != undefined){
 	var nbr2 = parseInt(document.getElementById("TAG_cycle").dataset.nbr) + 1;
 	if(nbr2 == 0 || nbr2 == 12){dncycle(0);document.getElementById("ingame_time").innerHTML="12:00";}
 	else {
@@ -119,6 +119,7 @@ function dncycletimer() {
 			document.getElementById("ingame_day").innerHTML=curday;
 		}
 		document.getElementById("ingame_time").innerHTML=nbrp + nbrt2 + ":00" + dbgt;
+	}
 	}
 }
 
