@@ -23,7 +23,7 @@
 <script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script> <!-- cookie parser script to make my life a whole lot easier (https://github.com/js-cookie/js-cookie) -->
 
 <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.3/cookieconsent.min.css" />
-<script src="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.3/cookieconsent.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.3/cookieconsent.min.js"></script>
 
 
 <script>
@@ -146,7 +146,7 @@ Loaded Modules:<br><span id="moduletitle" style="cursor:help;"><span id="module_
 	<img id="changelogarrow" title="Changelog - Click to show/hide" src="https://raw.githubusercontent.com/Sv443/TextAdventureGame/master/arrow_left_160x160.png" style="width:2vw;height:2vw;cursor:pointer;" onclick="togglechangelog();"></img><br>
 	
 	<img id="saveelem" title="Save your game state to your browser cookies" data-state="normal" onclick="savegame();" style="width:2vw;height:2vw;cursor:pointer;" src="https://raw.githubusercontent.com/Sv443/TextAdventureGame/master/save_16x16.png"></img>
-	<img id="placeholder" title="Placeholder" style="width:2vw;height:2vw;cursor:pointer;" onclick="sendmsg('Placeholder!');" src="https://raw.githubusercontent.com/Sv443/TextAdventureGame/master/placeholder.png"></img>
+	<img id="placeholder" title="Placeholder" style="width:2vw;height:0px;cursor:pointer;" onclick="sendmsg('Placeholder!');" src="https://raw.githubusercontent.com/Sv443/TextAdventureGame/master/placeholder.png"></img>
 	<img id="loadelem" title="Load your game state from your browser cookies" src="https://raw.githubusercontent.com/Sv443/TextAdventureGame/master/load_16x16.png" style="width:2vw;height:2vw;cursor:pointer;" onclick="loadgame();"></img><br>
 	
 	<select id="sceneselector" onchange="scenechange();" title="Change Scene"><option value="dncycle">Beach</option><option value="camp">Camp</option><option value="inventory">Inventory</option><option value="status">Status</option></select> 

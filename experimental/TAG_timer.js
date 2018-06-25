@@ -82,6 +82,8 @@ function startTimer(duration, display) { //timer code from https://stackoverflow
 			else if(minutes == 15 && seconds == 38){																				playaudio("ambient_0", 1)}
 			else if(!document.body.innerHTML.includes("discovered a shipwreck") && minutes == time_found_boat && seconds == 00){	timedevent("found_shipwreck");}
 			
+			//if(seconds == 00 && !document.body.innerHTML.includes('id="status_dead"')){savegame("autosave");}
+			
 			else if(unlock_all_timed && !document.body.innerHTML.includes("discovered a shipwreck")){timedevent("found_shipwreck");}
 			
 			if(document.getElementById("muteelem").dataset.muted == 0){

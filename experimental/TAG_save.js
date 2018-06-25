@@ -4,7 +4,7 @@
 function saveinit() {document.getElementById("last_saved").innerHTML="never - type save";}
 
 var savestring;var cscore;
-function savegame() {
+function savegame(auto) {
 	getuserdata();
 	cscore = parseInt(document.getElementById("current_score").innerHTML);
 	if(cscore <= 0 || cscore === undefined){cscore = 0;}
@@ -22,16 +22,36 @@ function savegame() {
 	if(document.body.innerHTML.includes("structure_shelter")){ savestring += "1_" } else { savestring += "0_" }
 	if(document.body.innerHTML.includes("effect_hunger")){ savestring += "1-" } else { savestring += "0-" }
 	if(document.body.innerHTML.includes("effect_rain")){ savestring += "1" } else { savestring += "0" }
-
-	document.getElementById("last_saved").innerHTML=timerval;
-	sendmsg("You saved the game to your browser cookies. They will expire in exactly 10 years. Enter 'load' to load your game. But don't delete the cookies or you'll have to start over!");
-	sendmsg("<span style='color:red;'>Loading only works for the score and your items currently!</span>");
+	
+	if(auto === undefined){
+		auto = false;
+	}
+	else {
+		auto = true;
+	}
+	if(!auto){
+		document.getElementById("last_saved").innerHTML=timerval;
+		sendmsg("You saved the game to your browser cookies. They will expire in exactly 10 years. Enter 'load' to load your game. But don't delete the cookies or you'll have to start over!");
+		sendmsg("<span style='color:red;'>Loading only works for the score and your items currently!</span>");
+	}
+	else if(auto) {
+		document.getElementById("last_saved").innerHTML="Autosaved at " + timerval;
+	}
 	savetocookies();
 }
 
 function savetocookies() {
 	if(dbg){sendmsg("saving to cookies: " + savestring, "orange");}
 	Cookies.set('sstr', savestring, { expires: 3650 }); // save savestring to cookies that expire in 10 years
+}
+
+function checkforsave() {
+	var sstr = Cookies.get('sstr');
+	if(sstr != undefined){
+		var sstr2 = sstr.split("_");
+		var sstr3 = sstr2[1].split("-");
+		sendmsg("You already have a saved game where your progress was " + sstr3[0] + ":" + sstr3[1] + ". Load it by pressing the load button in the top right.");
+	}
 }
 
 function loadgame(loadstring) { // [browser_minutes-seconds_score_item1-item2-item3..._structure1-structure2..._status1-status2-status3...]
@@ -136,7 +156,7 @@ function loadgame(loadstring) { // [browser_minutes-seconds_score_item1-item2-it
 		getitem("item_logs_elem", "Logs - Sturdy building material", "https://raw.githubusercontent.com/Sv443/TextAdventureGame/master/logs_16x16.png", "appenditem");
 	}
 	
-	sendmsg("Loaded game!");
+	sendmsg("Loaded game successfully!");
 }
 
 console.log("initialized TAG_save.js");

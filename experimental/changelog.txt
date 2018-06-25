@@ -48,7 +48,8 @@
 		- fixed some bugs
 		- added scene switching which also accordingly changes the positions of the UI
 		- added cookie API to make my life a whole lot easier
-		- added score and item saving and loading which was in and of itself a hard job. I don't know how in the hell I'm going to implement the time loading without completely rewriting the TAG_timer script though
+		- added score and item saving and loading which was in and of itself a hard job. I don't know how in the hell I'm going to implement the time loading without completely rewriting the TAG_timer script and probably everything else though...
+		- game autosaves every minute
 }
 { TODO / BUGS >
 
@@ -77,13 +78,13 @@
 }
 { PLANNED >
 		WIP- change through different scenes (backgrounds) to see your structures, your inventory, your health and status effects, the day/night cycle, settings, and so on
-		- unique soundtrack (currently work in progress)
+		WIP- unique soundtrack (currently work in progress)
 		- multi-language support
 		- multiple bad and good endings
 		- more discoverable and explorable structures with unique items
 		- butterfly-effect
-		- completely rework the parser script (very very hard-coded)
-		- allow people to make their own text adventure game only through the usage of arrays and variables in a new module (no fiddly coding at all)
+		- completely rework the parser and loading script (very very hard-coded)
+		- allow people to make their own text adventure game only through the usage of arrays and variables in a new module (no fiddly coding at all          (except for me            yay                       i'm already excited))
 		- add multiple themes for the UI
 }
 
