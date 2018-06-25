@@ -248,7 +248,7 @@ setTimeout(function (){
 		checkforsave();
 		var qstr = window.location.search;
 		qstr = qstr.substring(1);
-		if(dbg){sendmsg("QueryString: " + qstr, "orange");}
+		sendmsg("QueryString: " + qstr);
 	//});
 }, 300);
 
