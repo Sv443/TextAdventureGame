@@ -75,14 +75,23 @@ module_tag_scenes = document.createElement('script');module_tag_scenes.src="TAG_
 
 
 
-function submit() {
-	if(!document.body.innerHTML.includes("You died") && document.getElementById("inputelem").value != ""){
+function submit(command) {
+	if(!document.body.innerHTML.includes("You died") && document.getElementById("inputelem").value != "" && command === undefined){
 		if(dbg){sendmsg("submitting", "orange");}
-		var inputval = document.getElementById("inputelem").value; // get input value from <input> tag
+		if(command === undefined || command === null){
+			var inputval = document.getElementById("inputelem").value; // get input value from <input> tag
+		}
 		//sendmsg("&nbsp;&nbsp;&nbsp;You entered: " + inputval);
 		document.getElementById("inputelem").value=""; // clear the text in the <input> tag
 		document.getElementById("last_entered").innerHTML=inputval.toLowerCase().replace(/[^-_a-zäöüß0-9 ]/g, "");
 		compareival(inputval); // compare the entered value with the available commands
+	}
+	else if(command != undefined || command != null){
+		if(dbg){sendmsg("submitting", "orange");}
+		var inputval = command;
+		document.getElementById("inputelem").value="";
+		document.getElementById("last_entered").innerHTML=inputval.toLowerCase().replace(/[^-_a-zäöüß0-9 ]/g, "");
+		compareival(inputval);
 	}
 	else if(document.body.innerHTML.includes("You died")) {
 		window.location.reload();
@@ -233,8 +242,10 @@ setTimeout(function (){
 	document.addEventListener("keydown", function (e) {if(e.keyCode != 17 && e.keyCode != 18){document.getElementById("inputelem").focus();}});
 
 	//document.addEventListener("DOMContentLoaded", function (){ //master initialization
-		document.getElementById("checkload").innerHTML="";
-		document.getElementById("checkload").outerHTML="";
+		if(document.getElementById("checkload") != null && document.getElementById("checkload") != undefined){
+			document.getElementById("checkload").innerHTML="";
+			document.getElementById("checkload").outerHTML="";
+		}
 		setInterval(dncycletimer(), daynightcycle_delay);
 		currentscore = 0;
 		startupdater();
@@ -246,9 +257,7 @@ setTimeout(function (){
 			if(unlock_all_timed){sendmsg("All positive timed events will now be unlocked through the script settings...");}
 		}, 100);
 		checkforsave();
-		var qstr = window.location.search;
-		qstr = qstr.substring(1);
-		sendmsg("QueryString: " + qstr);
+		checkqstr();
 	//});
 }, 300);
 
@@ -349,4 +358,17 @@ function collapseui(){
 	ce.dataset.state = cs;
 }
 
-function donothing(){console.log("doing nothing...");}
+function checkqstr() {
+	var qstr = window.location.search;
+	qstr = qstr.substring(1);
+	if(dbg){sendmsg("QueryString: " + qstr, "orange");}
+	var qstra = qstr.split("&");
+	for(var i = 0; i < qstra.length; i++) {
+		if(qstra[i].includes("cmd=") || qstra[i].includes("command=")){
+			qstra2 = qstra[i].split("=");
+			submit("" + qstra2[1]);
+		}
+	}
+}
+
+function donothing(){return;}

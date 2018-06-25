@@ -32,7 +32,7 @@ function compareival(inputval) {
 			window.location.reload();
 			break;
 		case "dev_ua":
-			sendmsg("u_agent    : " + ua);sendmsg("browser    : " + browser);
+			alert("u_agent    : " + ua);sendmsg("browser    : " + browser, "orange");
 			break;
 		case "dev_soundtest1":
 			var anbr = Math.floor(Math.random()*2);
