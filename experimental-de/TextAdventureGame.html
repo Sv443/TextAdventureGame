@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<head>
+<title>[B] Text Island (Lädt...)</title>
+<meta charset="UTF-8"/>
+<link rel="icon" type="image/vnd.microsoft.icon" href="https://raw.githubusercontent.com/Sv443/TextAdventureGame/master/icon_160x160.ico">
+<link rel="stylesheet" href="TAG_CSS.css">
+<script id="script_tag_master" src="TAG_master.js" type="text/javascript"></script>
+
+<link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.3/cookieconsent.min.css" />
+<script src="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.3/cookieconsent.min.js"></script>
+
+
+<script>
+window.addEventListener("load", function(){
+window.cookieconsent.initialise({
+  "palette": {
+    "popup": {
+      "background": "#dfdfdf",
+      "text": "#000000"
+    },
+    "button": {
+      "background": "#828282",
+      "text": "#ffffff"
+    }
+  },
+  "showLink": false,
+  "theme": "edgeless",
+  "position": "bottom-left",
+  "content": {
+    "message": "Diese deutsche Version ist noch unvollständig! Bitte nicht zu viel erwarten, die Übersetzungs-Integration ist momentan in Arbeit. Bei der Eingabe von 'speichern', bist du damit einverstanden, dass ein kleiner Text-String in deine Browser-Cookies gespeichert wird, um es leichter zu machen, später zu laden.",
+    "dismiss": "Verstanden!"
+  }
+})});
+</script>
+<script>
+// better image preloading @ https://perishablepress.com/press/2009/12/28/3-ways-preload-images-css-javascript-ajax/
+function preloader() {
+	if (document.getElementById) {
+		document.getElementById("preload-01").style.background = "url(https://raw.githubusercontent.com/Sv443/TextAdventureGame/master/daynightcycle%20-%20320x160/time_0_320x160.png) no-repeat -9999px -9999px";
+		document.getElementById("preload-02").style.background = "url(https://raw.githubusercontent.com/Sv443/TextAdventureGame/master/daynightcycle%20-%20320x160/time_1_320x160.png) no-repeat -9999px -9999px";
+		document.getElementById("preload-03").style.background = "url(https://raw.githubusercontent.com/Sv443/TextAdventureGame/master/daynightcycle%20-%20320x160/time_2_320x160.png) no-repeat -9999px -9999px";
+		document.getElementById("preload-04").style.background = "url(https://raw.githubusercontent.com/Sv443/TextAdventureGame/master/daynightcycle%20-%20320x160/time_3_320x160.png) no-repeat -9999px -9999px";
+		document.getElementById("preload-05").style.background = "url(https://raw.githubusercontent.com/Sv443/TextAdventureGame/master/daynightcycle%20-%20320x160/time_4_320x160.png) no-repeat -9999px -9999px";
+		document.getElementById("preload-06").style.background = "url(https://raw.githubusercontent.com/Sv443/TextAdventureGame/master/daynightcycle%20-%20320x160/time_5_320x160.png) no-repeat -9999px -9999px";
+		document.getElementById("preload-07").style.background = "url(https://raw.githubusercontent.com/Sv443/TextAdventureGame/master/daynightcycle%20-%20320x160/time_6_320x160.png) no-repeat -9999px -9999px";
+		document.getElementById("preload-08").style.background = "url(https://raw.githubusercontent.com/Sv443/TextAdventureGame/master/daynightcycle%20-%20320x160/time_7_320x160.png) no-repeat -9999px -9999px";
+		document.getElementById("preload-09").style.background = "url(https://raw.githubusercontent.com/Sv443/TextAdventureGame/master/daynightcycle%20-%20320x160/time_8_320x160.png) no-repeat -9999px -9999px";
+		document.getElementById("preload-10").style.background = "url(https://raw.githubusercontent.com/Sv443/TextAdventureGame/master/daynightcycle%20-%20320x160/time_9_320x160.png) no-repeat -9999px -9999px";
+		document.getElementById("preload-11").style.background = "url(https://raw.githubusercontent.com/Sv443/TextAdventureGame/master/daynightcycle%20-%20320x160/time_10_320x160.png) no-repeat -9999px -9999px";
+		document.getElementById("preload-12").style.background = "url(https://raw.githubusercontent.com/Sv443/TextAdventureGame/master/daynightcycle%20-%20320x160/time_11_320x160.png) no-repeat -9999px -9999px";
+	}
+}
+function addLoadEvent(func) {
+	var oldonload = window.onload;
+	if (typeof window.onload != 'function') {
+		window.onload = func;
+	} else {
+		window.onload = function() {
+			if (oldonload) {
+				oldonload();
+			}
+			func();
+		}
+	}
+}
+document.addEventListener("DOMContentLoaded", function () {addLoadEvent(preloader);});
+</script>
+
+</head>
+<body style="font-family:Courier;" data-nbr="11">
+<div align="center">
+<br>
+<div id="uicontainer">
+<div id="outputelem" align="left">
+
+
+<span id="premsg">(<a style="text-decoration:none;color:blue;" href="https://de.wikipedia.org/wiki/Adventure#Textadventures" target="_blank" title="Was ist ein Text Adventure?">TAG</a>) Text Island<script>document.write(" v" + curversion);</script> von <a href="https://github.com/Sv443" style="text-decoration:none; color:blue;" target="blank_" title="Sv443 auf GitHub">Sv443 / Sven Fehler</a><br></span>
+<span>Gib <span class="hoverhelp" title="Nutze das Eingabefeld ganz unten, um 'tutorial' einzugeben und drücke 'Absenden' oder die Taste 'Enter'">tutorial</span> ein, wenn du eine Einführung brauchst oder <span title="Nutze das Eingabefeld ganz unten, um 'list' einzugeben und drücke 'Absenden' oder die Taste 'Enter'" class="hoverhelp">list</span> um alle entsperrten Kommandos zu sehen.<br></span>
+<span>Beispiel für den richtigen Syntax: "anschauen insel" oder "benutzen taschenmesser"<br><br></span>
+<span id="checkload">Konnte Script nicht laden. Bitte drücke F5. Falls es trotzdem nicht klappt, ist entweder JavaScript nicht aktiviert oder du verwendest Internet Explorer 11 oder niedriger, der nicht unterstützt wird. Ansonsten <a href='https://github.com/Sv443' target="blank_">kontaktiere mich bitte</a>!<br><br></span>
+<span id="out"></span>
+
+</div>
+<div id="retryelem" style="background-color:#ffffff;"></div>
+<div style="height:0.8vw;"></div>
+<div id="itemelem" title="Inventory">
+<abbr id="itemabbr" style="cursor:help;" title="Taschenmesser - 'Nicht zum Verzehr geeignet' steht auf dem Etikett"><img id="item_army_knife_elem" src="https://raw.githubusercontent.com/Sv443/TextAdventureGame/master/army_knife_16x16.png" style="width:2vw;height:2vw;"></img></abbr>
+<span id="appenditem"></span>
+
+</div>
+<div style="height:0.8vw;"></div>
+<div id="structureelem" title="Structures">
+<span id="appendstructure"></span>
+
+</div>
+<div style="height:0.8vw;"></div>
+<div id="effectselem" title="Status Effects">
+<abbr id="effectabbr" style="cursor:help;" title="Hunger - Du bist am verhungern! Iss so bald wie möglich etwas, sonst stirbst du an dem 10-Minuten Marker."><img id="effect_hunger" src="https://raw.githubusercontent.com/Sv443/code/master/resources/images/hunger_16x16.png" style="width:2vw;height:2vw;"></img></abbr>
+<span id="appendeffect"></span>
+</div>
+<div style="height:0.8vw;"></div>
+<div id="inputcontainer"><input id="inputelem" type="text" placeholder=">_" title="Gib hier deine Aktionen ein (Syntax Beispiel: benutzen taschenmesser)"></input><button id="submitelem" onclick="submit();" title="Zum Absenden klicken oder Enter drücken">&gt;</button></div>
+</div>
+</div>
+<div style="position:absolute;top:10px;left:10px;">
+<!--<img id="TAG_cycle" data-nbr="11" src="" style="box-shadow:5px 5px 10px grey;width:18vw;height:9vw;border-radius:10px;"></img> --><!--cycle has to start at 11 because the script increases it by 1, so it overflows and starts at 0-->
+<span id="TAG_cycle" data-nbr="11"></span>
+<div id="timercontainer">
+<br>
+Vergangene Echtzeit:<br><span id="game_timer">00:00</span><br><br>
+In-Game Zeit:<br>Tag <span id="ingame_day">1</span>, <span id="ingame_time">12:00</span><br><br>
+Score:<br><span id="current_score">0</span><br><br>
+Zuletzt Eingegeben:<br>"<span id="last_entered"></span>"<br><br>
+Zuletzt Gespeichert:<br>"<span id="last_saved">das speichermodul wurde abgeschaltet</span>"<br><br>
+Geladene Module:<br><span id="module_counter">0</span>/<span id="max_modules">0</span><br><br>
+</div>
+</div>
+<div id="changelogcontainer" style="top:10px;right:10px;position:absolute;">
+<div align="right">
+<div id="controlpanelcontainer" align="center">
+<img id="muteelem" title="Stummschalten" style="width:2vw;height:2vw;top:0px;cursor:pointer;" onclick="togglemute();" data-muted="0" src="https://raw.githubusercontent.com/Sv443/TextAdventureGame/master/mute_0_128x128.png"></img>&nbsp;
+<img id="changelogarrow" title="Änderungsprotokoll (auf Englisch) öffnen/schließen" src="https://raw.githubusercontent.com/Sv443/TextAdventureGame/master/arrow_left_160x160.png" style="width:2vw;height:2vw;cursor:pointer;" onclick="togglechangelog();"></img><br>
+</div></div><br>
+<div id="changelogelem" data-opened="0"></div>
+</div>
+
+
+
+
+<!-- preload audio and day/night cycle images -->
+
+<audio id="audio0elem" preload><source src="tropicalforest0.mp3" type="audio/mpeg"></source></audio><!-- audio by audiomicro.com -->
+<audio id="audio1elem" preload><source src="tropicalforest1.mp3" type="audio/mpeg"></source></audio><!-- audio by audiomicro.com -->
+<audio id="audio2elem" preload><source src="knife0.mp3" type="audio/mpeg"></source></audio><!-- audio by freesound.org -->
+<audio id="audio3elem" preload><source src="crafting0.mp3" type="audio/mpeg"></source></audio><!-- audio by freesound.org -->
+<audio id="audio4elem" preload><source src="eating0.mp3" type="audio/mpeg"></source></audio><!-- audio by freesound.org -->
+<audio id="audio5elem" preload><source src="starving0.mp3" type="audio/mpeg"></source></audio><!-- audio by freesound.org -->
+<audio id="audio6elem" preload><source src="fallingtree0.mp3" type="audio/mpeg"></source></audio><!-- audio by freesound.org -->
+<audio id="audio7elem" preload><source src="tropicalforest2.mp3" type="audio/mpeg"></source></audio><!-- audio by freesound.org -->
+<audio id="audio8elem" preload><source src="tropicalforest3.mp3" type="audio/mpeg"></source></audio><!-- audio by freesound.org -->
+
+<div style="position:fixed;z-index:-1;top:50px;left:45vw;">
+<img id="preload-01" src="https://raw.githubusercontent.com/Sv443/TextAdventureGame/master/daynightcycle%20-%20320x160/time_0_320x160.png" width="1px" height="1px"/>
+<img id="preload-02" src="https://raw.githubusercontent.com/Sv443/TextAdventureGame/master/daynightcycle%20-%20320x160/time_1_320x160.png" width="1px" height="1px"/>
+<img id="preload-03" src="https://raw.githubusercontent.com/Sv443/TextAdventureGame/master/daynightcycle%20-%20320x160/time_2_320x160.png" width="1px" height="1px"/>
+<img id="preload-04" src="https://raw.githubusercontent.com/Sv443/TextAdventureGame/master/daynightcycle%20-%20320x160/time_3_320x160.png" width="1px" height="1px"/>
+<img id="preload-05" src="https://raw.githubusercontent.com/Sv443/TextAdventureGame/master/daynightcycle%20-%20320x160/time_4_320x160.png" width="1px" height="1px"/>
+<img id="preload-06" src="https://raw.githubusercontent.com/Sv443/TextAdventureGame/master/daynightcycle%20-%20320x160/time_5_320x160.png" width="1px" height="1px"/>
+<img id="preload-07" src="https://raw.githubusercontent.com/Sv443/TextAdventureGame/master/daynightcycle%20-%20320x160/time_6_320x160.png" width="1px" height="1px"/>
+<img id="preload-08" src="https://raw.githubusercontent.com/Sv443/TextAdventureGame/master/daynightcycle%20-%20320x160/time_7_320x160.png" width="1px" height="1px"/>
+<img id="preload-09" src="https://raw.githubusercontent.com/Sv443/TextAdventureGame/master/daynightcycle%20-%20320x160/time_8_320x160.png" width="1px" height="1px"/>
+<img id="preload-10" src="https://raw.githubusercontent.com/Sv443/TextAdventureGame/master/daynightcycle%20-%20320x160/time_9_320x160.png" width="1px" height="1px"/>
+<img id="preload-11" src="https://raw.githubusercontent.com/Sv443/TextAdventureGame/master/daynightcycle%20-%20320x160/time_10_320x160.png" width="1px" height="1px"/>
+<img id="preload-12" src="https://raw.githubusercontent.com/Sv443/TextAdventureGame/master/daynightcycle%20-%20320x160/time_11_320x160.png" width="1px" height="1px"/>
+</div>
+</body>
+</html>
+    

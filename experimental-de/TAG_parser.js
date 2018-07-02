@@ -1,0 +1,339 @@
+// Text Island input parsing and output giving module
+// (c) Sv443 / Sven Fehler 2018 - licensed under MIT license
+
+
+
+// Command List:
+
+// retry, test, ping, sv443, github, tutorial, help, suicide, die, succ, swim (to) [X], save,
+// load, time(r), look (at) [X], get/take/retrieve [X], eat [X], kill [X], craft/create/make/build [X]
+
+
+function compareival(inputval) {
+	var lcival = inputval.toLowerCase().replace(/[^-_a-zäöüß0-9 ]/g, ""); // convert entered string to lowercase and remove all special characters except space, - and _
+    switch(lcival){ // compare with available commands
+		case "list":
+			sendmsg("Verfügbare Kommandos:<br><br>"
+			+ "<span title='Starte das Spiel neu' class='hoverhelp'>neustart</span>, <span title='Pinge die Website, um die Verbindung zu überprüfen' class='hoverhelp'>ping</span>, <span title='Besuche Sv443 auf GitHub' class='hoverhelp'>sv443/github/code</span>"
+			+ ", <span title='Zeige das Tutorial an' class='hoverhelp'>tutorial/hilfe</span>, <span title='Stirb sofort!' class='hoverhelp'>selbstmord/sterben</span>, <span title='Schwimme irgendwo hin' class='hoverhelp'>schwimme (zu) [XY]</span>"
+			+ ", <span title='Speichere/Lade das Spiel zu/von den Browser Cookies' class='hoverhelp'>speichern/laden</span>, <span title='Zeige den Timer' class='hoverhelp'>time(r)</span>, <span title='Schaue etwas an, um mehr Infos zu bekommen' class='hoverhelp'>anschauen [XY]</span>, <span title='Nimm etwas' class='hoverhelp'>nehmen/holen/mitnehmen [XY]</span>"
+			+ ", <span title='Iss etwas' class='hoverhelp'>essen [XY]</span>, <span title='Töte etwas' class='hoverhelp'>töten [XY]</span>, <span title='Baue etwas' class='hoverhelp'>bauen,craften,konstruieren [XY]</span>");
+			break;
+		case "neustart":
+			window.location.reload();
+			break;
+		case "credits":
+			credits();
+			break;
+		case "credit":
+			credits();
+			break;
+		case "dev_ua":
+			sendmsg("u_agent    : " + ua);sendmsg("browser    : " + browser);
+			break;
+		case "dev_soundtest1":
+			var anbr = Math.floor(Math.random()*2);
+			sendmsg(anbr);
+			playaudio("ambient_" + anbr, 1);
+			break;
+		case "dev_soundtest2":
+			var anbr = Math.floor(Math.random()*2) + 2;
+			sendmsg(anbr);
+			playaudio("ambient_" + anbr, 1);
+			break;
+		case "dev_test":
+			sendmsg("dbg: " + dbg + " - v" + curversion + " - sendkey: " + key_send + " - repeatkey: " + key_repeat + " - time_starving: " + time_starving + " - time_died_of_hunger: " + time_died_of_hunger);
+			break;
+		case "ping":
+			sendmsg("Pong!");
+			break;
+		case "sv443":
+			sendmsg("<a href='https://github.com/Sv443' target='blank_'>Sv443 auf GitHub</a>");
+			break;
+		case "time":
+			sendmsg("In-Game Zeit: Tag " + document.getElementById("ingame_day").innerHTML + ", " + document.getElementById("ingame_time").innerHTML + ", Vergangene Echtzeit: " + document.getElementById("game_timer").innerHTML);
+			break;
+		case "timer":
+			sendmsg("In-Game Zeit: Tag " + document.getElementById("ingame_day").innerHTML + ", " + document.getElementById("ingame_time").innerHTML + ", Vergangene Echtzeit: " + document.getElementById("game_timer").innerHTML);
+			break;
+		case "code":
+			sendmsg("<a href='https://github.com/Sv443' target='blank_'>Sv443 auf GitHub</a>");
+			break;
+		case "github":
+			sendmsg("<a href='https://github.com/Sv443' target='blank_'>Sv443 auf GitHub</a>");
+			break;
+		case "tutorial":
+			sendmsg("This is a text adventure game. Most of the times you start off in a specific situation you have to escape and you have to type what you want the character to do."
+			+ "<br><br> At the bottom you see a brown rectangle. This is your inventory. If you hover over an item you'll see a short information."
+			+ "<br><br> Below that is the grey rectangle. Here you see all your discovered / built structures. Hover over a structure to see it's effects."
+			+ "<br><br> Underneath is the blue rectangle. Here you see your current status effects. Hover over an effect to see information and the duration of the effect."
+			+ "<br><br> If text is marked with a <span title='Yes, just like this :)' style='cursor:help;background-color:#fff493;'>yellow</span> background, you can also hover over it to get extra information."
+			+ "<br><br> Also, some actions can be performed multiple times to get different results."
+			+ "<br><br> To start off, try typing " + '"' + "look around" + '".<br><br>');
+			break;
+		case "hilfe":
+			sendmsg("This is a text adventure game. Most of the times you start off in a specific situation you have to escape and you have to type what you want the character to do."
+			+ "<br><br> At the bottom you see a brown rectangle. This is your inventory. If you hover over an item you'll see a short information."
+			+ "<br><br> Below that is the grey rectangle. Here you see all your discovered / built structures. Hover over a structure to see it's effects."
+			+ "<br><br> Underneath is the blue rectangle. Here you see your current status effects. Hover over an effect to see information and the duration of the effect."
+			+ "<br><br> If text is marked with a <span title='Yes, just like this :)' style='cursor:help;background-color:#fff493;'>yellow</span> background, you can also hover over it to get extra information."
+			+ "<br><br> Also, some actions can be performed multiple times to get different results."
+			+ "<br><br> To start off, try typing " + '"' + "look around" + '".<br><br>');
+			break;
+		case "selbstmord":
+			sendmsg("... du wolltest es so ...");
+			playerdied("selbstmord");
+			break;
+			break;
+		/*case "tooteral":
+			sendmsg("<b><i><span style='color:red;'>TOOTERAL:</span></i></b>");
+			sendmsg("This is a text adventure game. Most of the times you start off in a specific situation you have to escape and you have to type what you want the character to do."
+			+ "<br><br> At the bottom you see a brown rectangle. This is your inventory. If you hover over an item you'll see a short information."
+			+ "<br><br> Below that is the grey rectangle. Here you see all your discovered / built structures. Hover over a structure to see it's effects."
+			+ "<br><br> Underneath is the blue rectangle. Here you see your current status effects. Hover over an effect to see information and the duration of the effect."
+			+ "<br><br> If text is marked with a <span title='Yes, just like this :)' style='cursor:help;background-color:#fff493;'>yellow</span> background, you can also hover over it to get extra information."
+			+ "<br><br> Also, some actions can be performed multiple times to get different results."
+			+ "<br><br> To start off, try typing " + '"' + "look around" + '".<br><br>');
+			break;*/
+		case "sterben":
+			sendmsg("... du wolltest es so ...");
+			playerdied("selbstmord");
+			break;
+		case "succ": //please dont                                                    trust me
+			while(true){
+				setTimeout(function (){
+				sendmsg("<a href='https://sv443.github.io/code/succ.html' target='_blank'>CLICK ME CLICK ME CLICK ME CLICK ME CLICK ME CLICK ME CLICK ME CLICK ME CLICK ME CLICK ME</a>");
+				}, 100);
+			}
+			break;
+		case "speichern":
+			savegame();
+			break;
+		case "":
+			break;
+		default:
+			if(lcival.includes("schwimmen") || lcival.includes("fällen") || lcival.includes("anschauen") || lcival.includes("holen") || lcival.includes("nehmen") || lcival.includes("mitnehmen") || lcival.includes("essen") || lcival.includes("töten") || lcival.includes("laden") || lcival.includes("craften") || lcival.includes("konstruieren") || lcival.includes("bauen") || lcival.includes("erkunden")){
+				multiaction(lcival);
+			}
+			else if(lcival.includes("scheiß")){
+				incscore(-1);
+				sendmsg("(-1 score)");
+			}
+			else { //if nothing fits, send message
+				sendmsg("Ich weiß nicht, was du mit " + '"' + lcival + '" meinst.');
+			}
+			break;
+	}
+}
+
+var item_coconut;var item_lianas;var item_rope;
+function multiaction(lcival) { // actions that consist of multiple variations and/or attributes
+	if(dbg){sendmsg("multiaction triggered");}
+	if(lcival.includes("anschauen")){
+		if(lcival.includes("anschauen")){
+			if(lcival.includes("insel") && !document.body.innerHTML.includes('You look around on the small island.')){ incscore(150); sendmsg("You look around on the small island. You see a bunch of coconut palm trees. One of the coconuts is hanging very low. Maybe you can get it.");localStorage.setItem("coconut", true); }
+			else if(lcival.includes("insel") && !document.body.innerHTML.includes('You look around further and find a bunch of lianas.') && document.body.innerHTML.includes('You look around on the small island.')){ incscore(150); sendmsg("You look around further and find a bunch of lianas."); }
+			else if(lcival.includes("insel") && document.body.innerHTML.includes('You look around further and find a bunch of lianas.')){ if(!document.body.innerHTML.includes("find some flint stones beneath a cliff")){incscore(150);} sendmsg("After exploring the island for the third time you find some flint stones beneath a cliff."); }
+			else{ sendmsg("Look at what?"); }
+		}
+		else if(lcival.includes("insel") && !document.body.innerHTML.includes('You look around on the small island.')){ incscore(150);sendmsg("You look around on the small island. You see a bunch of coconut palm trees. One of the coconuts is hanging very low. Maybe you can get it.");localStorage.setItem("coconut", true); }
+		else if(lcival.includes("insel") && !document.body.innerHTML.includes('You look around further and find a bunch of lianas.') && document.body.innerHTML.includes('You look around on the small island.')){ incscore(150);sendmsg("You look around further and find a bunch of lianas."); }
+		else if(lcival.includes("insel") && document.body.innerHTML.includes('You look around further and find a bunch of lianas.')){ if(!document.body.innerHTML.includes("find some flint stones beneath a cliff")){incscore(150);}sendmsg("After exploring the island for the third time you find some flint stones beneath a cliff."); }
+		else { sendmsg("Look at what?"); }
+	}
+	else if(lcival.includes("get") || lcival.includes("retrieve") || lcival.includes("take") || lcival.includes("obtain") || lcival.includes("harvest")){
+		
+		// coconut
+		if(lcival.includes("coconut") && !document.body.innerHTML.includes('img id="item_coconut_elem"') && document.body.innerHTML.includes('One of the coconuts is hanging very low')){
+			if(dbg){sendmsg("got item: coconut");}
+			if(!document.body.innerHTML.includes("cut the low hanging coconut off")){incscore(100);}
+			playaudio("item_knife", 1);
+			sendmsg("You take your knife and cut the low hanging coconut off.");
+			getitem("item_coconut_elem", "Coconut - Useful if you are hungry (Consumable Effects: provides saturation)", "https://sv443.github.io/TextAdventureGame/coconut_16x16.png", "appenditem");
+		}
+		else if(lcival.includes("coconut") && !document.body.innerHTML.includes('img id="item_coconut_elem"')){
+			sendmsg("You don't know where to get a coconut from! Try looking around first!");
+		}
+		else if(lcival.includes("coconut") && document.body.innerHTML.includes('img id="item_coconut_elem"')){
+			sendmsg("You can't reach any other coconuts!");
+		}
+		
+		
+		// flint stone
+		else if(lcival.includes("flint") && !document.body.innerHTML.includes('img id="item_flint_stone_elem"') && document.body.innerHTML.includes('find some flint stones beneath a cliff')){
+			if(dbg){sendmsg("got item: flint stone");}
+			if(!document.body.innerHTML.includes("discovered and take one of the flint stones")){incscore(100);}
+			sendmsg("You get to the cliff you discovered and take one of the flint stones.");
+			getitem("item_flint_stone_elem", "Flint Stone - MISSING DESCRIPTION", "https://raw.githubusercontent.com/Sv443/TextAdventureGame/master/flint_stone_16x16.png", "appenditem");
+		}
+		else if(lcival.includes("flint") && !document.body.innerHTML.includes('img id="item_flint_stone_elem"')){
+			sendmsg("You don't know where to get flint stones from! Try looking around again!");
+		}
+		else if(lcival.includes("flint") && document.body.innerHTML.includes('img id="item_flint_stone_elem"')){
+			sendmsg("You can't carry any more flint stones! Try using the one you have first.");
+		}
+		
+		// lianas
+		else if(lcival.includes("liana") && !document.body.innerHTML.includes('img id="item_lianas_elem"') && document.body.innerHTML.includes('find a bunch of lianas.')){
+			if(dbg){sendmsg("got item: lianas");}
+			if(!document.body.innerHTML.includes("cut some of the lianas off")){incscore(100);}
+			sendmsg("You take your knife and cut some of the lianas off.");
+			playaudio("item_knife", 1);
+			getitem("item_lianas_elem", "Lianas - Maybe you can craft something with these, Tarzan", "https://sv443.github.io/TextAdventureGame/lianas_16x16.png", "appenditem");
+		}
+		else if(lcival.includes("liana") && !document.body.innerHTML.includes('img id="item_lianas_elem"')){
+			sendmsg("You don't know where to get lianas from! Try looking around first!");
+		}
+		else if(lcival.includes("liana") && document.body.innerHTML.includes('img id="item_lianas_elem"')){
+			sendmsg("You can't reach any other lianas!");
+		}
+		
+		
+		else {
+			sendmsg("What do you want to get?");
+		}
+	}
+	else if(lcival.includes("craft") || lcival.includes("create") || lcival.includes("make") || lcival.includes("build")){
+		
+		// rope hint
+		if(lcival.includes("liana") && document.body.innerHTML.includes('You take your knife and cut some of the lianas off')){
+			sendmsg("You try to figure out what you can craft with the lianas. The first thing that comes to your mind is to make a rope out of it.");
+		}
+		
+		
+		// rope
+		else if(lcival.includes("rope") && !document.body.innerHTML.includes('img id="item_rope_elem"') && document.body.innerHTML.includes('You take your knife and cut some of the lianas off')){
+			if(dbg){sendmsg("got item: rope");}
+			if(!document.body.innerHTML.includes("and get a rope")){incscore(100);}
+			sendmsg("You tie the lianas together and get a rope.");
+			removeitem("item_lianas_elem");
+			getitem("item_rope_elem", "Rope - Tie something together", "https://sv443.github.io/TextAdventureGame/rope_16x16.png", "appenditem");
+		}
+		else if(lcival.includes("rope") && document.body.innerHTML.includes('img id="item_rope_elem"') && document.body.innerHTML.includes('You take your knife and cut some of the lianas off')) {
+			sendmsg("You already have a rope.");
+		}
+		else if(lcival.includes("rope") && !document.body.innerHTML.includes('img id="item_rope_elem"') && !document.body.innerHTML.includes('You take your knife and cut some of the lianas off')) {
+			sendmsg("You'll need some lianas to craft a rope!");
+		}
+		
+		
+		// shelter
+		else if(lcival.includes("shelter") && !document.body.innerHTML.includes('img id="structure_shelter_elem"') && document.body.innerHTML.includes('You tie the lianas together and get a rope') && document.body.innerHTML.includes("take one of the flint stones")){
+			if(dbg){sendmsg("built structure: shelter");}
+			if(!document.body.innerHTML.includes("and get a basic shelter")){incscore(200);}
+			sendmsg("You tie some trees together with the rope, light a fire with your flint stone and get a basic shelter that'll protect you against rain and freezing.");
+			removeitem("item_rope_elem");
+			playaudio("crafting", 1);
+			removeitem("item_flint_stone_elem");
+			if(document.body.innerHTML.includes('title="Raining')){
+				removeitem("effect_rain");
+			}
+			getitem("structure_shelter", "Basic Shelter - Better than nothing (Structure Effects: provides shelter against rain and freezing)", "https://raw.githubusercontent.com/Sv443/TextAdventureGame/master/shelter_2_16x16.png", "appendstructure");
+		}
+		else if(lcival.includes("shelter") && document.body.innerHTML.includes("take one of the flint stones") && document.body.innerHTML.includes('img id="structure_shelter_elem"') && document.body.innerHTML.includes('You tie the lianas together and get a rope')) {
+			sendmsg("You already have a shelter.");
+		}
+		else if(lcival.includes("shelter") && !document.body.innerHTML.includes("take one of the flint stones")) {
+			sendmsg("You'll need some rope and a flint stone to build a shelter!");
+		}
+		else if(lcival.includes("shelter") && !document.body.innerHTML.includes('img id="structure_shelter_elem"') && !document.body.innerHTML.includes('You tie the lianas together and get a rope')){
+			sendmsg("You'll need some rope and a flint stone to build a shelter!");
+		}
+		
+		
+		else {
+			sendmsg("What do you want to craft?");
+		}
+	}
+	else if(lcival.includes("eat") || lcival.includes("consume")){
+		if(lcival.includes("coconut") && document.body.innerHTML.includes('item_coconut_elem')){
+			sendmsg("You ate the coconut and feel saturated. If you didn't eat it, you may have died.");
+			playaudio("eating", 1);
+			removeitem("effect_hunger");
+			removeitem("item_coconut_elem");
+		}
+		else if(lcival.includes("coconut") && !document.body.innerHTML.includes('img id="item_coconut_elem"')){
+			sendmsg("You don't have a coconut yet!");
+		}
+		else if(lcival.includes("army knife") || lcival.includes("knife")){
+			sendmsg("You suffered extreme internal bleeding and died!");
+			playerdied("internal bleeding");
+		}
+		else if(lcival.includes("ass") || lcival.includes("booty") || lcival.includes("butt") || lcival.includes("behind")){
+			sendmsg("Da booty too fat to eat.");
+		}
+		else {
+			sendmsg("Eat what?");
+		}
+	}
+	else if(lcival.includes("kill")){
+		if(lcival.includes("myself") || lcival.includes("yourself")){
+			sendmsg("... you asked for it ...");
+			playerdied("suicide");
+		}
+		else {
+			sendmsg("Kill what?");
+		}
+	}
+	else if(lcival.includes("swim")){
+		if(lcival.includes("swim to")){
+			if(lcival.includes("your mom") || lcival.includes("ur mom")){
+				sendmsg("no u");
+			}
+			else if(lcival.includes("other island") || lcival.includes("island")){
+				sendmsg("You'll need to build a boat to make it to another island!");
+			}
+			else if(lcival.includes("mainland") || lcival.includes("main land")){
+				sendmsg("You'll need to build a boat to make it to the mainland!");
+			}
+			else {
+				sendmsg("Swim where?");
+			}
+		}
+		else {
+			sendmsg("Swim where?");
+		}
+	}
+	else if(lcival.includes("explore")){
+			if(lcival.includes("your mom") || lcival.includes("ur mom")){
+				sendmsg("no u");
+			}
+			else if(lcival.includes("other island") || lcival.includes("island")){
+				sendmsg("You'll need to build a boat to make it to another island to be able to explore it!");
+			}
+			else if(document.body.innerHTML.includes('discovered a shipwreck') && lcival.includes("wreck")) {
+				sendmsg("You explore the shipwreck and stumble upon a hatchet. Maybe you can now cut down some trees!");
+				if(!document.body.innerHTML.includes("and stumble upon a hatchet")){incscore(100);}
+				getitem("item_hatchet_elem", "Hatchet - Anything but an axe", "https://raw.githubusercontent.com/Sv443/TextAdventureGame/master/hatchet_16x16.png", "appenditem");
+			}
+			else if(!document.body.innerHTML.includes('discovered a shipwreck') && lcival.includes("wreck")) {
+				sendmsg("You didn't find a shipwreck yet!");
+			}
+			else {
+				sendmsg("Explore what?");
+			}
+	}
+	else if(lcival.includes("chop") && document.body.innerHTML.includes("Maybe you can now cut down some trees!")){
+		if(lcival.includes("tree")){
+			sendmsg("You chopped down a tree and got some logs.");
+			getitem("item_logs_elem", "Logs - Sturdy building material", "https://raw.githubusercontent.com/Sv443/TextAdventureGame/master/logs_16x16.png", "appenditem");
+			playaudio("tree_falling", 1);
+		}
+		else {
+			sendmsg("Chop down what?");
+		}
+	}
+	else if(lcival.includes("chop") && !document.body.innerHTML.includes("Maybe you can now cut down some trees!")){
+		sendmsg("You have nothing to chop down a tree with!");
+	}
+	else if(lcival.includes("load")){
+		var loadstring = lcival.replace(/[load ]/g, "");
+		loadgame(loadstring);
+	}
+	else {
+		sendmsg("Internal error while comparing entered value. Please contact me via <a href='https://github.com/sv443'>GitHub</a> and tell me what you entered. Thanks!");
+	}
+}
+
+console.log("initialized TAG_parse.js");
+modulecount += 1;
