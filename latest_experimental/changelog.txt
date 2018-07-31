@@ -1,0 +1,98 @@
+{[B] 0.0.1>
+		- basic framework and beginning of story added
+}
+{[B] 0.0.2>
+		- completely reworked UI
+		- added status effects and crafting system
+		- made timed events better
+		- added sidebar with infos
+		- added saving and loading mechanism (although loading is disabled)
+}
+{[B] 0.0.3>
+		- added structure system, added basic shelter and explorable shipwreck
+		- renamed to Text Island
+		- tons and tons of fixes to improve convenience
+		- added flint stone and hatchet
+		- changed retry button
+		- modified sidebar
+		- fixed incompatibility errors
+		- added score system
+		- added many synonyms
+		- added day/night cycle with ingame time and time display (currently very fast and with no function)
+		- improved scaling of all elements
+}
+{[B] 0.0.4>
+		- added audio system, added some basic placeholder-sounds
+		- added ambient sound that plays on load
+		- added mute/unmute button
+		- redesigned retry button
+		- added tree chopping with logs item drop
+		- improved day/night cycle and made it independent from game timer
+		- added collapsable ingame changelog display
+		- added day/night dependant ambient sounds
+		- fixed bug of "make" always executing the not enough material to build shelter message
+		- fixed bug of "what do you want to get?" message executed after coconut was taken
+		- changed position of mute button to the left of the changelog arrow
+		- fixed position changes of top right control panel when changelog is opened
+		- reformatted changelog a bit
+		- removed image display of day/night cycle and made it so the background displays it instead
+		- added background underlay behind in/output elements, info panel and control panel
+		- changed last save string in the info panel to last saved at (ingame time)
+}
+{[B] 0.0.5>
+		- made it so the modules will be loaded twice for more stability in the UI
+		- telling the user if they are using a mobile device because they are currently unsupported
+		- hovering over the loaded modules indicator will show all loaded modules
+		- added css to remove antialiasing on all images which makes them very crisp (background day/night cycle included)
+		- added UI shortening / hiding / expanding button
+		- fixed some bugs
+		- added scene switching which also accordingly changes the positions of the UI
+		- added cookie API to make my life a whole lot easier
+		- added score and item saving and loading which was in and of itself a hard job. I don't know how in the hell I'm going to implement the time loading without completely rewriting the TAG_timer script and probably everything else though...
+		- adding a ?cmd=XY or ?command=XY after the URL can now execute a command on page load (example: "?cmd=dev_ua" will execute the command dev_ua on page load and will display the user agent info)
+		- items, structures and statuses are now being displayed in their respective scenes
+		- added black border around the UI elements
+}
+{ TODO / BUGS >
+
+		NOTE: please send any bugs, errors, glitches or suggestions (please look at the planned features (at the bottom) first to not make a duplicate)
+		through the github issue tracker to help improve the game! You'll also be mentioned in the credits :) (https://github.com/Sv443/TextAdventureGame/issues)
+
+
+		D- (DONE - added load delay to allow for functions to load before getting called) fix bug of modules not loading correctly on a public website (works fine locally via file:///)
+		D- (DONE - if statement was formatted weirdly) fix bug of "make" always executing the not enough material to build shelter message
+		D- (DONE - put it to the left of changelog arrow) find better position for mute button
+		D- (DONE - had to be "else if" but only was "if") fix bug of "what do you want to get?" appearing after coconut was taken
+		D- (DONE - also added load delay) fix bug of "the save module was disabled" being shown no matter if it was loaded correctly or not
+		D- (DONE - made the script not focus if CTRL and/or ALT are being pressed) make the script not focus on the <input> when CTRL is pressed
+		D- (DONE - made the background color transparent) graphical error of retry button not having a transparent container
+		D- (DONE - resizing underlay after death) graphical error of underlay between in/output elements not resizing correctly after death
+		D- (DONE - variable was being initialized but didn't get set correctly) mute element not found
+		D- (DONE - added them to the control panel) add save/load buttons
+		D- (DONE - script was stalling at some points because elements couldn't be found - now the script is just skipping them if they couldn't be found) module count display and init still not loading correctly on external URL (not file:///) (slowly starts to piss me off now) (this bug is not game breaking but it makes the displays not work and sometimes even the prologue messages don't show up at all and it displays the couldn't load script error even though everything works fine)
+		D- (DONE - called setInterval function in the wrong way) day/night cycle somehow stopped working
+		D- (DONE - added condition so it skips the erroring part if the elements cannot be found) script can't find some elements and just stalls without running through the other code which breaks everything
+		D- (DONE - added a button to the control panel) make the UI collapsable or maybe even completely togglable to get a "cinematic" view
+		D- (DONE - info panel updater which was in an if statement couldn't be reached while the d/n cycle state was 0) 10:00 being displayed instead of 12:00
+		D- (DONE - removed the style change of the ui after death) ui scales and positions incorrectly after death
+		D- (DONE - changed the object's position to absolute and z-index to -1 to always have the lowest z-height) background rendered objects appear in front of changelog
+		D- (DONE - ui doesn't get styled (shows up) if the state was set to hidden) ui shows up (info panel doesn't) after the scene was switched if it was disabled in another scene before
+		WIP- (WORK IN PROGRESS) finally fix the damn submit button scaling issues and its bad design that bugged me since 0.0.1
+		- bad scaling on mobile devices
+		- sort the github repo and put all resources in a dedicated folder like the day/night cycle images already are
+}
+{ PLANNED >
+		WIP- (WORK IN PROGRESS) change through different scenes (backgrounds) to see your structures, your inventory, your health and status effects, the day/night cycle, settings, and so on
+		WIP- (WORK IN PROGRESS) unique soundtrack
+		- multi-language support
+		- multiple bad and good endings
+		- more discoverable and explorable structures with unique items
+		- butterfly-effect
+		- achievement system
+		- completely rework the parser and saving/loading script (very very hard-coded)
+		- allow people to make their own text adventure game only through the usage of arrays and variables in a new module (no fiddly coding at all          (except for me            yay                       i'm already excited))
+		- add multiple themes for the UI
+}
+
+
+by the way i formatted this document in this weird way so i can collapse the versions in notepad++ and concentrate on one section
