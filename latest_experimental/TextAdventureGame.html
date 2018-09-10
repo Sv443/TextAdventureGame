@@ -1,3 +1,11 @@
+<!--
+
+
+Text Island by Sv443 (www.github.com/sv443) - (c) Sv443 / Sven Fehler 2018 - Licensed under MIT license
+
+
+-->
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -43,7 +51,7 @@ window.cookieconsent.initialise({
   "theme": "edgeless",
   "position": "bottom-left",
   "content": {
-    "message": "By clicking on the 'save' icon in the control panel you agree that this website stores your current game progress in your browser's cookies to make it easier to load your progress afterwards. (Note: this will be one small text string, so it won't take up too much space)",
+    "message": "By clicking on the 'save' icon in the control panel you agree that this website stores your current game progress in your browser's cookies to make it easier to load your progress afterwards. (Note: this will be one small text string, so it won't take up too much space)<br><a href='http://www.sv443.net/privacypolicy_en' target='blank_'>Privacy Policy</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href='http://www.sv443.net/privacypolicy_de' target='blank_'>Datenschutzerklärung</a>",
     "dismiss": "Got it!"
   }
 })});
@@ -85,7 +93,7 @@ function addLoadEvent(func) {
 		}
 	}
 }
-document.addEventListener("DOMContentLoaded", function () {addLoadEvent(preloader);});
+document.addEventListener("DOMContentLoaded", function () {addLoadEvent(preloader);checkkeyhelp();});
 </script>
 
 </head>
@@ -97,11 +105,10 @@ document.addEventListener("DOMContentLoaded", function () {addLoadEvent(preloade
 			<div id="outputelem" align="left">
 
 
-				<span id="premsg">(<a style="text-decoration:none;color:blue;" href="https://en.wikipedia.org/wiki/Adventure_game#Text_adventures_and_interactive_fiction" target="_blank" title="What is a Text Adventure Game?">TAG</a>) Text Island<script>document.write(" v" + curversion);</script> by <a href="https://github.com/Sv443" style="text-decoration:none; color:blue;" target="blank_" title="Sv443 on GitHub">Sv443</a><br></span>
+				<span id="premsg">(<a style="text-decoration:none;color:blue;" href="https://en.wikipedia.org/wiki/Adventure_game#Text_adventures_and_interactive_fiction" target="_blank" title="What is a Text Adventure Game? (Opens in new tab)">TAG</a>) Text Island<script>document.write(" v" + curversion);</script> by <a href="https://github.com/Sv443" style="text-decoration:none; color:blue;" target="blank_" title="Sv443 on GitHub (Opens in new tab)">Sv443</a><br></span>
 				<span>Currently there is no ending and the game is in Beta, so please don't expect too much! If you have scaling issues try holding CTRL and scroll up and down.</span><br>
-				<span>Type <span class="hoverhelp" title="Use the input text field at the bottom to type 'tutorial' and click 'Submit' or press 'Enter'">tutorial</span> if you want an introduction or <span title="Use the input text field at the bottom to type 'list' and click 'Submit' or press 'Enter'" class="hoverhelp">list</span> to see all unlocked commands.</span><br>
-				<span>Click the save or load buttons in the top right to save or load the game!</span><br><br>
-				<span id="checkload">Couldn't load script! Either you are using Internet Explorer 11 or lower which isn't supported yet or you didn't enable JavaScript. Else <a href='https://github.com/Sv443'>contact me</a> if you are sure that it is already activated and you checked it on another browser. Thanks!<br><br></span>
+				<span>Type <span class="hoverhelp" title="Use the input text field at the bottom to type 'tutorial' and click 'Submit' or press 'Enter'">tutorial</span> if you want an introduction, <span class="hoverhelp" title="Use the input text field at the bottom to type 'keys' and click 'Submit' or press 'Enter'">keys</span> to view key bindings or <span title="Use the input text field at the bottom to type 'list' and click 'Submit' or press 'Enter'" class="hoverhelp">list</span> to see all unlocked commands.</span><br><br>
+				<span id="checkload">Couldn't load script! Either you are using Internet Explorer 11 or lower which isn't supported yet or you didn't enable JavaScript. Else please press F5 to try again. If the problem persists, please <a href='https://github.com/Sv443/textadventuregame/issues' target="blank_" title="(Opens in new tab)">contact me</a> if you also made sure that JavaScript is activated and you checked this website on another browser as well. Thanks!<br><br></span>
 				<span id="out"></span>
 
 			</div>
@@ -141,21 +148,24 @@ document.addEventListener("DOMContentLoaded", function () {addLoadEvent(preloade
 	</div>
 	
 	<div style="position:absolute;top:10px;left:10px;">
-		<!--<img id="TAG_cycle" data-nbr="11" src="" style="box-shadow:5px 5px 10px grey;width:18vw;height:9vw;border-radius:10px;"></img> --><!--cycle has to start at 11 because the script increases it by 1, so it overflows and starts at 0-->
-		<span id="TAG_cycle" data-nbr="11" title="This is an invisible data storage for the d/n cycle"></span>
+		<!--<img id="TAG_cycle" data-nbr="11" src="" style="box-shadow:5px 5px 10px grey;width:18vw;height:9vw;border-radius:10px;"></img>-->
+		<span id="TAG_cycle" data-nbr="11" title="This is an invisible data storage for the d/n cycle state"></span><!--cycle has to start at 11 because the script increases it by 1, so it overflows and starts at 0-->
 		<div id="timercontainer" title="Info Panel">
-			Timer:<br><span id="game_timer">00:00</span><br><br>
+			Elapsed Time:<br><span id="game_timer">00:00</span><br><br>
 			In-Game Time:<br>Day <span id="ingame_day">1</span>, <span id="ingame_time">12:00</span><br><br>
 			Current Score:<br><span id="current_score">0</span><br><br>
 			Last Entered:<br>"<span id="last_entered"></span>"<br><br>
 			Last Saved at:<br>"<span id="last_saved">the save module is loading or was disabled</span>"<br><br>
+			Completion Progress:<br><span id="completion_progress">loading...</span>%<br><br>
 			Loaded Modules:<br><span id="moduletitle" style="cursor:help;"><span id="module_counter">0</span>/<span id="max_modules">0</span></span><br>
 			
-			<span id="devmenu">
-				<br><br><span style="color:red;background-color:black;">DEV MENU:</span>
-				<br><span style="cursor:pointer;color:red;background-color:black;" onclick='getitem("structure_chicken_coop_elem", "Chicken Coop - Source of Eggs (Structure Effects: provides food) (Click to enter coop and get extra information)", "https://sv443.github.io/TextAdventureGame/chicken_coop_16x16.png", "appendstructure");'>get chicken coop</span>
-				<br><span style="cursor:pointer;color:red;background-color:black;" onclick="entercoop();">enter chicken coop</span><br>
-			</span>
+			<div id="devmenu" title="Dev Menu - Close by removing the ?cmd=dev_menu from the URL and/or reloading the page">
+				<br><br><span style="cursor:help;color:red;background-color:black;">DEV MENU:</span><br>
+				<br><span style="cursor:pointer;color:red;background-color:black;" onclick='getitem("structure_chicken_coop_elem", "Chicken Coop - Source of Eggs (Structure Effects: provides food) (Click to enter coop and get extra information)", "https://sv443.github.io/TextAdventureGame/chicken_coop_16x16.png", "appendstructure");' title="gets you the chicken coop structure">get chicken coop</span>
+				<br><span style="cursor:pointer;color:red;background-color:black;" onclick="entercoop();" title="enters the chicken coop, even if you don't have it yet">enter chicken coop</span><br>
+				<br><span style="cursor:pointer;color:red;background-color:black;" onclick="test_itemc();" title="spawns 111 items to test the item container">test item container</span><br>
+				<br><span style="cursor:pointer;color:red;background-color:black;" onclick="sendmsg('Unlocking all timed events...', 'red');timedevent('found_shipwreck');" title="unlocks all positive timed events like the shipwreck discovery">unlock all timed</span><br>
+			</div>
 		</div>
 	</div>
 	<div id="changelogcontainer" style="top:10px;right:10px;position:absolute;">
@@ -169,7 +179,23 @@ document.addEventListener("DOMContentLoaded", function () {addLoadEvent(preloade
 				<img id="loadelem" title="Load your game state from your browser cookies" src="https://raw.githubusercontent.com/Sv443/TextAdventureGame/master/load_16x16.png" style="width:2vw;height:2vw;cursor:pointer;" onclick="loadgame();"></img>
 				<img id="langchelem" title="Change Language" src="https://raw.githubusercontent.com/Sv443/TextAdventureGame/master/lang_en.png" onclick="langchange();" data-lang="en" style="width:2vw;height:2vw;cursor:pointer;border-radius:0.2vw;"></img><br>
 	
-				<select id="sceneselector" onchange="scenechange();" title="Change Scene (change here or press TAB instead)"><option value="dncycle">Beach</option><option value="camp">Camp</option><option value="structures">Camp 2</option><option value="inventory">Inventory</option><option value="status">Status</option></select><span style="color:rgba(0,0,0,0);"></span>
+				<div id="sceneselectorcontainer">
+					<select id="sceneselector" onchange="scenechange();" title="Change Scene (change here or press TAB instead)"><option value="dncycle">Beach</option><option value="camp">Camp</option><option value="structures">Camp 2</option><option value="inventory">Inventory</option><option value="status">Status</option></select><span style="color:rgba(0,0,0,0);"></span>
+				</div>			</div>
+		</div>
+		<br>
+		<div id="changelogelem" data-opened="0"></div>
+	</div>
+	<div id="keyshelpwrapper" style="bottom:10px;right:10px;position:absolute;">
+		<div align="right">
+			<div id="keyhelpcontainer" align="center" title="Key Assignment">
+				<img style="z-index:0;position:absolute;top:0px;right:0px;width:2vw;height:2vw;cursor:pointer;border-radius:20vw;" title="Close" src="https://raw.githubusercontent.com/Sv443/TextAdventureGame/master/raw_red.png" onclick="closekeyhelp();"></img>
+				<img style="z-index:1;position:absolute;top:0px;right:0px;width:2vw;height:2vw;cursor:pointer;border-radius:20vw;" title="Close" src="https://raw.githubusercontent.com/Sv443/TextAdventureGame/master/whitex.png" onclick="closekeyhelp();"></img>
+				<table id="keyhelptable">
+					<tr><th><img class="noantialias" id="keyhelp_up" title="Arrow Key Up" style="width:3vw;height:3vw;" src="https://raw.githubusercontent.com/Sv443/TextAdventureGame/master/key_up.png"></img></th><td>Repeat last action</td></tr>
+					<tr><th><img class="noantialias" id="keyhelp_tab" title="Tab" style="width:3.5vw;height:3vw;" src="https://raw.githubusercontent.com/Sv443/TextAdventureGame/master/key_tab.png"></img></th><td>Switch scene</td></tr>
+					<tr><th><img class="noantialias" id="keyhelp_enter" title="Enter" style="width:3vw;height:3.5vw;" src="https://raw.githubusercontent.com/Sv443/TextAdventureGame/master/key_enter.png"></img></th><td>Submit / Retry</td></tr>
+				</table>
 			</div>
 		</div>
 		<br>
@@ -188,42 +214,42 @@ document.addEventListener("DOMContentLoaded", function () {addLoadEvent(preloade
 	
 	
 
-<!-- preload audio and day/night cycle images -->
+	<!-- preload audio and day/night cycle images -->
 
-<audio id="audio0elem" preload><source src="audio/tropicalforest0.mp3" type="audio/mpeg"></source></audio><!-- audio by audiomicro.com -->
-<audio id="audio1elem" preload><source src="audio/tropicalforest1.mp3" type="audio/mpeg"></source></audio><!-- audio by audiomicro.com -->
-<audio id="audio2elem" preload><source src="audio/knife0.mp3" type="audio/mpeg"></source></audio><!-- audio by freesound.org -->
-<audio id="audio3elem" preload><source src="audio/crafting0.mp3" type="audio/mpeg"></source></audio><!-- audio by freesound.org -->
-<audio id="audio4elem" preload><source src="audio/eating0.mp3" type="audio/mpeg"></source></audio><!-- audio by freesound.org -->
-<audio id="audio5elem" preload><source src="audio/starving0.mp3" type="audio/mpeg"></source></audio><!-- audio by freesound.org -->
-<audio id="audio6elem" preload><source src="audio/fallingtree0.mp3" type="audio/mpeg"></source></audio><!-- audio by freesound.org -->
-<audio id="audio7elem" preload><source src="audio/tropicalforest2.mp3" type="audio/mpeg"></source></audio><!-- audio by freesound.org -->
-<audio id="audio8elem" preload><source src="audio/tropicalforest3.mp3" type="audio/mpeg"></source></audio><!-- audio by freesound.org -->
-<audio id="audio9elem" preload><source src="audio/chickens_0_0.mp3" type="audio/mpeg"></source></audio><!-- audio recorded by myself -->
-<audio id="audio10elem" preload><source src="audio/chickens_0_1.mp3" type="audio/mpeg"></source></audio><!-- audio recorded by myself -->
-<audio id="audio11elem" preload><source src="audio/chickens_1_0.mp3" type="audio/mpeg"></source></audio><!-- audio recorded by myself -->
-<audio id="audio12elem" preload><source src="audio/chickens_1_1.mp3" type="audio/mpeg"></source></audio><!-- audio recorded by myself -->
-<audio id="audio13elem" preload><source src="audio/chickens_2_0.mp3" type="audio/mpeg"></source></audio><!-- audio recorded by myself -->
-<audio id="audio14elem" preload><source src="audio/chickens_2_1.mp3" type="audio/mpeg"></source></audio><!-- audio recorded by myself -->
+	<audio id="audio0elem" preload><source src="audio/tropicalforest0.mp3" type="audio/mpeg"></source></audio><!-- audio by audiomicro.com -->
+	<audio id="audio1elem" preload><source src="audio/tropicalforest1.mp3" type="audio/mpeg"></source></audio><!-- audio by audiomicro.com -->
+	<audio id="audio2elem" preload><source src="audio/knife0.mp3" type="audio/mpeg"></source></audio><!-- audio by freesound.org -->
+	<audio id="audio3elem" preload><source src="audio/crafting0.mp3" type="audio/mpeg"></source></audio><!-- audio by freesound.org -->
+	<audio id="audio4elem" preload><source src="audio/eating0.mp3" type="audio/mpeg"></source></audio><!-- audio by freesound.org -->
+	<audio id="audio5elem" preload><source src="audio/starving0.mp3" type="audio/mpeg"></source></audio><!-- audio by freesound.org -->
+	<audio id="audio6elem" preload><source src="audio/fallingtree0.mp3" type="audio/mpeg"></source></audio><!-- audio by freesound.org -->
+	<audio id="audio7elem" preload><source src="audio/tropicalforest2.mp3" type="audio/mpeg"></source></audio><!-- audio by freesound.org -->
+	<audio id="audio8elem" preload><source src="audio/tropicalforest3.mp3" type="audio/mpeg"></source></audio><!-- audio by freesound.org -->
+	<audio id="audio9elem" preload><source src="audio/chickens_0_0.mp3" type="audio/mpeg"></source></audio><!-- audio recorded by myself -->
+	<audio id="audio10elem" preload><source src="audio/chickens_0_1.mp3" type="audio/mpeg"></source></audio><!-- audio recorded by myself -->
+	<audio id="audio11elem" preload><source src="audio/chickens_1_0.mp3" type="audio/mpeg"></source></audio><!-- audio recorded by myself -->
+	<audio id="audio12elem" preload><source src="audio/chickens_1_1.mp3" type="audio/mpeg"></source></audio><!-- audio recorded by myself -->
+	<audio id="audio13elem" preload><source src="audio/chickens_2_0.mp3" type="audio/mpeg"></source></audio><!-- audio recorded by myself -->
+	<audio id="audio14elem" preload><source src="audio/chickens_2_1.mp3" type="audio/mpeg"></source></audio><!-- audio recorded by myself -->
 
-<div style="position:fixed;z-index:-1;top:50px;left:45vw;">
-<img class="imgpreload" id="preload-01" src="https://raw.githubusercontent.com/Sv443/TextAdventureGame/master/daynightcycle%20-%20320x160/time_0_320x160.png" width="1px" height="1px"/>
-<img class="imgpreload" id="preload-02" src="https://raw.githubusercontent.com/Sv443/TextAdventureGame/master/daynightcycle%20-%20320x160/time_1_320x160.png" width="1px" height="1px"/>
-<img class="imgpreload" id="preload-03" src="https://raw.githubusercontent.com/Sv443/TextAdventureGame/master/daynightcycle%20-%20320x160/time_2_320x160.png" width="1px" height="1px"/>
-<img class="imgpreload" id="preload-04" src="https://raw.githubusercontent.com/Sv443/TextAdventureGame/master/daynightcycle%20-%20320x160/time_3_320x160.png" width="1px" height="1px"/>
-<img class="imgpreload" id="preload-05" src="https://raw.githubusercontent.com/Sv443/TextAdventureGame/master/daynightcycle%20-%20320x160/time_4_320x160.png" width="1px" height="1px"/>
-<img class="imgpreload" id="preload-06" src="https://raw.githubusercontent.com/Sv443/TextAdventureGame/master/daynightcycle%20-%20320x160/time_5_320x160.png" width="1px" height="1px"/>
-<img class="imgpreload" id="preload-07" src="https://raw.githubusercontent.com/Sv443/TextAdventureGame/master/daynightcycle%20-%20320x160/time_6_320x160.png" width="1px" height="1px"/>
-<img class="imgpreload" id="preload-08" src="https://raw.githubusercontent.com/Sv443/TextAdventureGame/master/daynightcycle%20-%20320x160/time_7_320x160.png" width="1px" height="1px"/>
-<img class="imgpreload" id="preload-09" src="https://raw.githubusercontent.com/Sv443/TextAdventureGame/master/daynightcycle%20-%20320x160/time_8_320x160.png" width="1px" height="1px"/>
-<img class="imgpreload" id="preload-10" src="https://raw.githubusercontent.com/Sv443/TextAdventureGame/master/daynightcycle%20-%20320x160/time_9_320x160.png" width="1px" height="1px"/>
-<img class="imgpreload" id="preload-11" src="https://raw.githubusercontent.com/Sv443/TextAdventureGame/master/daynightcycle%20-%20320x160/time_10_320x160.png" width="1px" height="1px"/>
-<img class="imgpreload" id="preload-12" src="https://raw.githubusercontent.com/Sv443/TextAdventureGame/master/daynightcycle%20-%20320x160/time_11_320x160.png" width="1px" height="1px"/>
-<img class="imgpreload" id="preload-13" src="https://raw.githubusercontent.com/Sv443/TextAdventureGame/master/scenes/camp_320x160.png" width="1px" height="1px"/>
-<img class="imgpreload" id="preload-14" src="https://raw.githubusercontent.com/Sv443/TextAdventureGame/master/scenes/structures_320x160.png" width="1px" height="1px"/>
-<img class="imgpreload" id="preload-15" src="https://raw.githubusercontent.com/Sv443/TextAdventureGame/master/scenes/inventory_320x160.png" width="1px" height="1px"/>
-<img class="imgpreload" id="preload-16" src="https://raw.githubusercontent.com/Sv443/TextAdventureGame/master/scenes/status_320x160.png" width="1px" height="1px"/>
-</div>
+	<div style="position:fixed;z-index:-1;top:120vh;">	
+		<img class="imgpreload" id="preload-01" src="https://raw.githubusercontent.com/Sv443/TextAdventureGame/master/daynightcycle%20-%20320x160/time_0_320x160.png" width="1px" height="1px"/>
+		<img class="imgpreload" id="preload-02" src="https://raw.githubusercontent.com/Sv443/TextAdventureGame/master/daynightcycle%20-%20320x160/time_1_320x160.png" width="1px" height="1px"/>
+		<img class="imgpreload" id="preload-03" src="https://raw.githubusercontent.com/Sv443/TextAdventureGame/master/daynightcycle%20-%20320x160/time_2_320x160.png" width="1px" height="1px"/>
+		<img class="imgpreload" id="preload-04" src="https://raw.githubusercontent.com/Sv443/TextAdventureGame/master/daynightcycle%20-%20320x160/time_3_320x160.png" width="1px" height="1px"/>
+		<img class="imgpreload" id="preload-05" src="https://raw.githubusercontent.com/Sv443/TextAdventureGame/master/daynightcycle%20-%20320x160/time_4_320x160.png" width="1px" height="1px"/>
+		<img class="imgpreload" id="preload-06" src="https://raw.githubusercontent.com/Sv443/TextAdventureGame/master/daynightcycle%20-%20320x160/time_5_320x160.png" width="1px" height="1px"/>
+		<img class="imgpreload" id="preload-07" src="https://raw.githubusercontent.com/Sv443/TextAdventureGame/master/daynightcycle%20-%20320x160/time_6_320x160.png" width="1px" height="1px"/>
+		<img class="imgpreload" id="preload-08" src="https://raw.githubusercontent.com/Sv443/TextAdventureGame/master/daynightcycle%20-%20320x160/time_7_320x160.png" width="1px" height="1px"/>
+		<img class="imgpreload" id="preload-09" src="https://raw.githubusercontent.com/Sv443/TextAdventureGame/master/daynightcycle%20-%20320x160/time_8_320x160.png" width="1px" height="1px"/>
+		<img class="imgpreload" id="preload-10" src="https://raw.githubusercontent.com/Sv443/TextAdventureGame/master/daynightcycle%20-%20320x160/time_9_320x160.png" width="1px" height="1px"/>
+		<img class="imgpreload" id="preload-11" src="https://raw.githubusercontent.com/Sv443/TextAdventureGame/master/daynightcycle%20-%20320x160/time_10_320x160.png" width="1px" height="1px"/>
+		<img class="imgpreload" id="preload-12" src="https://raw.githubusercontent.com/Sv443/TextAdventureGame/master/daynightcycle%20-%20320x160/time_11_320x160.png" width="1px" height="1px"/>
+		<img class="imgpreload" id="preload-13" src="https://raw.githubusercontent.com/Sv443/TextAdventureGame/master/scenes/camp_320x160.png" width="1px" height="1px"/>
+		<img class="imgpreload" id="preload-14" src="https://raw.githubusercontent.com/Sv443/TextAdventureGame/master/scenes/structures_320x160.png" width="1px" height="1px"/>
+		<img class="imgpreload" id="preload-15" src="https://raw.githubusercontent.com/Sv443/TextAdventureGame/master/scenes/inventory_320x160.png" width="1px" height="1px"/>
+		<img class="imgpreload" id="preload-16" src="https://raw.githubusercontent.com/Sv443/TextAdventureGame/master/scenes/status_320x160.png" width="1px" height="1px"/>
+	</div>
 </body>
 </html>
     

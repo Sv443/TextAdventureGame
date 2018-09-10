@@ -1,6 +1,7 @@
 :root {
 	--border-rad: 0.8vw;
 	--ui-border-color: black;
+	--ui-bg-alpha: 0.7;
 }
 
 /* make scrollbar smaller on webkit browsers (not compatible with Firefox, IE and Edge) */
@@ -21,8 +22,8 @@
 }
 
 :target {
-	padding:5px;
-	border-style:solid;
+	padding:1px;
+	border-style:dashed;
 	border-width:4px;
 	border-color:red;
 	border-radius:5px;
@@ -43,24 +44,24 @@
 	font-family: Courier;
 }
 
-body {
-    image-rendering: optimizeSpeed;             /* STOP SMOOTHING, GIVE ME SPEED  */
-    image-rendering: -moz-crisp-edges;          /* Firefox                        */
-    image-rendering: -o-crisp-edges;            /* Opera                          */
-    image-rendering: -webkit-optimize-contrast; /* Chrome (and eventually Safari) */
-    image-rendering: pixelated; 				/* Chrome */
-    image-rendering: optimize-contrast;         /* CSS3 Proposed                  */
-    -ms-interpolation-mode: nearest-neighbor;   /* IE8+                           */´
+body { /* disable image antialiasing */
+    image-rendering: optimizeSpeed;
+    image-rendering: -moz-crisp-edges;
+    image-rendering: -o-crisp-edges;
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: pixelated;
+    image-rendering: optimize-contrast;
+    -ms-interpolation-mode: nearest-neighbor;
 }
 
-img { 
-    image-rendering: optimizeSpeed;             /* STOP SMOOTHING, GIVE ME SPEED  */
-    image-rendering: -moz-crisp-edges;          /* Firefox                        */
-    image-rendering: -o-crisp-edges;            /* Opera                          */
-    image-rendering: -webkit-optimize-contrast; /* Chrome (and eventually Safari) */
-    image-rendering: pixelated; 				/* Chrome */
-    image-rendering: optimize-contrast;         /* CSS3 Proposed                  */
-    -ms-interpolation-mode: nearest-neighbor;   /* IE8+                           */´
+img:not(.noantialias) {  /* disable image antialiasing */
+    image-rendering: optimizeSpeed;
+    image-rendering: -moz-crisp-edges;
+    image-rendering: -o-crisp-edges;
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: pixelated;
+    image-rendering: optimize-contrast;
+    -ms-interpolation-mode: nearest-neighbor;
 }
 
 .imgpreload {
@@ -69,7 +70,7 @@ img {
 }
 
 #timercontainer {
-	background-color:rgba(50,50,50,0.5);
+	background-color:rgba(50,50,50,var(--ui-bg-alpha));
 	border-radius:var(--border-rad);
 	padding:5px;
 	color:white;
@@ -91,7 +92,7 @@ img {
 	left:27vw;
 	
 	font-family:Courier;
-	background-color:rgba(50,50,50,0.65);
+	background-color:rgba(50,50,50,var(--ui-bg-alpha));
 	border-radius:var(--border-rad);
 	padding:10px;
 	z-index:11;
@@ -105,11 +106,11 @@ img {
 
 #controlpanelcontainer {
 	font-family:Courier;
-	background-color:rgba(50,50,50,0.5);
+	background-color:rgba(50,50,50,var(--ui-bg-alpha));
 	border-radius:var(--border-rad);
 	padding:5px;
 	z-index:11;
-	width:10vw;
+	width:9vw;
 	
 	border-style:solid;
 	border-width:0.2vw;
@@ -117,34 +118,61 @@ img {
 	border-radius:var(--border-rad);
 }
 
-select {
-	-moz-appearance: none;
-	-webkit-appearance: none;
-	appearance: none;
-	border: none;
-	width:7vw;
-	height:1.6vw;
-	font-size:0.8vw;
+#keyhelpcontainer {
 	font-family:Courier;
-	padding-left:0px;
-	background:url(selbg.png) repeat;
-	color:#fff;
-	box-shadow:2px 2px 5px 1px rgba(0,0,0,0.3);
-	border-radius:0.3vw;
-	outline:none;
-	cursor:pointer;
+	background-color:rgba(50,50,50,var(--ui-bg-alpha));
+	border-radius:var(--border-rad);
+	padding:5px;
+	z-index:11;
+	width:20vw;
+	
+	border-style:solid;
+	border-width:0.2vw;
+	border-color:var(--ui-border-color);
+	border-radius:var(--border-rad);
 }
 
-select option {
-	color: #666;
+#keyhelptable th {
+	width: 20%;
 }
 
-select:focus::-ms-value {
-	background-color: transparent;
+#keyhelptable td {
+	width: 80%;
+	font-size:1vw;
+	padding-left: 0.5vw;
+	color: white;
 }
 
-select::-ms-expand {
-	display: none;
+select {
+  width: 7.5vw;
+  height: 2vw;
+  font-size: 1vw;
+  background-color: #FF7B00;
+  border: 0.2vw solid black;
+  border-radius: 0.5vw;
+  display: inline-block;
+  line-height: 1.5em;
+  padding: 0.1em 0.1em 0.1em 0.1em;
+
+  margin: 0;      
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+
+select:focus {
+  background-size: 5px 5px, 5px 5px, 1px 1.5em;
+  background-repeat: no-repeat;
+  border-color: white;
+  outline: 1;
+}
+
+
+select:-moz-focusring {
+  color: transparent;
+  text-shadow: 0 0 0 #000;
 }
 
 #isecontainer {
@@ -290,7 +318,7 @@ div#preload { display: none; }
 	font-size:1vw;
 	background-color:#efefef;
 	border-color:#efefef;
-	border-width:3px;
+	border-width:0.2vw;
 	border-radius:var(--border-rad);
 	color:#000;
 }

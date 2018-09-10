@@ -2,14 +2,14 @@
 // (c) Sv443 / Sven Fehler 2018 - licensed under MIT license
 
 
-document.addEventListener("keyup", function (e){
+document.addEventListener("keydown", function (e){
 	if(e.keyCode == key_send){
 		submit();
 	}
 	else if(e.keyCode == key_repeat){
 		repeat();
 	}
-	else if(e.keyCode == key_next_scene){
+	else if(e.keyCode == key_next_scene && !document.body.innerHTML.includes("jsid_started_tutorial")){
 		nextscene();
 	}
 });
@@ -36,6 +36,14 @@ window.onresize = function(event) {
 document.addEventListener("orientationchange", function (){
 	dncycle(document.getElementById("TAG_cycle").dataset.nbr); // instantly resizes background image if window orientation is changed
 	scenechange(1);
+});
+
+document.addEventListener("beforeunload", function(){
+	window.onbeforeunload = function(e) {
+		var dialogText = 'Dialog text here';
+		e.returnValue = dialogText;
+		return dialogText;
+	};
 });
 
 console.log("initialized TAG_listeners.js");

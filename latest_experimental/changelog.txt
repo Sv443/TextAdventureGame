@@ -53,9 +53,33 @@
 		- items, structures and statuses are now being displayed in their respective scenes
 		- added black border around the UI elements
 }
+{[B] 0.0.6>
+		- added a one time showing up (until closed) key binding popup
+		- removed "save" and "load" commands due to being obsolete
+		- expanded the dev menu (for people reading this, type "dev_menu" to unlock it ;D )
+		- completely reworked the tutorial
+		- added a privacy policy in english and german
+		- added a completion progress info to the info panel
+		- changed the style of the scene selector
+		- added feature to skip introduction popups by adding a "?(or &)nointro" to the URL (can be combined with "?cmd="), make sure that you turn the second (and up) "?" into a "&" (example: ?nointro&cmd=test)
+		- renamed timer to elapsed time
+}
+
+{ PLANNED >
+		D- (DONE) change through different scenes (backgrounds) to see your structures, your inventory, your health and status effects, the day/night cycle, settings, and so on
+		WIP- (WORK IN PROGRESS) unique soundtrack
+		- multi-language support
+		- multiple bad and good endings
+		- more discoverable and explorable structures with unique items
+		- butterfly-effect
+		- achievement system
+		- completely rework the parser and saving/loading script (very very hard-coded)
+		- allow people to make their own text adventure game only through the usage of arrays and variables in a new module (no fiddly coding at all          (except for me            yay                       i'm already excited))
+		- add multiple themes for the UI
+}
 { TODO / BUGS >
 
-		NOTE: please send any bugs, errors, glitches or suggestions (please look at the planned features (at the bottom) first to not make a duplicate)
+		NOTE: please send any bugs, errors, glitches or suggestions (please look at the planned features (above this paragraph) first to not make a duplicate)
 		through the github issue tracker to help improve the game! You'll also be mentioned in the credits :) (https://github.com/Sv443/TextAdventureGame/issues)
 
 
@@ -79,19 +103,7 @@
 		D- (DONE - ui doesn't get styled (shows up) if the state was set to hidden) ui shows up (info panel doesn't) after the scene was switched if it was disabled in another scene before
 		WIP- (WORK IN PROGRESS) finally fix the damn submit button scaling issues and its bad design that bugged me since 0.0.1
 		- bad scaling on mobile devices
-		- sort the github repo and put all resources in a dedicated folder like the day/night cycle images already are
-}
-{ PLANNED >
-		WIP- (WORK IN PROGRESS) change through different scenes (backgrounds) to see your structures, your inventory, your health and status effects, the day/night cycle, settings, and so on
-		WIP- (WORK IN PROGRESS) unique soundtrack
-		- multi-language support
-		- multiple bad and good endings
-		- more discoverable and explorable structures with unique items
-		- butterfly-effect
-		- achievement system
-		- completely rework the parser and saving/loading script (very very hard-coded)
-		- allow people to make their own text adventure game only through the usage of arrays and variables in a new module (no fiddly coding at all          (except for me            yay                       i'm already excited))
-		- add multiple themes for the UI
+		- sort the github repo and put all resources in a dedicated folder like the day/night cycle images already are (probably will redo the whole repo, it's extremely messy)
 }
 
 

@@ -42,6 +42,7 @@ function timedevent(t_event){
 				break;
 			case "found_shipwreck":
 				sendmsg("You walked around on the islands beach and discovered a shipwreck that you could maybe explore.");
+				progress("inc");
 				incscore(150);
 				getitem("structure_shipwreck", "Shipwreck - A nice shelter and opportunity to do some exploration! (Structure Effects: provides shelter against rain and can be explored to find items)", "https://raw.githubusercontent.com/Sv443/TextAdventureGame/master/shipwreck_16x16.png", "appendstructure")
 				break;
@@ -91,6 +92,18 @@ function startTimer(duration, display) { //timer code from https://stackoverflow
 			else {
 				document.title="[B] Text Island (" + minutes + ":" + seconds + ") 🔇";
 			}
+			
+			
+			var scinc = minutes % 10;
+			if (scinc == 0 && seconds == 0 && minutes != 0 && !document.body.innerHTML.includes("You died")){
+				if(minutes == 10){
+					sendmsg("You have survived 10 minutes and so you'll earn 100 score points!");
+				}
+				else {
+					sendmsg("You have survived another 10 minutes and so you'll earn 100 score points!");
+				}
+				incscore(100);
+			}
 		}
     }, timer_dur);
 }
@@ -126,3 +139,5 @@ function dncycletimer() {
 console.log("initialized TAG_timer.js");
 modulecount += 1;
 modules_displayname += ", TAG_timer";
+
+// progress("inc"); occurs 1 time

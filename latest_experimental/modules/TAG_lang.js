@@ -21,7 +21,7 @@ function langchange() {
 	sendmsg("Changing Language to: " + chto2 + ". Reload the page for the changes to take action, but don't forget to save your game!");
 	ls.src="https://raw.githubusercontent.com/Sv443/TextAdventureGame/master/lang_" + chto + ".png";
 	ls.dataset.lang=chto;
-	sendmsg("the language change feature is currently unfinished!", "red");
+	sendmsg("the language change feature does not work currently!", "red");
 }
 
 /*

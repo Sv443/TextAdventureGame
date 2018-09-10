@@ -13,7 +13,7 @@ code incompatible with Internet Explorer 1-11
 // Settings  --  --  Settings  --  --  Settings  --  --  Settings  --  --  Settings  --  --  Settings  --  --  Settings  --  --  Settings  --  --  Settings  --  --  Settings  --  --  Settings  --  --  Settings  --  --  Settings  --  --  Settings  --  --  Settings  --  --  Settings  --  --  Settings  --  --  Settings  --  --  Settings  --  --  Settings  --  --  Settings  --  --  Settings  --  --  Settings  --  --  Settings  --  --  Settings
 // Settings  --  --  Settings  --  --  Settings  --  --  Settings  --  --  Settings  --  --  Settings  --  --  Settings  --  --  Settings  --  --  Settings  --  --  Settings  --  --  Settings  --  --  Settings  --  --  Settings  --  --  Settings  --  --  Settings  --  --  Settings  --  --  Settings  --  --  Settings  --  --  Settings  --  --  Settings  --  --  Settings  --  --  Settings  --  --  Settings  --  --  Settings  --  --  Settings
 
-var curversion = "[B]-0.0.5";
+var curversion = "[B]-0.0.6";
 var death_enabled = true; //enable / disable death - default true
 var max_volume = 0.2; //maximum volume level of played audios - default and recommended 0.2 - min 0 - max 1
 var dbg = false; //debug to the html output - default false
@@ -34,13 +34,15 @@ var time_died_of_freezing = 20; //in min - default 20
 var time_raining_again = 32; //in min - default 32
 var time_died_of_freezing_again = 40; //in min - default 40
 var time_found_boat = 22; // in min - default 22
-var timer_multiplier = 1; //timer multiplier, make timer faster / slower (2 for double speed, 1 for normal speed, 0.5 for half speed, and so on) - (some things may not work correctly at higher speeds)
+var timer_multiplier = 1; // timer multiplier, make timer faster / slower (2 for double speed, 1 for normal speed, 0.5 for half speed, and so on) - (some things may not work correctly at higher speeds)
+var tutorial_delay = 17000; // in ms - the delay between the messages of the tutorial - default 17000
+var progress_occurencies = 4; //occurencies of the progress increments
 
 
 
 //load all modules, comment out a module if you don't want it loaded and decrease the max_modules variable by 1 (if you need it to) to update the UI accordingly
 //listeners and parser modules are needed, else the script will either not work or error
-var modulecount = 0;var max_modules = 7;var modules_displayname = "TAG_master";
+var modulecount = 0, max_modules = 7;var modules_displayname = "TAG_master";
 
 
 
@@ -66,14 +68,14 @@ module_tag_audio = document.createElement('script');module_tag_audio.src="module
 module_tag_lang = document.createElement('script');module_tag_lang.src="modules/TAG_lang.js";module_tag_lang.id="script_tag_lang";document.getElementById("script_tag_master").appendChild(module_tag_lang);
 
 
-// changelog
+//changelog
 
 /* 0.0.1 */   var changelogcontent =  "<div style='width:0.3vw;height:0.2vw;'></div><div style='width:0.3vw;height:0.2vw;'></div><div style='width:0.3vw;height:0.2vw;'></div><span style='font-size:0.75vw;'><b>[B]-0.0.1</b></span><div style='width:0.3vw;height:0.2vw;'></div><div style='width:100%;border-top-style:solid;border-width:2px;'></div><div style='width:0.3vw;height:0.2vw;'></div>- basic framework and beginning of story added<div style='width:0.3vw;height:0.2vw;'></div><div style='width:0.2vw;height:0.3vw;'></div>- added coconut item<br><br>"
 /* 0.0.2 */ 						+ "<div style='width:0.3vw;height:0.2vw;'></div><div style='width:0.3vw;height:0.2vw;'></div><div style='width:0.3vw;height:0.2vw;'></div><span style='font-size:0.75vw;'><b>[B]-0.0.2</b></span><div style='width:0.3vw;height:0.2vw;'></div><div style='width:100%;border-top-style:solid;border-width:2px;'></div><div style='width:0.3vw;height:0.2vw;'></div>- completely reworked UI<div style='width:0.3vw;height:0.2vw;'></div><div style='width:0.3vw;height:0.2vw;'></div>- added status effects, inventory and crafting system<div style='width:0.3vw;height:0.2vw;'></div><div style='width:0.3vw;height:0.2vw;'></div>- added timed events<div style='width:0.3vw;height:0.2vw;'></div><div style='width:0.3vw;height:0.2vw;'></div>- added sidebar with infos<div style='width:0.3vw;height:0.2vw;'></div><div style='width:0.3vw;height:0.2vw;'></div>- added saving and loading mechanism (although loading is disabled)<br><br>"
 /* 0.0.3 */ 						+ "<div style='width:0.3vw;height:0.2vw;'></div><div style='width:0.3vw;height:0.2vw;'></div><div style='width:0.3vw;height:0.2vw;'></div><span style='font-size:0.75vw;'><b>[B]-0.0.3</b></span><div style='width:0.3vw;height:0.2vw;'></div><div style='width:100%;border-top-style:solid;border-width:2px;'></div><div style='width:0.3vw;height:0.2vw;'></div>- added structure system, added basic shelter and explorable shipwreck<div style='width:0.3vw;height:0.2vw;'></div><div style='width:0.3vw;height:0.2vw;'></div>- renamed to Text Island<div style='width:0.3vw;height:0.2vw;'></div><div style='width:0.3vw;height:0.2vw;'></div>- tons and tons of fixes to improve convenience<div style='width:0.3vw;height:0.2vw;'></div><div style='width:0.3vw;height:0.2vw;'></div>- added flint stone and hatchet<div style='width:0.3vw;height:0.2vw;'></div><div style='width:0.3vw;height:0.2vw;'></div>- changed retry button<div style='width:0.3vw;height:0.2vw;'></div><div style='width:0.3vw;height:0.2vw;'></div>- modified sidebar<div style='width:0.3vw;height:0.2vw;'></div><div style='width:0.3vw;height:0.2vw;'></div>- fixed incompatibility errors<div style='width:0.3vw;height:0.2vw;'></div><div style='width:0.3vw;height:0.2vw;'></div>- added score system<div style='width:0.3vw;height:0.2vw;'></div><div style='width:0.3vw;height:0.2vw;'></div>- added many synonyms<div style='width:0.3vw;height:0.2vw;'></div><div style='width:0.3vw;height:0.2vw;'></div>- added day/night cycle with ingame time and time display (currently very fast and with no function)<div style='width:0.3vw;height:0.2vw;'></div><div style='width:0.3vw;height:0.2vw;'></div>- improved scaling of all elements<br><br>"
 /* 0.0.4 */ 						+ "<div style='width:0.3vw;height:0.2vw;'></div><div style='width:0.3vw;height:0.2vw;'></div><div style='width:0.3vw;height:0.2vw;'></div><span style='font-size:0.75vw;'><b>[B]-0.0.4</b></span><div style='width:0.3vw;height:0.2vw;'></div><div style='width:100%;border-top-style:solid;border-width:2px;'></div><div style='width:0.3vw;height:0.2vw;'></div>- added audio system, added some basic placeholder-sounds<div style='width:0.3vw;height:0.2vw;'></div><div style='width:0.3vw;height:0.2vw;'></div>- added ambient sound that plays on load<div style='width:0.3vw;height:0.2vw;'></div><div style='width:0.3vw;height:0.2vw;'></div>- added mute/unmute button<div style='width:0.3vw;height:0.2vw;'></div><div style='width:0.3vw;height:0.2vw;'></div>- redesigned retry button<div style='width:0.3vw;height:0.2vw;'></div><div style='width:0.3vw;height:0.2vw;'></div>- added tree chopping with logs item drop<div style='width:0.3vw;height:0.2vw;'></div><div style='width:0.3vw;height:0.2vw;'></div>- improved day/night cycle and made it independent from game timer<div style='width:0.3vw;height:0.2vw;'></div><div style='width:0.3vw;height:0.2vw;'></div>- added this collapsable ingame changelog display<div style='width:0.3vw;height:0.2vw;'></div><div style='width:0.3vw;height:0.2vw;'></div>- added day/night dependant ambient sounds<div style='width:0.3vw;height:0.2vw;'></div><div style='width:0.3vw;height:0.2vw;'></div>- fixed bug of 'make' always executing the not enough material to build shelter message<div style='width:0.3vw;height:0.2vw;'></div><div style='width:0.3vw;height:0.2vw;'></div>- fixed bug of 'what do you want to get?' message executed after coconut was taken<div style='width:0.3vw;height:0.2vw;'></div><div style='width:0.3vw;height:0.2vw;'></div>- changed position of mute button to the left of the changelog arrow<div style='width:0.3vw;height:0.2vw;'></div><div style='width:0.3vw;height:0.2vw;'></div>- fixed position changes of top right control panel when changelog is opened<div style='width:0.3vw;height:0.2vw;'></div><div style='width:0.3vw;height:0.2vw;'></div>- reformatted changelog a bit<div style='width:0.3vw;height:0.2vw;'></div><div style='width:0.3vw;height:0.2vw;'></div>- removed image display of day/night cycle and made it so the background displays it instead<div style='width:0.3vw;height:0.2vw;'></div><div style='width:0.3vw;height:0.2vw;'></div>- added background underlay behind in/output elements, info panel and control panel<div style='width:0.3vw;height:0.2vw;'></div><div style='width:0.3vw;height:0.2vw;'></div>- changed last save string in the info panel to last saved at (ingame time)<br><br>"
-/* 0.0.5 */                         + "<div style='width:0.3vw;height:0.2vw;'></div><div style='width:0.3vw;height:0.2vw;'></div><div style='width:0.3vw;height:0.2vw;'></div><span style='font-size:0.75vw;'><b>[B]-0.0.5</b></span><div style='width:0.3vw;height:0.2vw;'></div><div style='width:100%;border-top-style:solid;border-width:2px;'></div><div style='width:0.3vw;height:0.2vw;'></div>- made it so the modules will be loaded twice for more stability in the UI<div style='width:0.3vw;height:0.2vw;'></div><div style='width:0.3vw;height:0.2vw;'></div>- telling the user if they are using a mobile device because they are currently unsupported<div style='width:0.3vw;height:0.2vw;'></div><div style='width:0.3vw;height:0.2vw;'></div>- hovering over the loaded modules indicator will show all loaded modules<div style='width:0.3vw;height:0.2vw;'></div><div style='width:0.3vw;height:0.2vw;'></div>- added css to remove antialiasing on all images which makes them very crisp (background day/night cycle included)<div style='width:0.3vw;height:0.2vw;'></div><div style='width:0.3vw;height:0.2vw;'></div>- added ui shortening / hiding / expanding button<div style='width:0.3vw;height:0.2vw;'></div><div style='width:0.3vw;height:0.2vw;'></div>- added scene switching which also accordingly changes the positions of the UI<div style='width:0.3vw;height:0.2vw;'></div><div style='width:0.3vw;height:0.2vw;'></div>- fixed some bugs<div style='width:0.3vw;height:0.2vw;'></div><div style='width:0.3vw;height:0.2vw;'></div>- added cookie API to make my life a whole lot easier<div style='width:0.3vw;height:0.2vw;'></div><div style='width:0.3vw;height:0.2vw;'></div>- added score and item saving and loading<div style='width:0.3vw;height:0.2vw;'></div><div style='width:0.3vw;height:0.2vw;'></div>- adding a ?cmd=XY or ?command=XY after the URL can now execute a command on page load<div style='width:0.3vw;height:0.2vw;'></div><div style='width:0.3vw;height:0.2vw;'></div>- items, structures and statuses are now being displayed in their respective scenes<div style='width:0.3vw;height:0.2vw;'></div><div style='width:0.3vw;height:0.2vw;'></div>- added black border around the UI elements<br><br>";
-
+/* 0.0.5 */                         + "<div style='width:0.3vw;height:0.2vw;'></div><div style='width:0.3vw;height:0.2vw;'></div><div style='width:0.3vw;height:0.2vw;'></div><span style='font-size:0.75vw;'><b>[B]-0.0.5</b></span><div style='width:0.3vw;height:0.2vw;'></div><div style='width:100%;border-top-style:solid;border-width:2px;'></div><div style='width:0.3vw;height:0.2vw;'></div>- made it so the modules will be loaded twice for more stability in the UI<div style='width:0.3vw;height:0.2vw;'></div><div style='width:0.3vw;height:0.2vw;'></div>- telling the user if they are using a mobile device because they are currently unsupported<div style='width:0.3vw;height:0.2vw;'></div><div style='width:0.3vw;height:0.2vw;'></div>- hovering over the loaded modules indicator will show all loaded modules<div style='width:0.3vw;height:0.2vw;'></div><div style='width:0.3vw;height:0.2vw;'></div>- added css to remove antialiasing on all images which makes them very crisp (background day/night cycle included)<div style='width:0.3vw;height:0.2vw;'></div><div style='width:0.3vw;height:0.2vw;'></div>- added ui shortening / hiding / expanding button<div style='width:0.3vw;height:0.2vw;'></div><div style='width:0.3vw;height:0.2vw;'></div>- added scene switching which also accordingly changes the positions of the UI<div style='width:0.3vw;height:0.2vw;'></div><div style='width:0.3vw;height:0.2vw;'></div>- fixed some bugs<div style='width:0.3vw;height:0.2vw;'></div><div style='width:0.3vw;height:0.2vw;'></div>- added cookie API to make my life a whole lot easier<div style='width:0.3vw;height:0.2vw;'></div><div style='width:0.3vw;height:0.2vw;'></div>- added score and item saving and loading<div style='width:0.3vw;height:0.2vw;'></div><div style='width:0.3vw;height:0.2vw;'></div>- adding a ?cmd=XY or ?command=XY after the URL can now execute a command on page load<div style='width:0.3vw;height:0.2vw;'></div><div style='width:0.3vw;height:0.2vw;'></div>- items, structures and statuses are now being displayed in their respective scenes<div style='width:0.3vw;height:0.2vw;'></div><div style='width:0.3vw;height:0.2vw;'></div>- added black border around the UI elements<br><br>"
+/* 0.0.6 */                         + "<div style='width:0.3vw;height:0.2vw;'></div><div style='width:0.3vw;height:0.2vw;'></div><div style='width:0.3vw;height:0.2vw;'></div><span style='font-size:0.75vw;'><b>[B]-0.0.6</b></span><div style='width:0.3vw;height:0.2vw;'></div><div style='width:100%;border-top-style:solid;border-width:2px;'></div><div style='width:0.3vw;height:0.2vw;'></div>- added a one time showing up (until closed) key assignment popup<div style='width:0.3vw;height:0.2vw;'></div><div style='width:0.3vw;height:0.2vw;'></div>- removed 'save' and 'load' commands due to being obsolete<div style='width:0.3vw;height:0.2vw;'></div><div style='width:0.3vw;height:0.2vw;'></div>- expanded the dev menu (for people reading this, type 'dev_menu' to unlock it ;D )<div style='width:0.3vw;height:0.2vw;'></div><div style='width:0.3vw;height:0.2vw;'></div>- completely reworked the tutorial<div style='width:0.3vw;height:0.2vw;'></div><div style='width:0.3vw;height:0.2vw;'></div>- added a privacy policy in english and german<br><br>";
 
 
 
@@ -128,10 +130,9 @@ function detectIE() {
 
     var edge = ua.indexOf('Edge/');
     if (edge > 0) {
-       // Edge (IE 12+) (works with edge so i'll parse it as not IE)
+       // Edge (IE 12+) (script works with edge so i'll parse it as not IE)
        isie = false;
-	   return;
-    }
+	   return;	}
 
     // other browser
     isie = false;
@@ -258,7 +259,7 @@ function error(cause) {
 }
 
 var currentscore;
-function incscore(increment) { //item: 100, discovered thing: 150, structure: 200
+function incscore(increment) { //item: 100, ten minutes passed: 100, discovery: 150, structure: 200
 	var beforescore = document.getElementById("current_score").innerHTML;
 	currentscore = parseInt(beforescore) + parseInt(increment);
 	document.getElementById("current_score").innerHTML=parseInt(currentscore);
@@ -278,7 +279,7 @@ setTimeout(function (){
 		setInterval(dncycletimer, daynightcycle_delay);
 		currentscore = 0;
 		startupdater();
-		sendmsg("You start out stranded on a small island.<br>&gt;&nbsp;All you've got on you is an army knife.<br>&gt;&nbsp;Also you are starving. Find something to eat to survive!<br><br>");
+		sendmsg("<b>Story:</b><br>&gt;&nbsp;You start out stranded on a small island.<br>&gt;&nbsp;All you've got on you is an army knife.<br>&gt;&nbsp;Also you are starving. Find something to eat to survive!<br><br>", "#005656");
 		setTimeout(function () {
 			console.log("initialized " + modulecount + "/" + max_modules + " modules");
 		}, module_load_time);
@@ -399,6 +400,87 @@ function checkqstr() {
 			submit("" + qstra2[1]);
 		}
 	}
+}
+
+function closekeyhelp(nowarning) {
+	if(nowarning === true){
+		Cookies.set('kh', true, { expires: 365 });
+		document.getElementById("keyshelpwrapper").style="position:fixed;top:120vh;";
+	}
+	else if(confirm("Warning!\nThis will never show up again, until you type 'keys' in the input field or clear the Cookies!\nAlso, by confirming, you agree that this site saves Cookies to your Computer.\n\nClose anyway?")) {
+		Cookies.set('kh', true, { expires: 365 });
+		document.getElementById("keyshelpwrapper").style="position:fixed;top:120vh;";
+	}
+	else {
+		return;
+	}
+}
+
+function checkkeyhelp() {
+	var ckh = parseBool(Cookies.get('kh'));
+	
+	if(ckh) {
+		closekeyhelp(true);
+	}
+	
+	if(queryString.includes("nointro")){
+		closekeyhelp(true);
+		setTimeout(function(){
+			document.getElementsByClassName("cc-window")[0].innerHTML="";
+		}, 1000);
+	}
+}
+
+function parseBool(val) {
+	return val === true || val === "true";
+}
+
+function targetelem(id) {
+	document.getElementById(id).style+="padding:5px;border-style:solid;border-width:0.6vw;border-color:#f00;border-radius:1vw;";
+}
+
+function untargetelem(id) {
+	document.getElementById(id).style="";
+}
+
+function timedtarget(time, id){
+	targetelem(id);
+	setTimeout(function(){untargetelem(id);}, time/5);
+	setTimeout(function(){targetelem(id);}, time/5*2);
+	setTimeout(function(){untargetelem(id);}, time/5*3);
+	setTimeout(function(){targetelem(id);}, time/5*4);
+	setTimeout(function(){untargetelem(id);}, time);
+}
+
+setTimeout(function(){
+	if(Cookies.get('visited') != "true"){
+		if(!queryString.includes("nointro") && confirm("Welcome!\n\nThis seems to be the first time you entered this website.\nWould you like to start the tutorial? (Only takes a minute).\n(By continuing you agree that a miniscule amount of Cookies get saved to your Computer).")){
+			starttutorial();
+		}
+		else if(!queryString.includes("nointro")) {
+			sendmsg("From now on that popup will not appear again.", "red");
+			sendmsg("If you nevertheless want to start the tutorial, please type 'tutorial'.", "red");
+		}
+		else {
+			sendmsg("popups and introductions have been disabled through the querystring", "red");
+		}
+	}
+
+	Cookies.set('visited', true, { expires: 365 });
+}, 500);
+
+document.addEventListener("DOMContentLoaded", function(){progress("init");});
+
+function progress(kwd){
+	var pelem = document.getElementById("completion_progress");
+	setTimeout(function(){
+		if(kwd == "init"){
+			pelem.innerHTML="0";
+		}
+		else if (kwd == "inc"){
+			pelem.innerHTML=Math.ceil(parseInt(pelem.innerHTML) + (100 / progress_occurencies));
+		}
+	}, module_load_time);
 }
 
 function donothing(){return;}
