@@ -1,0 +1,37 @@
+{
+  "name": "textisland",
+  "version": "0.1.0",
+  "description": "A text-based adventure browser game",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "npx electron .",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "eslint ./"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Sv443/TextAdventureGame.git"
+  },
+  "keywords": [
+    "game",
+    "browser-game",
+    "text-adventure"
+  ],
+  "author": {
+    "name": "Sv443",
+    "email": "sven.fehler@web.de",
+    "url": "https://github.com/Sv443"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Sv443/TextAdventureGame/issues"
+  },
+  "homepage": "https://github.com/Sv443/TextAdventureGame#readme",
+  "devDependencies": {
+    "electron": "^8.1.1",
+    "eslint": "^6.8.0"
+  },
+  "dependencies": {
+    "svjsl": "^1.8.4"
+  }
+}

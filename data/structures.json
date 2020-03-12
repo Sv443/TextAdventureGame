@@ -1,0 +1,10 @@
+{
+    "shelter": {
+        "name": "Basic Shelter",
+        "obj": "BasicShelter",
+        "effects": {
+            "rain-resist": 0.5
+        },
+        "icon": "structures/shelter.png"
+    }
+}
