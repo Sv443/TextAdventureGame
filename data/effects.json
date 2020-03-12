@@ -1,7 +1,6 @@
 {
     "hunger": {
         "name": "Hunger",
-        "obj": "Hunger",
         "type": "timed",
         "time": [0, 0, 0],
         "icon": "hunger.png"
