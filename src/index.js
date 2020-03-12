@@ -1,5 +1,5 @@
 const jsl = require("svjsl");
-const { app, BrowserWindow, Menu, MenuItem, globalShortcut, ipcMain } = require("electron");
+const { app, BrowserWindow, globalShortcut, ipcMain } = require("electron");
 
 const settings = require("../settings");
 
@@ -26,13 +26,15 @@ function preInit()
 function init()
 {
     let win = new BrowserWindow({
-        width: 800,
-        height: 600,
+        width: 400,
+        height: 450,
         webPreferences: {
             nodeIntegration: true
         },
         icon: settings.resources.icon,
-        frame: false
+        frame: false,
+        transparent: true,
+        resizable: true
     });
 
     // let devMenu = new MenuItem();
@@ -50,16 +52,6 @@ function init()
     win.loadFile(settings.menu.mainMenuHTML);
 
     global.mainWindow = win;
-}
-
-/**
- * Sends an error message to the console
- * @param {String} section
- * @param {Error|String} err
- */
-function initError(section, err)
-{
-    console.error(`Error in ${section}: ${err}`);
 }
 
 /**
@@ -83,5 +75,14 @@ app.on("activate", () => {
     if(BrowserWindow.getAllWindows().length === 0)
         return initAll();
 });
+
+//#MARKER IPC
+
+ipcMain.on("exit", () => {
+    if(process.platform !== "darwin")
+        return app.quit();
+});
+
+
 
 initAll();

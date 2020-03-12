@@ -17,14 +17,12 @@ html, body{
     scroll-behavior: smooth;
 }
 
-body {
+body:not(.transparent) {
     margin: 0;
     background-color: var(--bg-color);
     color: #fff;
     font-family: "Roboto", "Segoe UI", "Arial", sans-serif;
     font-size: 15px;
-
-    transition: background-color var(--sidenav-animation-speed);
 }
 
 .noselect {

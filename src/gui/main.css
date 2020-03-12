@@ -1,0 +1,24 @@
+header {
+    display: block;
+    text-align: center;
+
+    padding: 3px;
+}
+
+#titleText {
+    font-size: 40px;
+}
+
+header #headerContent {
+    -webkit-user-select: none;
+    -webkit-app-region: drag;
+}
+
+header .nodrag {
+    -webkit-app-region: no-drag;
+}
+
+#titlebarIcon {
+    width: 1em;
+    height: 1em;
+}

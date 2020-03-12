@@ -2,6 +2,7 @@
 <html>
     <head>
         <meta charset="UTF-8">
+        <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline';" />
 
         <title>Text Island v0.1</title>
 
@@ -11,6 +12,21 @@
         <link rel="stylesheet" href="./main.css">
     </head>
     <body>
-
+        <header>
+            <div id="headerContent">
+                <span id="titleContainer">
+                    <span id="titleText"></span>
+                </span>
+            </div>
+        </header>
+        <main>
+            <nav>
+                <button id="btnPlay">Play Game</button><br>
+                <button id="btnSettings">Settings</button><br>
+                <button id="btnAbout">About</button><br>
+                <br>
+                <button id="btnExit">Exit</button><br>
+            </nav>
+        </main>
     </body>
 </html>
