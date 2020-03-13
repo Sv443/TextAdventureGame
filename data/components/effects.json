@@ -1,6 +1,7 @@
 {
     "hunger": {
         "name": "Hunger",
+        "tooltip": "You need to eat something before you die of starvation!",
         "type": "timed",
         "time": [0, 0, 0],
         "icon": "hunger.png"

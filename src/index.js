@@ -1,12 +1,14 @@
 const jsl = require("svjsl");
 const { app, BrowserWindow, globalShortcut, ipcMain } = require("electron");
 
+const validateComponents = require("./validateComponents");
+
 const settings = require("../settings");
 
 const comp = Object.freeze({
-    items: require("../data/items.json"),
-    structs: require("../data/structures.json"),
-    effects: require("../data/effects.json")
+    items: require("../data/components/items.json"),
+    structs: require("../data/components/structures.json"),
+    effects: require("../data/components/effects.json")
 });
 
 
@@ -15,7 +17,10 @@ const comp = Object.freeze({
 
 function preInit()
 {
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve) => {
+        validateComponents(comp).then(() => {
+            global.comp = comp;
+        });
         return resolve();
     });
 }
