@@ -1,6 +1,6 @@
-const Component = require("./Component");
+const BaseComponent = require("./BaseComponent");
 
-class Structure extends Component {
+class Structure extends BaseComponent {
     constructor(name)
     {
         super("structure", name);

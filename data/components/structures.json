@@ -1,9 +1,36 @@
 {
     "shelter": {
         "name": "Basic Shelter",
-        "effects": {
-            "rain-resist": 0.5
+        "tooltip": "A very basic shelter that will provide you with a warm place to sleep",
+        "fromStart": false,
+        "icon": "shelter.png",
+        "crafting": {
+            "craftable": true,
+            "ingredients": {
+                "ropevine": 1,
+                "flint": 1
+            },
+            "craftableAfterMilestones": [
+                "FoundVineRope"
+            ]
         },
-        "icon": "structures/shelter.png"
+        "finding": {
+            "findable": false
+        }
+    },
+    "shipwreck": {
+        "name": "Shipwreck",
+        "tooltip": "The wreck of an old yacht. Maybe they have something on board that could be useful?",
+        "fromStart": false,
+        "icon": "shipwreck.png",
+        "crafting": {
+            "craftable": false
+        },
+        "finding": {
+            "findable": true,
+            "findableAfterMilestones": [
+                "LocationRockyBeach"
+            ]
+        }
     }
 }

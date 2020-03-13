@@ -1,9 +1,34 @@
 {
     "hunger": {
         "name": "Hunger",
-        "tooltip": "You need to eat something before you die of starvation!",
-        "type": "timed",
-        "time": [0, 0, 0],
-        "icon": "hunger.png"
+        "tooltip": "You are starving and need to eat something soon!",
+        "icon": "hunger.png",
+        "fromStart": true,
+        "timing": {
+            "timed": true,
+            "type": "random",
+            "quantity": -1,
+            "minTime": [0, 20, 0],
+            "cooldown": [0, 20, 0],
+            "initialChance": 0.5,
+            "chanceInterval": [0, 0, 20],
+            "chanceIncrement": 0.05
+        }
+    },
+    "rain": {
+        "name": "Rain",
+        "tooltip": "It's raining! Find a shelter before you get hypothermia!",
+        "icon": "rain.png",
+        "fromStart": false,
+        "timing": {
+            "timed": true,
+            "type": "random",
+            "quantity": -1,
+            "minTime": [0, 10, 0],
+            "cooldown": [0, 30, 0],
+            "initialChance": 0.05,
+            "chanceInterval": [0, 0, 5],
+            "chanceIncrement": 0.01
+        }
     }
 }

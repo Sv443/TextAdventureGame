@@ -1,7 +1,104 @@
 {
+    "armyknife": {
+        "name": "Army Knife",
+        "type": "tool",
+        "tooltip": "\"Don't eat\" is printed on the backside",
+        "fromStart": true,
+        "icon": "armyknife.png",
+        "unlocksMilestone": null,
+        "crafting": {
+            "craftable": false
+        },
+        "finding": {
+            "findable": false
+        }
+    },
+    "coconut": {
+        "name": "Coconut",
+        "type": "consumable",
+        "tooltip": "Tom Hanks loves these",
+        "fromStart": false,
+        "icon": "coconut.png",
+        "unlocksMilestone": "FoundCoconut",
+        "crafting": {
+            "craftable": false
+        },
+        "finding": {
+            "findable": true,
+            "findableAfterMilestones": [
+                "LocationBeach"
+            ]
+        }
+    },
     "vine": {
         "name": "Vine",
+        "type": "ingredient",
         "tooltip": "Maybe you could craft something with this, Tarzan",
-        "icon": "vine.png"
+        "fromStart": false,
+        "icon": "vine.png",
+        "unlocksMilestone": "FoundVine",
+        "crafting": {
+            "craftable": false
+        },
+        "finding": {
+            "findable": true,
+            "findableAfterMilestones": [
+                "LocationBeach"
+            ]
+        }
+    },
+    "vinerope": {
+        "name": "Vine Rope",
+        "type": "tool",
+        "tooltip": "A primitive way to tie things together",
+        "fromStart": false,
+        "icon": "vinerope.png",
+        "unlocksMilestone": "FoundVineRope",
+        "crafting": {
+            "craftable": true,
+            "ingredients": {
+                "vine": 1
+            },
+            "craftableAfterMilestones": [
+                "FoundVine"
+            ]
+        },
+        "finding": {
+            "findable": false
+        }
+    },
+    "flint": {
+        "name": "Flint",
+        "type": "ingredient",
+        "tooltip": "MISSING_TOOLTIP",
+        "fromStart": false,
+        "icon": "flint.png",
+        "unlocksMilestone": "FoundFlint",
+        "crafting": {
+            "craftable": false
+        },
+        "finding": {
+            "findable": true,
+            "findableAfterMilestones": [
+                "LocationCliff"
+            ]
+        }
+    },
+    "hatchet": {
+        "name": "Hatchet",
+        "type": "tool",
+        "tooltip": "Not quite an axe, but It'll be good enough",
+        "fromStart": false,
+        "icon": "hatchet.png",
+        "unlocksMilestone": "FoundHatchet",
+        "crafting": {
+            "craftable": false
+        },
+        "finding": {
+            "findable": true,
+            "findableAfterMilestones": [
+                "LocationShipwreck"
+            ]
+        }
     }
 }
