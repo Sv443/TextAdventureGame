@@ -1,7 +1,7 @@
 {
   "name": "textisland",
   "version": "0.1.0",
-  "description": "A text-based adventure browser game",
+  "description": "A text-based adventure game",
   "main": "src/index.js",
   "scripts": {
     "start": "npx electron .",
@@ -14,7 +14,6 @@
   },
   "keywords": [
     "game",
-    "browser-game",
     "text-adventure"
   ],
   "author": {
