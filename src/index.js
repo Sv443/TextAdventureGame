@@ -20,6 +20,8 @@ function preInit()
     return new Promise((resolve) => {
         validateComponents(comp).then(() => {
             global.comp = comp;
+        }).catch(err => {
+            throw new Error(err)
         });
         return resolve();
     });
