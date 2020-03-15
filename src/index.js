@@ -1,7 +1,9 @@
 const jsl = require("svjsl");
+const col = jsl.colors.fg;
 const { app, BrowserWindow, globalShortcut, ipcMain } = require("electron");
 
 const validateComponents = require("./validateComponents");
+const debug = require("./debug");
 
 const settings = require("../settings");
 
@@ -17,11 +19,15 @@ const comp = Object.freeze({
 
 function preInit()
 {
-    return new Promise((resolve) => {
+    return new Promise((resolve, reject) => {
+        debug("PreInit", "ValidateComponents", "Starting component validation");
         validateComponents(comp).then(() => {
             global.comp = comp;
         }).catch(err => {
-            throw new Error(err)
+            err.forEach(error => {
+                console.error(`${col.yellow}[PreInit/ValidateComponents] ${col.red}Error while validating an object of the "${error.component}" component: ${error.whatsWrong}${jsl.colors.rst}`);
+            });
+            return reject(`There ${err.length > 1 ? "were some errors" : "was an error"} while validating components.`);
         });
         return resolve();
     });
@@ -32,6 +38,7 @@ function preInit()
  */
 function init()
 {
+    debug("Init", "ElectronWindow", "Initializing Electron window");
     let win = new BrowserWindow({
         width: 400,
         height: 450,
@@ -66,6 +73,7 @@ function init()
  */
 function initAll()
 {
+    debug("PreInit", "InitAll", "Starting initialization");
     preInit().then(() => {
         app.whenReady().then(() => {
             init();
@@ -86,6 +94,7 @@ app.on("activate", () => {
 //#MARKER IPC
 
 ipcMain.on("exit", () => {
+    debug("MainController", "IpcMain", "IpcMain got exit command - exiting application...");
     if(process.platform !== "darwin")
         return app.quit();
 });

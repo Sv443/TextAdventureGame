@@ -3,7 +3,7 @@ const resolve = require("path").resolve;
 
 const settings = {
     debug: {
-        verboseLogging: false,      // set to true to enable extra debug output
+        verboseLogging: true, // set to true to enable extra debug output
     },
     info: {
         name: "Text Island",                                      // the name of the project

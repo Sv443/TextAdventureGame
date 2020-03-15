@@ -5,7 +5,7 @@
         "tooltip": "\"Don't eat\" is printed on the backside",
         "fromStart": true,
         "icon": "armyknife.png",
-        "unlocksMilestone": null,
+        "unlocksMilestone": "",
         "crafting": {
             "craftable": false
         },
