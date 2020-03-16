@@ -53,3 +53,12 @@ a:not(.noul):hover, .mimica:not(.noul):hover {
     transition: color 0.5s linear;
     text-decoration: underline;
 }
+
+.vspacer {
+    display: block;
+    width: 1px;
+}
+.vspacer.s  { height: 15px; }
+.vspacer.m  { height: 25px; }
+.vspacer.l  { height: 50px; }
+.vspacer.xl { height: 75px; }

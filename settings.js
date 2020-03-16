@@ -19,6 +19,16 @@ const settings = {
     },
     menu: {
         mainMenuHTML: resolve("./src/gui/main.html")
+    },
+    game: {
+        mainFolder: "TextIsland", // the main folder where everything will be located. This folder will be situated in the user's home directory
+        save: { //#SECTION saving and loading
+            settingsFile: "settings.json", // the file the settings will be saved to
+        }
+    },
+    translate: {
+        translationsFolder: "translations", // the folder where all translation files are located in
+        langCodes: ["en", "de"], // the available language codes
     }
 };
 

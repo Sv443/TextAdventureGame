@@ -1,9 +1,9 @@
 {
-    "shelter": {
+    "basicshelter": {
         "name": "Basic Shelter",
         "tooltip": "A very basic shelter that will provide you with a warm place to sleep",
         "fromStart": false,
-        "icon": "shelter.png",
+        "icon": "basicshelter.png",
         "crafting": {
             "craftable": true,
             "ingredients": {
@@ -11,7 +11,8 @@
                 "flint": 1
             },
             "craftableAfterMilestones": [
-                "FoundVineRope"
+                "FoundVineRope",
+                "FoundFlint"
             ]
         },
         "finding": {

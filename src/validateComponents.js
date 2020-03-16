@@ -1,4 +1,5 @@
-// const jsl = require("svjsl");
+const col = require("svjsl").colors.fg;
+const rst = require("svjsl").colors.rst;
 
 const debug = require("./debug");
 
@@ -30,9 +31,8 @@ function validateComponents(components)
         let componentTypes = ["items", "structs", "effects"];
 
         componentTypes.forEach(compType => {
-            debug("ValidateComponents", "Main", `  > Validating components of type "${compType}":`);
+            let validatedComps = [];
             Object.keys(components[compType]).forEach(objKey => {
-                debug("ValidateComponents", "Main", `Validating component "${objKey}"`);
                 let obj = components[compType][objKey];
 
                 //#SECTION shared properties:
@@ -68,7 +68,10 @@ function validateComponents(components)
                     break;
                     default: throw new Error(`Unknown component type "${compType}"`);
                 }
+
+                validatedComps.push(objKey);
             });
+            debug("ValidateComp", "Valid", `Validated components of type "${compType}": ${col.yellow}${validatedComps.join(`${rst}, ${col.yellow}`)}${rst}`);
         });
 
         if(wrong.length > 0)
