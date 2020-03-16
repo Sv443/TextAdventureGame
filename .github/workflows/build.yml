@@ -24,6 +24,11 @@ jobs:
         npm ci
       env:
         CI: "true"
+    - name: Lint Script # runs ESLint to check the code for broken conventions
+      run: |
+        npm run lint
+      env:
+        CI: "true"
     - name: Build App # builds the Electron app for Linux and MacOS
       run: |
         npm run build-unix
