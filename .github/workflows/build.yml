@@ -1,0 +1,76 @@
+name: build
+
+on:
+  push:
+    branches:
+      - master
+  release:
+    types:
+      - created
+
+jobs:
+#MARKER Unix
+  build-unix:
+    runs-on: ubuntu-latest
+
+    timeout-minutes: 10
+
+    strategy:
+      fail-fast: false
+      matrix:
+        node-version: [12.x]
+
+    steps:
+    - uses: actions/checkout@v1 # checkout latest commit
+    - name: Use Node.js ${{ matrix.node-version }} # set up Node.js
+      uses: actions/setup-node@v1
+      with:
+        node-version: ${{ matrix.node-version }}
+    - name: Install Dependencies # runs the npm ci command to install all dependencies
+      run: |
+        npm ci
+      env:
+        CI: "true"
+    - name: Build App # builds the Electron app for Linux and MacOS
+      run: |
+        npm run build-unix
+      env:
+        CI: "true"
+    - name: "Upload Artifacts"
+      uses: actions/upload-artifact@v1.0.0
+      with:
+        name: "TextIsland_Unix"
+        path: dist/
+
+#MARKER Windows
+  build-win:
+    runs-on: windows-latest
+
+    timeout-minutes: 10
+
+    strategy:
+      fail-fast: false
+      matrix:
+        node-version: [12.x]
+
+    steps:
+    - uses: actions/checkout@v1 # checkout latest commit
+    - name: Use Node.js ${{ matrix.node-version }} # set up Node.js
+      uses: actions/setup-node@v1
+      with:
+        node-version: ${{ matrix.node-version }}
+    - name: Install Dependencies # runs the npm ci command to install all dependencies
+      run: |
+        npm ci
+      env:
+        CI: "true"
+    - name: Build App # builds the Electron app for Windows
+      run: |
+        npm run build-win
+      env:
+        CI: "true"
+    - name: "Upload Artifacts"
+      uses: actions/upload-artifact@v1.0.0
+      with:
+        name: "TextIsland_Windows"
+        path: dist/
