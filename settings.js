@@ -23,6 +23,7 @@ const settings = {
     },
     game: {
         mainFolder: "TextIsland", // the main folder where everything will be located. This folder will be situated in the user's home directory
+        gameHTML: resolve("./src/gui/game.html"), // game HTML file path
         save: { //#SECTION saving and loading
             settingsFile: "settings.json", // the file the settings will be saved to
         }

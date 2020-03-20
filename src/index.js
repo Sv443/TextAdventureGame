@@ -1,7 +1,7 @@
 const jsl = require("svjsl");
 const path = require("path");
 const col = jsl.colors.fg;
-const { app, BrowserWindow, globalShortcut, ipcMain } = require("electron");
+const { app, BrowserWindow, globalShortcut, ipcMain, screen } = require("electron");
 
 const validateComponents = require("./validateComponents");
 const userSettings = require("./userSettings");
@@ -15,6 +15,8 @@ const comp = Object.freeze({
     effects: require("../data/components/effects.json")
 });
 const inDebugger = (typeof v8debug === "object" || /--debug|--inspect/.test(process.execArgv.join(" ")));
+
+app.allowRendererProcessReuse = true;
 
 
 //#MARKER init
@@ -67,7 +69,10 @@ function init()
 
     // Shortcut for dev tools
     if(inDebugger || userSettings.get("general", "devMode") === true)
-        globalShortcut.register(process.platform === "darwin" ? "Alt+Cmd+I" : "Ctrl+Shift+I", () => win.webContents.openDevTools());
+        globalShortcut.register(process.platform === "darwin" ? "Alt+Cmd+I" : "Ctrl+Shift+I", () => {
+            if(process.mainWindow && !process.mainWindow.isDestroyed())
+                process.mainWindow.webContents.openDevTools();
+        });
 
     win.loadFile(settings.menu.mainMenuHTML);
 
@@ -111,6 +116,41 @@ ipcMain.on("openWindow", (sender, name) => {
     debug("IpcMain", "OpenWindow", `Opening window "${name}"`);
 
     process.mainWindow.loadFile(path.join(settings.menu.windowsRootDir, `${name}.html`));
+});
+
+ipcMain.on("openGame", () => {
+    debug("Init", "Game", "Initializing Electron window");
+
+    let screenRes = screen.getPrimaryDisplay().workAreaSize;
+
+    let gWin = new BrowserWindow({
+        width: screenRes.width,
+        height: screenRes.height,
+        maxWidth: screenRes.width,
+        maxHeight: screenRes.height,
+        minWidth: screenRes.width,
+        minHeight: screenRes.height,
+        webPreferences: {
+            nodeIntegration: true
+        },
+        icon: settings.resources.icon,
+        fullscreen: true,
+        transparent: true,
+        // skipTaskbar: true,
+        frame: false,
+        resizable: false
+    });
+    gWin.setMenu(null);
+
+    gWin.setFullScreen(true);
+    gWin.setKiosk(true);
+
+    debug("Init", "Game", `Opening main game HTML file ${settings.game.gameHTML}`);
+    gWin.loadFile(settings.game.gameHTML);
+
+    process.mainWindow.close();
+
+    process.mainWindow = gWin;
 });
 
 

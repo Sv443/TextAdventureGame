@@ -10,6 +10,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
     document.querySelector("#btnSettings").addEventListener("click", () => ipcRenderer.send("openWindow", "settings"));
 
+    document.querySelector("#btnDevGame").addEventListener("click", () => ipcRenderer.send("openGame"));
+
     document.querySelector("#btnExit").addEventListener("click", () => ipcRenderer.send("exit"));
 });
 

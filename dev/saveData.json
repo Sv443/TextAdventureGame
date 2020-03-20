@@ -1,0 +1,46 @@
+{
+    "name": "Sven",
+    "character": 0,
+    "unlockedMilestones": [
+        {
+            "name": "LocationSunnyBeach",
+            "when": [0, 0, 0]
+        },
+        {
+            "name": "LocationSunnyFields",
+            "when": [0, 4, 13]
+        },
+        {
+            "name": "LocationSunnyClearing",
+            "when": [0, 8, 33]
+        }
+    ],
+    "possessions": {
+        "items": [
+            {
+                "objName": "armyknife",
+                "quantity": 1
+            },
+            {
+                "objName": "coconut",
+                "quantity": 1
+            },
+            {
+                "objName": "vine",
+                "quantity": 1
+            }
+        ],
+        "structs": [
+            {
+                "objName": "basicshelter"
+            }
+        ],
+        "effects": [
+            {
+                "objName": "hunger",
+                "timeGotten": [0, 0, 0],
+                "currentChance": 0.5
+            }
+        ]
+    }
+}
