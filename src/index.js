@@ -60,7 +60,7 @@ function init()
         },
         icon: settings.resources.icon,
         frame: false,
-        transparent: true,
+        hasShadow: true,
         resizable: true
     });
     win.setMenu(null);

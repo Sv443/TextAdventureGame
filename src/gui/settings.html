@@ -31,10 +31,42 @@
                 Game sett
             </div>
             <div id="tabSound" class="settingsTab" data-tab="sound" style="display:none;">
-                Sound alda
+                <div class="centered">
+                    <table class="centeredTable">
+                        <tr>
+                            <td>Music:</td>
+                            <td>
+                                <input id="musicVol" type="range" min="0" max="100" value="100">
+                                <label for="musicVol" id="musicVolPercentage">100%</label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Sound Effects:</td>
+                            <td>
+                                <input id="sfxVol" type="range" min="0" max="100" value="100">
+                                <label for="sfxVol" id="sfxVolPercentage">100%</label>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
             </div>
             <div id="tabControls" class="settingsTab" data-tab="controls" style="display:none;">
-                Controls
+                <div class="centered">
+                    <table class="centeredTable">
+                        <tr>
+                            <td>Open Map</td>
+                            <td>
+                                <button class="keybindChangeButton" data-setting="keybinds/openMap">Tab</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Open Inventory</td>
+                            <td>
+                                <button class="keybindChangeButton" data-setting="keybinds/openInventory">I</button>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
             </div>
             <div id="tabAbout" class="settingsTab" data-tab="about" style="display:none;">
                 <div class="centered">

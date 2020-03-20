@@ -65,3 +65,7 @@ div.settingsTab {
 div.centered {
     text-align: center;
 }
+
+table.centeredTable {
+    display: inline-block;
+}
