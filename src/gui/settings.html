@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline';" />
+
+        <title>Settings - Text Island v0.1</title>
+
+        <script src="./global.js"></script>
+        <script src="./settings.js"></script>
+
+        <link rel="stylesheet" href="./global.css">
+        <link rel="stylesheet" href="./settings.css">
+    </head>
+    <body>
+        <header>
+            <div id="headerContent">
+                <span id="titleContainer">
+                    <span id="titleText"></span>
+                </span>
+            </div>
+        </header>
+        <nav id="mainNav">
+            <button class="tabSwitchButton active" data-tab="game">Game</button>
+            <button class="tabSwitchButton" data-tab="sound">Sound</button>
+            <button class="tabSwitchButton" data-tab="controls">Controls</button>
+            <button class="tabSwitchButton" data-tab="about">About</button>
+        </nav>
+        <main>
+            <div id="tabGame" class="settingsTab" data-tab="game">
+                Game sett
+            </div>
+            <div id="tabSound" class="settingsTab" data-tab="sound" style="display:none;">
+                Sound alda
+            </div>
+            <div id="tabControls" class="settingsTab" data-tab="controls" style="display:none;">
+                Controls
+            </div>
+            <div id="tabAbout" class="settingsTab" data-tab="about" style="display:none;">
+                <div class="centered">
+                    &copy; Copyright 2020 Sv443 / Sven Fehler<br>
+                    Licensed under the <span id="licenseTxt" class="mimica">MIT License</span>
+                </div>
+                <br>
+                Pariatur cupidatat est minim sit excepteur. Adipisicing nisi fugiat dolor eu ut ad duis dolore. Est cupidatat officia Lorem deserunt ut. Pariatur labore voluptate labore minim dolore. Minim nostrud veniam tempor ea aliqua cillum ullamco adipisicing labore magna veniam do aute culpa.<br>
+                Magna officia enim deserunt in aute incididunt cillum. Ipsum consectetur esse mollit aute. Enim consequat est nostrud in in ea est. Minim enim culpa Lorem sit anim.<br>
+                Eiusmod reprehenderit nulla et adipisicing cupidatat incididunt. Non proident nulla cupidatat incididunt duis sit culpa. Elit anim minim ea dolore consectetur labore amet nulla ullamco aute. Labore adipisicing adipisicing ex minim consequat duis mollit.
+            </div>
+        </main>
+        <br><br><br>
+        <nav id="bottomNav">
+            <button id="btnCancel">Cancel</button>
+            <button id="btnSave">Save</button>
+        </nav>
+    </body>
+</html>

@@ -18,6 +18,7 @@ const settings = {
         icon: resolve("./resources/other/icon.ico")
     },
     menu: {
+        windowsRootDir: resolve("./src/gui/"),
         mainMenuHTML: resolve("./src/gui/main.html")
     },
     game: {

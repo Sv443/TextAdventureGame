@@ -1,4 +1,5 @@
 const jsl = require("svjsl");
+const path = require("path");
 const col = jsl.colors.fg;
 const { app, BrowserWindow, globalShortcut, ipcMain } = require("electron");
 
@@ -14,7 +15,6 @@ const comp = Object.freeze({
     effects: require("../data/components/effects.json")
 });
 const inDebugger = (typeof v8debug === "object" || /--debug|--inspect/.test(process.execArgv.join(" ")));
-
 
 
 //#MARKER init
@@ -53,6 +53,8 @@ function init()
     let win = new BrowserWindow({
         width: 800,
         height: 550,
+        minWidth: 500,
+        minHeight: 350,
         webPreferences: {
             nodeIntegration: true
         },
@@ -98,9 +100,17 @@ app.on("activate", () => {
 //#MARKER IPC
 
 ipcMain.on("exit", () => {
-    debug("MainController", "IpcMain", "IpcMain got exit command - exiting application...");
+    debug("IpcMain", "Exit", "IpcMain got exit command - exiting application...");
     if(process.platform !== "darwin")
         return app.quit();
+});
+
+ipcMain.on("openWindow", (sender, name) => {
+    jsl.unused(sender);
+
+    debug("IpcMain", "OpenWindow", `Opening window "${name}"`);
+
+    process.mainWindow.loadFile(path.join(settings.menu.windowsRootDir, `${name}.html`));
 });
 
 
