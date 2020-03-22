@@ -1,6 +1,7 @@
 const BaseComponent = require("./BaseComponent");
 
-class Item extends BaseComponent {
+class Item extends BaseComponent
+{
     constructor(name)
     {
         super("item", name);

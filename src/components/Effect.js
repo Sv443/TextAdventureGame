@@ -1,6 +1,7 @@
 const BaseComponent = require("./BaseComponent");
 
-class Effect extends BaseComponent {
+class Effect extends BaseComponent
+{
     constructor(name)
     {
         super("effect", name);

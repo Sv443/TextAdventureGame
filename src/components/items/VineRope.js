@@ -1,6 +1,7 @@
 const Item = require("../Item");
 
-class VineRope extends Item {
+class VineRope extends Item
+{
     constructor()
     {
         super("vinerope");

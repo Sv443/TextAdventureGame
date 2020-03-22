@@ -3,7 +3,8 @@
 const path = require("path");
 
 
-class BaseComponent {
+class BaseComponent
+{
     /**
      * The base component that is used for all the components, like Item, Structure and Effect.
      * See supported types in the autocompletion for the `type` parameter.

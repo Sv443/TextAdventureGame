@@ -1,6 +1,7 @@
 const Item = require("../Item");
 
-class Hatchet extends Item {
+class Hatchet extends Item
+{
     constructor()
     {
         super("hatchet");
