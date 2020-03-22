@@ -1,0 +1,13 @@
+/* #MARKER pause menu */
+nav#pauseMenu[data-opened="false"] {
+    display: none;
+}
+
+nav#pauseMenu[data-opened="true"] {
+    display: inline-block;
+    position: fixed;
+    width: 100vw;
+    height: 100vw;
+    top: 0;
+    left: 0;
+}
