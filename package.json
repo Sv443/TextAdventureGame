@@ -36,6 +36,6 @@
     "minimist": "^1.2.3"
   },
   "dependencies": {
-    "svjsl": "^1.9.1"
+    "svjsl": "^1.9.4"
   }
 }

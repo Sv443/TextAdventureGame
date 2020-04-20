@@ -6,5 +6,21 @@ class Structure extends BaseComponent
     {
         super("structure", name);
     }
+
+    /**
+     * Gets called when the structure object is crafted
+     */
+    structureCrafted()
+    {
+
+    }
+
+    /**
+     * Gets called when the structure object was found
+     */
+    structureFound()
+    {
+
+    }
 }
 module.exports = Structure;

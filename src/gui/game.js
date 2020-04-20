@@ -1,8 +1,8 @@
 const { ipcRenderer } = require("electron");
-const settings = require("../../settings");
+// const settings = require("../../settings");
 
 const autosave = require("../autosave");
-const gameManager = require("../gameManager.js");
+const gameManager = require("../gameMgr.js");
 
 const meta = {
     windowName: "Game"

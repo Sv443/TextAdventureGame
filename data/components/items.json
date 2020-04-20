@@ -11,7 +11,8 @@
         },
         "finding": {
             "findable": false
-        }
+        },
+        "stackSize": 1
     },
     "coconut": {
         "name": "Coconut",
@@ -28,7 +29,16 @@
             "findableAfterMilestones": [
                 "LocationBeach"
             ]
-        }
+        },
+        "consuming": {
+            "gainedEffects": [
+                "saturation"
+            ],
+            "removedEffects": [
+                "hunger"
+            ]
+        },
+        "stackSize": 4
     },
     "vine": {
         "name": "Vine",
@@ -45,7 +55,8 @@
             "findableAfterMilestones": [
                 "LocationBeach"
             ]
-        }
+        },
+        "stackSize": 8
     },
     "vinerope": {
         "name": "Vine Rope",
@@ -65,7 +76,8 @@
         },
         "finding": {
             "findable": false
-        }
+        },
+        "stackSize": 2
     },
     "flint": {
         "name": "Flint",
@@ -82,7 +94,8 @@
             "findableAfterMilestones": [
                 "LocationCliff"
             ]
-        }
+        },
+        "stackSize": 2
     },
     "hatchet": {
         "name": "Hatchet",
@@ -99,6 +112,7 @@
             "findableAfterMilestones": [
                 "LocationShipwreck"
             ]
-        }
+        },
+        "stackSize": 1
     }
 }

@@ -115,7 +115,10 @@ ipcMain.on("openWindow", (sender, name) => {
 
     debug("IpcMain", "OpenWindow", `Opening window "${name}"`);
 
-    process.mainWindow.loadFile(path.join(settings.menu.windowsRootDir, `${name}.html`));
+    process.mainWindow.loadFile(path.join(settings.menu.windowsRootDir, `${name}.html`)).then(() => {
+        if(name == "main")
+            process.mainWindow.setFullScreen(false); // TODO: fix this
+    });
 });
 
 ipcMain.on("openGame", () => {

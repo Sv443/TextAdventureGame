@@ -3,12 +3,15 @@
 const path = require("path");
 
 
+/** @typedef {("item"|"structure"|"effect")} ComponentType */
+
+
 class BaseComponent
 {
     /**
      * The base component that is used for all the components, like Item, Structure and Effect.
      * See supported types in the autocompletion for the `type` parameter.
-     * @param {("item"|"structure"|"effect")} type The type of the component. This determines stuff like component data files and resource locations
+     * @param {ComponentType} type The type of the component. This determines stuff like component data files and resource locations
      * @param {String} objectName 
      * @returns {BaseComponent|String} Returns the constructed object, or, if an error was encountered, returns the error message as a string
      */

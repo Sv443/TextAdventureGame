@@ -2,7 +2,7 @@ const jsl = require("svjsl");
 const save = require("./save");
 
 /**
- * Creates an autosave and saves it to slot 0
+ * Creates an autosave and saves it to save slot 0
  */
 function create()
 {
