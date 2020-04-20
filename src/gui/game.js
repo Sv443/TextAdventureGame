@@ -37,7 +37,7 @@ document.addEventListener("DOMContentLoaded", () => {
  */
 function togglePauseMenu(enabled)
 {
-    if(typeof enabled === "undefined")
+    if(typeof enabled === "undefined") // lgtm [js/unneeded-defensive-code]
     {
         if(gameManager.isPaused())
         {
