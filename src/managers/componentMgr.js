@@ -1,8 +1,8 @@
 const jsl = require("svjsl");
 
-const Item = require("./components/Item");
-const Effect = require("./components/Effect");
-const Structure = require("./components/Structure");
+const Item = require("../components/Item");
+const Effect = require("../components/Effect");
+const Structure = require("../components/Structure");
 /** @typedef {("item"|"structure"|"effect")} ComponentType */
 /**
  * @typedef {Object} Components

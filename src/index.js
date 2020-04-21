@@ -61,9 +61,10 @@ function init()
             nodeIntegration: true
         },
         icon: settings.resources.icon,
-        frame: false,
-        hasShadow: true,
-        resizable: true
+        frame: true,
+        hasShadow: false,
+        resizable: false,
+        fullscreen: true
     });
     win.setMenu(null);
 
