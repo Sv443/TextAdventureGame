@@ -6,6 +6,7 @@ const { app, BrowserWindow, globalShortcut, ipcMain, screen } = require("electro
 const validateComponents = require("./validateComponents");
 const userSettings = require("./userSettings");
 const debug = require("./debug");
+const displayMgr = require("./managers/displayMgr");
 
 const settings = require("../settings");
 
@@ -14,9 +15,7 @@ const comp = Object.freeze({
     structs: require("../data/components/structures.json"),
     effects: require("../data/components/effects.json")
 });
-const inDebugger = (typeof v8debug === "object" || /--debug|--inspect/.test(process.execArgv.join(" ")));
-
-app.allowRendererProcessReuse = true;
+const inDebugger = jsl.inDebugger();
 
 
 //#MARKER init
@@ -68,15 +67,40 @@ function init()
     });
     win.setMenu(null);
 
+    let dispID = userSettings.get("general", "displayID");
+    if(typeof dispID === "number")
+    {
+        try
+        {
+            let scr = new Object(screen);
+            displayMgr.listDisplays(scr).forEach(d => {
+                if(d.id == dispID)
+                    displayMgr.setDisplay(dispID, scr);
+            });
+        }
+        catch(err)
+        {
+            jsl.unused(err);
+        }
+    }
+
+
     // Shortcut for dev tools
     if(inDebugger || userSettings.get("general", "devMode") === true)
+    {
         globalShortcut.register(process.platform === "darwin" ? "Alt+Cmd+I" : "Ctrl+Shift+I", () => {
             if(process.mainWindow && !process.mainWindow.isDestroyed())
                 process.mainWindow.webContents.openDevTools();
         });
+    }
+
+    // screen.getAllDisplays().forEach(disp => {
+    //     debug("Init", "MultiScreen", `Detected screen with ID ${disp.id} - bounds: ${disp.bounds.width}x${disp.bounds.height}`);
+    // });
 
     win.loadFile(settings.menu.mainMenuHTML);
 
+    module.exports.mainWindow = win;
     process.mainWindow = win;
 }
 
@@ -86,8 +110,12 @@ function init()
 function initAll()
 {
     debug("PreInit", "InitAll", "Starting initialization");
+
+    app.allowRendererProcessReuse = true;
+
     preInit().then(() => {
         app.whenReady().then(() => {
+            refreshDisplays();
             return init();
         })/*.catch(err => initError("ElectronInit", err))*/;
     })/*.catch(err => initError("PreInit", err))*/;
@@ -103,6 +131,16 @@ app.on("activate", () => {
         return initAll();
 });
 
+function refreshDisplays()
+{
+    let disps = [];
+    displayMgr.listDisplays(screen).forEach(disp => {
+        let { id, width, height, bounds } = disp;
+        disps.push({ id, width, height, bounds });
+    });
+    global.displays = disps;
+}
+
 //#MARKER IPC
 
 ipcMain.on("exit", () => {
@@ -116,10 +154,25 @@ ipcMain.on("openWindow", (sender, name) => {
 
     debug("IpcMain", "OpenWindow", `Opening window "${name}"`);
 
-    process.mainWindow.loadFile(path.join(settings.menu.windowsRootDir, `${name}.html`)).then(() => {
-        if(name == "main")
-            process.mainWindow.setFullScreen(false); // TODO: fix this
-    });
+    process.mainWindow.loadFile(path.join(settings.menu.windowsRootDir, `${name}.html`));
+    module.exports.mainWindow = process.mainWindow;
+});
+
+/**
+ * Sets the window's bounds
+ * @param {Electron.Rectangle} bounds 
+ */
+function setBounds(bounds)
+{
+    if(!process.mainWindow)
+        throw new Error(`Can't set bounds because the mainWindow object doesn't exist`);
+    process.mainWindow.setBounds(bounds);
+}
+
+ipcMain.on("setBounds", (sender, bounds) => {
+    jsl.unused(sender);
+
+    setBounds(bounds);
 });
 
 ipcMain.on("openGame", () => {
@@ -155,8 +208,7 @@ ipcMain.on("openGame", () => {
     process.mainWindow.close();
 
     process.mainWindow = gWin;
+    module.exports.mainWindow = gWin;
 });
-
-
 
 initAll();

@@ -1,4 +1,4 @@
-const gameModule = require("./gui/game");
+const gameModule = require("../gui/game");
 
 var game = {
     paused: false

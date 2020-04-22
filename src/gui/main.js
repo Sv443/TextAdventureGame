@@ -6,12 +6,10 @@ const meta = {
 };
 
 document.addEventListener("DOMContentLoaded", () => {
-    document.querySelector("#titleText").innerHTML = settings.info.name;
+    document.querySelector("#titleText").innerText = settings.info.name;
 
     document.querySelector("#btnSettings").addEventListener("click", () => ipcRenderer.send("openWindow", "settings"));
-
     document.querySelector("#btnDevGame").addEventListener("click", () => ipcRenderer.send("openGame"));
-
     document.querySelector("#btnExit").addEventListener("click", () => ipcRenderer.send("exit"));
 });
 
