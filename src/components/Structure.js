@@ -5,6 +5,8 @@ class Structure extends BaseComponent
     constructor(name)
     {
         super("structure", name);
+
+        return this;
     }
 
     /**

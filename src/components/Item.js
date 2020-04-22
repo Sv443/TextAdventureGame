@@ -19,6 +19,8 @@ class Item extends BaseComponent
         super("item", name);
 
         this.maxQuantity = 1;
+
+        return this;
     }
 
     /**

@@ -5,6 +5,8 @@ class Hunger extends Effect
     constructor()
     {
         super("hunger");
+
+        return this;
     }
 }
 module.exports = Hunger;

@@ -2,6 +2,8 @@ class MilestoneMgr {
     constructor()
     {
         this.milestones = [];
+
+        return this;
     }
 
     /**

@@ -1,3 +1,5 @@
+const jsl = require("svjsl");
+
 const Inventory = require("./Inventory");
 const MilestoneMgr = require("./MilestoneMgr");
 
@@ -7,6 +9,8 @@ class Player
     {
         this.inventory = new Inventory();
         this.milestones = new MilestoneMgr();
+
+        return this;
     }
 
     /**
@@ -15,7 +19,7 @@ class Player
      */
     kill(cause)
     {
-        
+        jsl.unused(cause);
     }
 }
 module.exports = Player;

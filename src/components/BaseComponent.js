@@ -46,7 +46,7 @@ class BaseComponent
         {
             // itemdata exists
             this.objName = objectName;
-            this.name = dat.name;
+            this.displayName = dat.name;
             this.iconPath = path.join(this._getResourceBasePath(), dat.icon);
 
 

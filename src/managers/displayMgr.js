@@ -46,7 +46,7 @@ function setDisplay(id, electronScreen)
                 if(!ipcRenderer) // if in main process
                     jsl.unused(); // TODO: set bounds on main window - I CANT FOR THE LOVE OF FUCK GET THIS TO WORK NO MATTER WHAT I TRY
                 else // if in renderer process
-                    ipcRenderer.emit("setBounds", newBounds);
+                    ipcRenderer.send("setBounds", newBounds);
                 return true;
             }
         });

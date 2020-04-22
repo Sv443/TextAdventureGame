@@ -5,6 +5,8 @@ class Coconut extends Item
     constructor()
     {
         super("coconut");
+
+        return this;
     }
 }
 module.exports = Coconut;

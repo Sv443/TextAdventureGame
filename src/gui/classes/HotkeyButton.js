@@ -1,6 +1,6 @@
 // TODO: this whole thing
 
-const jsl = require("svjsl");
+// const jsl = require("svjsl");
 
 /**
  * @typedef {Object} HotkeyValue
@@ -39,6 +39,8 @@ class HotkeyButton {
             alt: defaultValue.alt || false,
             altgr: defaultValue.altgr || false
         };
+
+        return this;
     }
 
     /**
@@ -57,11 +59,11 @@ class HotkeyButton {
 module.exports = HotkeyButton;
 
 
-let hb = new HotkeyButton(new HTMLButtonElement(), {
-    ctrl: true,
-    keyCode: 77
-}, "testBtn");
+// let hb = new HotkeyButton(new HTMLButtonElement(), {
+//     ctrl: true,
+//     keyCode: 77
+// }, "testBtn");
 
-hb.onHotkeyChanged((newHotkey) => {
+// hb.onHotkeyChanged((newHotkey) => {
     
-});
+// });

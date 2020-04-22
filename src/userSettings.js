@@ -44,7 +44,7 @@ function init()
  * Saves a setting to the user settings file
  * @param {Section} section 
  * @param {String} key 
- * @param {String|Number|Boolean|null|NaN} value 
+ * @param {String|Number|Boolean|null|NaN} value Any JSON-compatible value
  */
 function set(section, key, value)
 {
