@@ -7,6 +7,7 @@ Planned for the next releases:
     - Add modding support
         - Load mods from a folder
         - Mod API with functions to register items, structures, effects, scenes, dialogue, etc.
+    - Add pets
 
 
 > [CURRENT: 0.1.0]
