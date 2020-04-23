@@ -13,8 +13,12 @@
 
 
 /* #MARKER BEGIN */
-html, body{
+html, body {
     scroll-behavior: smooth;
+}
+
+html, button, input[type="checkbox"] {
+    cursor: url("../../resources/other/cursor.png"), auto;
 }
 
 body:not(.transparent) {
