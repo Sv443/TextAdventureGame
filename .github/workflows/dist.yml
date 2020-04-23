@@ -32,90 +32,53 @@ jobs:
         npm ci
       env:
         CI: "true"
-    - name: Build App # builds the Electron app for Linux and MacOS
+    - name: Build Unix App #MARKER Build Unix
       run: |
         npm run build-unix
       env:
         CI: "true"
-
-#MARKER Windows
-  build-win:
-    runs-on: windows-latest
-
-    timeout-minutes: 10
-
-    strategy:
-      fail-fast: false
-      matrix:
-        node-version: [12.x]
-
-    steps:
-    - uses: actions/checkout@v1 # checkout latest commit
-    - name: Use Node.js ${{ matrix.node-version }} # set up Node.js
-      uses: actions/setup-node@v1
-      with:
-        node-version: ${{ matrix.node-version }}
-    - name: Install Dependencies # runs the npm ci command to install all dependencies
-      run: |
-        npm ci
-      env:
-        CI: "true"
-    - name: Build App # builds the Electron app for Windows
+    - name: Build Windows App #MARKER Build Windows
       run: |
         npm run build-win
       env:
         CI: "true"
-
-#MARKER ZIP files
-  bundle:
-    needs: ["build-unix", "build-win"]
-    runs-on: ubuntu-latest
-
-    timeout-minutes: 10
-
-    strategy:
-      fail-fast: false
-      matrix:
-        node-version: [12.x]
-    
-    steps:
-      - name: ZIP files
-        run: |
-          cd dist
-          mkdir zipped
-          zip -r ./zipped/TextIsland-linux-arm64 ./TextIsland-linux-arm64
-          zip -r ./zipped/TextIsland-linux-ia32 ./TextIsland-linux-ia32
-          zip -r ./zipped/TextIsland-linux-x64 ./TextIsland-linux-x64
-          zip -r ./zipped/TextIsland-win32-arm64 ./TextIsland-win32-arm64
-          zip -r ./zipped/TextIsland-win32-ia32 ./TextIsland-win32-ia32
-          zip -r ./zipped/TextIsland-win32-x64 ./TextIsland-win32-x64
-      - name: Upload Linux-arm64 Artifact
-        uses: actions/upload-artifact@v1.0.0
-        with:
-          name: "TextIsland_Linux-arm64"
-          path: dist/zipped/TextIsland-linux-arm64
-      - name: Upload Linux-ia32 Artifact
-        uses: actions/upload-artifact@v1.0.0
-        with:
-          name: "TextIsland_Linux-ia32"
-          path: dist/zipped/TextIsland-linux-ia32
-      - name: Upload Linux-x64 Artifact
-        uses: actions/upload-artifact@v1.0.0
-        with:
-          name: "TextIsland_Linux-x64"
-          path: dist/zipped/TextIsland-linux-x64
-      - name: Upload Windows-arm64 Artifact
-        uses: actions/upload-artifact@v1.0.0
-        with:
-          name: "TextIsland_Windows-arm64"
-          path: dist/zipped/TextIsland-win32-arm64
-      - name: Upload Windows-ia32 Artifact
-        uses: actions/upload-artifact@v1.0.0
-        with:
-          name: "TextIsland_Windows-ia32"
-          path: dist/zipped/TextIsland-win32-ia32
-      - name: Upload Windows-x64 Artifact
-        uses: actions/upload-artifact@v1.0.0
-        with:
-          name: "TextIsland_Windows-x64"
-          path: dist/zipped/TextIsland-win32-x64
+    - name: ZIP files #MARKER ZIP files
+      run: |
+        cd dist
+        mkdir zipped
+        zip -r ./zipped/TextIsland-linux-arm64 ./TextIsland-linux-arm64
+        zip -r ./zipped/TextIsland-linux-ia32 ./TextIsland-linux-ia32
+        zip -r ./zipped/TextIsland-linux-x64 ./TextIsland-linux-x64
+        zip -r ./zipped/TextIsland-win32-arm64 ./TextIsland-win32-arm64
+        zip -r ./zipped/TextIsland-win32-ia32 ./TextIsland-win32-ia32
+        zip -r ./zipped/TextIsland-win32-x64 ./TextIsland-win32-x64
+    - name: Upload Linux-arm64 Artifact
+      uses: actions/upload-artifact@v1.0.0
+      with:
+        name: "TextIsland_Linux-arm64"
+        path: dist/zipped/TextIsland-linux-arm64
+    - name: Upload Linux-ia32 Artifact
+      uses: actions/upload-artifact@v1.0.0
+      with:
+        name: "TextIsland_Linux-ia32"
+        path: dist/zipped/TextIsland-linux-ia32
+    - name: Upload Linux-x64 Artifact
+      uses: actions/upload-artifact@v1.0.0
+      with:
+        name: "TextIsland_Linux-x64"
+        path: dist/zipped/TextIsland-linux-x64
+    - name: Upload Windows-arm64 Artifact
+      uses: actions/upload-artifact@v1.0.0
+      with:
+        name: "TextIsland_Windows-arm64"
+        path: dist/zipped/TextIsland-win32-arm64
+    - name: Upload Windows-ia32 Artifact
+      uses: actions/upload-artifact@v1.0.0
+      with:
+        name: "TextIsland_Windows-ia32"
+        path: dist/zipped/TextIsland-win32-ia32
+    - name: Upload Windows-x64 Artifact
+      uses: actions/upload-artifact@v1.0.0
+      with:
+        name: "TextIsland_Windows-x64"
+        path: dist/zipped/TextIsland-win32-x64
