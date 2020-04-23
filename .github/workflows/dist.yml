@@ -11,7 +11,7 @@ on:
 
 jobs:
 #MARKER Unix
-  build-unix:
+  build-and-dist:
     runs-on: ubuntu-latest
 
     timeout-minutes: 10
@@ -39,6 +39,11 @@ jobs:
         CI: "true"
     - name: Build Windows App #MARKER Build Windows
       run: |
+        sudo dpkg --add-architecture i386
+        wget -qO - https://dl.winehq.org/wine-builds/winehq.key | sudo apt-key add -
+        sudo add-apt-repository ppa:cybermax-dexter/sdl2-backport
+        sudo apt-add-repository "deb https://dl.winehq.org/wine-builds/ubuntu $(lsb_release -cs) main"
+        sudo apt install --install-recommends winehq-stable
         npm run build-win
       env:
         CI: "true"
