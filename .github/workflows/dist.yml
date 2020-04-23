@@ -4,7 +4,6 @@ on:
   push:
     branches:
       - master
-      - wip/0.1.0 # just to test
   release:
     types:
       - created
@@ -53,9 +52,7 @@ jobs:
         mkdir zipped
         cd zipped
         mkdir {TextIsland-linux-arm64,TextIsland-linux-ia32,TextIsland-linux-x64,TextIsland-win32-ia32,TextIsland-win32-x64}
-        ls
         cd ..
-        ls
         zip -r ./zipped/TextIsland-linux-arm64/ ./TextIsland-linux-arm64
         zip -r ./zipped/TextIsland-linux-ia32/ ./TextIsland-linux-ia32
         zip -r ./zipped/TextIsland-linux-x64/ ./TextIsland-linux-x64
