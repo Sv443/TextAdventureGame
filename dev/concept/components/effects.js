@@ -1,6 +1,6 @@
 let x = {
-    "name": "Name of the effect - gets displayed in the UI",
-    "tooltip": "Tooltip / description of the effect",
+    "displayName": "Name of the effect - gets displayed in the UI",
+    "description": "Tooltip / description of the effect",
     "icon": "image_file_name.png",
     "fromStart": true, // whether or not the player should have the effect from the beginning of the game
     "timing": {

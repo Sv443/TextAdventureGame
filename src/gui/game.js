@@ -20,7 +20,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
     debug("Game", "DOM", "DOM is ready");
     
-    document.querySelector("#btnExitM").addEventListener("click", () => ipcRenderer.send("openWindow", "main"));
+    document.querySelector("#btnExitM").addEventListener("click", () => {
+        //TODO: same prompt as in exit to desktop
+        ipcRenderer.send("openWindow", "main");
+    });
     document.querySelector("#btnExitD").addEventListener("click", () => {
         debug("Game", "PauseMenu", "Exit to Desktop button was clicked, opening confirmation prompt...");
         remote.dialog.showMessageBox(remote.getCurrentWindow(), {

@@ -1,7 +1,7 @@
 {
     "hunger": {
-        "name": "Hunger",
-        "tooltip": "You are starving and need to eat something soon!",
+        "displayName": "Hunger",
+        "description": "You are starving and need to eat something soon!",
         "icon": "hunger.png",
         "fromStart": true,
         "timing": {
@@ -16,8 +16,8 @@
         }
     },
     "rain": {
-        "name": "Rain",
-        "tooltip": "It's raining! Find a shelter before you get hypothermia!",
+        "displayName": "Rain",
+        "description": "It's raining! Find a shelter before you get hypothermia!",
         "icon": "rain.png",
         "fromStart": false,
         "timing": {
