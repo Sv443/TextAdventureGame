@@ -1,12 +1,14 @@
 const jsl = require("svjsl");
 const path = require("path");
 const col = jsl.colors.fg;
+col.rst = jsl.colors.rst;
 const { app, BrowserWindow, globalShortcut, ipcMain, screen } = require("electron");
 
 const validateComponents = require("./validateComponents");
 const userSettings = require("./userSettings");
 const debug = require("./debug");
 const displayMgr = require("./managers/displayMgr");
+const updateCheck = require("./updateCheck");
 
 const settings = require("../settings");
 
@@ -106,6 +108,7 @@ function init()
 
 /**
  * Initializes everything
+ * @returns {void}
  */
 function initAll()
 {
@@ -115,8 +118,18 @@ function initAll()
 
     preInit().then(() => {
         app.whenReady().then(() => {
-            refreshDisplays();
-            return init();
+            updateCheck().then(updateInfo => {
+                if(updateInfo.available)
+                {
+                    debug("InitAll", "UpdateCheck", `${col.red}A new version of ${settings.info.name} is available${col.rst} - Current version: v${updateInfo.oldVersion} - New version: v${updateInfo.newVersion}`);
+                    alert(`A new version of ${settings.info.name} is available. Please visit this page to download it:\nhttps://github.com/Sv443/TextAdventureGame/releases\n\nCurrent version: v${updateInfo.oldVersion} - New version: v${updateInfo.newVersion}`);
+                }
+                else
+                    debug("InitAll", "UpdateCheck", `${col.green}${settings.info.name} is up to date${col.rst} - Message: ${updateInfo.message}`);
+
+                refreshDisplays();
+                return init();
+            })/*.catch(err => initError("UpdateCheck", err))*/;
         })/*.catch(err => initError("ElectronInit", err))*/;
     })/*.catch(err => initError("PreInit", err))*/;
 }

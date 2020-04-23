@@ -36,6 +36,7 @@
     "minimist": "^1.2.3"
   },
   "dependencies": {
-    "svjsl": "^1.9.4"
+    "svjsl": "^1.9.4",
+    "xmlhttprequest": "^1.8.0"
   }
 }

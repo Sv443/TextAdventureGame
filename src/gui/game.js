@@ -1,27 +1,68 @@
-const { ipcRenderer } = require("electron");
+const { ipcRenderer, remote } = require("electron");
 // const settings = require("../../settings");
 
+const debug = require("../debug");
 const autosave = require("../autosave");
-const gameManager = require("../gameMgr.js");
+// const gameManager = require("../managers/gameMgr");
 
 const meta = {
     windowName: "Game"
 };
 
+window.domWasLoaded = false;
+
 document.addEventListener("DOMContentLoaded", () => {
+    debug("Game", "Init", `Loading from context ${remote ? "Renderer" : "Main"}`);
+    
+    if(window.domWasLoaded) // event was firing twice for some reason and this is only a very crude workaround
+        return;
+    window.domWasLoaded = true;
+
+    debug("Game", "DOM", "DOM is ready");
+    
     document.querySelector("#btnExitM").addEventListener("click", () => ipcRenderer.send("openWindow", "main"));
     document.querySelector("#btnExitD").addEventListener("click", () => {
-        autosave.create().then(() => {
-            gameManager.unloadGame().then(() => {
-                ipcRenderer.send("exit");
-            }).catch(err => {
-                alert(`There was an error while unloading the game: ${err}`);
-                return ipcRenderer.send("exit");
-            });
+        debug("Game", "PauseMenu", "Exit to Desktop button was clicked, opening confirmation prompt...");
+        remote.dialog.showMessageBox(remote.getCurrentWindow(), {
+            title: "Quit to Desktop",
+            message: "Do you want to save before quitting?",
+            type: "question",
+            buttons: [
+                "Yes",
+                "No",
+                "Cancel"
+            ],
+            cancelId: 2,
+            defaultId: 0
+        }).then(result => {
+            let gameMgr = require("../managers/gameMgr");
+
+            switch(result.response)
+            {
+                case 0: // yes
+                    autosave.create().then(() => {
+                        gameMgr.unloadGame().then(() => {
+                            return ipcRenderer.send("exit");
+                        }).catch(err => {
+                            alert(`There was an error while unloading the game: ${err}\nPlease try manually saving in the pause menu.`);
+                        });
+                    }).catch(err => {
+                        return alert(`There was an error while creating an autosave: ${err}\nPlease try manually saving in the pause menu.`);
+                    });
+                break;
+                case 1: // no
+                    gameMgr.unloadGame().then(() => {
+                        return ipcRenderer.send("exit");
+                    }).catch(err => {
+                        alert(`There was an error while unloading the game: ${err}\nPlease try manually saving in the pause menu.`);
+                    });
+                break;
+                case 2: // cancel
+                    return;
+            }
         }).catch(err => {
-            alert(`There was an error while creating an autosave: ${err}`);
-            return ipcRenderer.send("exit");
-        });
+            return alert(`There was an error while showing the exit confirmation dialog: ${err}\nPlease try manually saving in the pause menu and exiting again.`);
+        })
     });
 
     document.addEventListener("keydown", e => {
@@ -35,19 +76,22 @@ document.addEventListener("DOMContentLoaded", () => {
  * @param {Boolean} [enabled] 
  * @returns {Boolean|String} Returns `true`, if the state could be set, a string containing an error message if not
  */
-function togglePauseMenu(enabled)
+function togglePauseMenu(enabled = undefined)
 {
+    let gameMgr = require("../managers/gameMgr");
     if(typeof enabled === "undefined") // lgtm [js/unneeded-defensive-code]
     {
-        if(gameManager.isPaused())
+        if(gameMgr.isPaused())
         {
+            debug("Game", "PauseMenu", "Closing PauseMenu");
             document.querySelector("#pauseMenu").dataset.opened = "false";
-            gameManager.setPaused(false);
+            gameMgr.setPaused(false);
         }
         else
         {
+            debug("Game", "PauseMenu", "Opening PauseMenu");
             document.querySelector("#pauseMenu").dataset.opened = "true";
-            gameManager.setPaused(true);
+            gameMgr.setPaused(true);
         }
         return true;
     }
@@ -55,13 +99,15 @@ function togglePauseMenu(enabled)
     {
         if(enabled === true)
         {
+            debug("Game", "PauseMenu", "Opening PauseMenu");
             document.querySelector("#pauseMenu").dataset.opened = "true";
-            gameManager.setPaused(true);
+            gameMgr.setPaused(true);
         }
         else if(enabled === false)
         {
+            debug("Game", "PauseMenu", "Closing PauseMenu");
             document.querySelector("#pauseMenu").dataset.opened = "false";
-            gameManager.setPaused(false);
+            gameMgr.setPaused(false);
         }
         return true;
     }

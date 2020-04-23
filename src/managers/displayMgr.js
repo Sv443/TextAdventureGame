@@ -17,7 +17,7 @@ function listDisplays(electronScreen)
 
     let allDisplays = [];
     electronScreen.getAllDisplays().forEach((disp, i) => {
-        debug("DisplayMgr", "ListDisplays", `Found display #${i} with bounds ${disp.bounds.width}x${disp.bounds.height}`);
+        debug("DisplayMgr", "ListDisplays", `Found display #${i} (${disp.bounds.width}x${disp.bounds.height}) <${disp.id}>`);
         let pDisp = disp;
         pDisp.index = i;
         allDisplays.push(pDisp);

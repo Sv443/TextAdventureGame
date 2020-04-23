@@ -6,14 +6,22 @@ const save = require("./save");
  */
 function create()
 {
-    let saveData = {};
-    save.save(0, saveData);
+    return new Promise((resolve, reject) => {
+        let saveData = {};
+        save.save(0, saveData);
+
+        return resolve();
+    });
 }
 
 function load()
 {
-    let loadData = save.load(0);
-    jsl.unused(loadData);
+    return new Promise((resolve, reject) => {
+        let loadData = save.load(0);
+        jsl.unused(loadData);
+
+        return resolve();
+    });
 }
 
 module.exports = { create, load };

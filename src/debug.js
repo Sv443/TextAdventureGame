@@ -13,7 +13,7 @@ function debug(section, subSection, message)
     // format: [hh:mm:ss.msc] <section/subSection> message
 
     if(settings.debug.verboseLogging === true)
-        console.log(`\x1b[2m[${getDateTime()}]${jsl.colors.rst} ${jsl.colors.fg.yellow}<${jsl.colors.fg.blue}${section}${jsl.colors.fg.yellow}/${jsl.colors.fg.cyan}${subSection}${jsl.colors.fg.yellow}>${jsl.colors.rst} ${message}`);
+        console.log(`\x1b[2m[${getDateTime()}]${jsl.colors.rst} ${jsl.colors.fg.yellow}<${jsl.colors.fg.blue}${section}${jsl.colors.fg.yellow}/${jsl.colors.fg.cyan}${subSection}${jsl.colors.fg.yellow}>${jsl.colors.rst} %c${message}`, "color: inherit;");
 }
 
 function getDateTime()
