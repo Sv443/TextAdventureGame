@@ -54,7 +54,6 @@ jobs:
         zip -r ./zipped/TextIsland-linux-arm64 ./TextIsland-linux-arm64
         zip -r ./zipped/TextIsland-linux-ia32 ./TextIsland-linux-ia32
         zip -r ./zipped/TextIsland-linux-x64 ./TextIsland-linux-x64
-        zip -r ./zipped/TextIsland-win32-arm64 ./TextIsland-win32-arm64
         zip -r ./zipped/TextIsland-win32-ia32 ./TextIsland-win32-ia32
         zip -r ./zipped/TextIsland-win32-x64 ./TextIsland-win32-x64
     - name: Upload Linux-arm64 Artifact
@@ -72,11 +71,6 @@ jobs:
       with:
         name: "TextIsland_Linux-x64"
         path: dist/zipped/TextIsland-linux-x64
-    - name: Upload Windows-arm64 Artifact
-      uses: actions/upload-artifact@v1.0.0
-      with:
-        name: "TextIsland_Windows-arm64"
-        path: dist/zipped/TextIsland-win32-arm64
     - name: Upload Windows-ia32 Artifact
       uses: actions/upload-artifact@v1.0.0
       with:

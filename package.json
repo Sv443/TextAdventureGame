@@ -7,8 +7,8 @@
     "start": "npx electron .",
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "eslint ./",
-    "build": "npm run build-all",
-    "build-all": "electron-packager ./ TextIsland --platform='all' --arch='ia32,x64,arm64' --overwrite --build-version=0.1.0 --out=dist --icon='./resources/other/icon.ico' --win32metadata.CompanyName='Sv443 Network' --win32metadata.ProductName='Text Island' --win32metadata.FileDescription='A text-based adventure game' --win32metadata.requested-execution-level=asInvoker --darwin-dark-mode-support",
+    "build": "npm run build-unix & npm run build-win",
+    "build-all": "npm run build-unix & npm run build-win",
     "build-unix": "electron-packager ./ TextIsland --platform='linux' --arch='ia32,x64,arm64' --overwrite --build-version=0.1.0 --out=dist --icon='./resources/other/icon.ico' --darwin-dark-mode-support",
     "build-win": "electron-packager ./ TextIsland --platform='win32' --arch='ia32,x64' --overwrite --build-version=0.1.0 --out=dist --icon='./resources/other/icon.ico' --win32metadata.CompanyName='Sv443 Network' --win32metadata.ProductName='Text Island' --win32metadata.FileDescription='A text-based adventure game' --win32metadata.requested-execution-level=asInvoker"
   },
