@@ -9,6 +9,7 @@ const userSettings = require("./userSettings");
 const debug = require("./debug");
 const displayMgr = require("./managers/displayMgr");
 const updateCheck = require("./updateCheck");
+const rpcMgr = require("./managers/rpcMgr");
 
 const settings = require("../settings");
 
@@ -101,6 +102,8 @@ function init()
     // });
 
     win.loadFile(settings.menu.mainMenuHTML);
+
+    rpcMgr.init();
 
     module.exports.mainWindow = win;
     process.mainWindow = win;
