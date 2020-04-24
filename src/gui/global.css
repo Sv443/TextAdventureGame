@@ -5,6 +5,8 @@
     --bg-color: #444;
     --bg-accent-color: #333;
     --bg-accent-color-darker: #222;
+
+    --custom-cursor: url("../../resources/other/cursor.png");
 }
 
 
@@ -18,7 +20,7 @@ html, body {
 }
 
 html, button, input[type="checkbox"] {
-    cursor: url("../../resources/other/cursor.png"), auto;
+    cursor: var(--custom-cursor), auto;
 }
 
 body:not(.transparent) {
