@@ -1,9 +1,9 @@
-const Discord = require("discord-game");
+// const Discord = require("discord-game");
 
-const settings = require("../../settings");
+// const settings = require("../../settings");
 
-const isRequireDiscord = true;
-Discord.create(settings.info.discordClientID, isRequireDiscord);
+// const isRequireDiscord = true;
+// Discord.create(settings.info.discordClientID, isRequireDiscord);
 
 
 /**
@@ -11,28 +11,28 @@ Discord.create(settings.info.discordClientID, isRequireDiscord);
  */
 function init()
 {
-    const activity = {
-        details: 'Details',
-        state: 'State',
-        assets: {
-            largeImage: 'icon_512x512',
-            largeText: 'Large',
-            samllImage: 'icon_512x512',
-            smallText: 'Small'
-        },
-        timestamps: {
-            startAt: new Date()
-        }
-    }
-    Discord.Activity
-        .update(activity)
-        .then(() => {
-            console.log("Rich Presence updated");
-        });
+    // const activity = {
+    //     details: 'Details',
+    //     state: 'State',
+    //     assets: {
+    //         largeImage: 'icon_512x512',
+    //         largeText: 'Large',
+    //         samllImage: 'icon_512x512',
+    //         smallText: 'Small'
+    //     },
+    //     timestamps: {
+    //         startAt: new Date()
+    //     }
+    // }
+    // Discord.Activity
+    //     .update(activity)
+    //     .then(() => {
+    //         console.log("Rich Presence updated");
+    //     });
       
-    setInterval(() => {
-        Discord.runCallback();
-    }, 1000/60);
+    // setInterval(() => {
+    //     Discord.runCallback();
+    // }, 1000/60);
 }
 
 /**

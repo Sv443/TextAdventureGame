@@ -69,3 +69,9 @@ div.centered {
 table.centeredTable {
     display: inline-block;
 }
+
+#hotkeyTable tr td:last-child button {
+    font-family: "Cascadia Code", "Inconsolata", "Consolas", "Courier New", monospace;
+    width: 75px;
+    /* width: 100%; */
+}
