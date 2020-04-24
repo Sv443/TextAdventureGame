@@ -37,6 +37,7 @@
     "minimist": "^1.2.3"
   },
   "dependencies": {
+    "discord-game": "^0.1.1",
     "semver": "^7.3.2",
     "svjsl": "^1.9.4",
     "xmlhttprequest": "^1.8.0"

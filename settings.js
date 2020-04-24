@@ -12,7 +12,8 @@ const settings = {
         version: packageJSON.version,                             // the version as a string
         versionInt: packageJSON.version.split("."),               // the version as a number array
         author: packageJSON.author,                               // the author information from package.json
-        privacyPolicyUrl: "https://sv443.net/privacypolicy/en"    // URL to the privacy policy
+        privacyPolicyUrl: "https://sv443.net/privacypolicy/en",   // URL to the privacy policy
+        discordClientID: "703167894443261953"                     // ID of the Discord application client
     },
     resources: {
         icon: resolve("./resources/other/icon.ico")
