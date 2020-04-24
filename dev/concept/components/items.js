@@ -1,7 +1,7 @@
 let x = {
-    "name": "Name of the item - gets displayed in the UI",
+    "displayName": "Name of the item - gets displayed in the UI",
+    "description": "Like the purple lore text under Minecraft's item names",
     "type": "ingredient|tool|consumable",
-    "tooltip": "Like the purple lore text under Minecraft's item names",
     "fromStart": false, // whether or not the item should be in the player's inventory from the beginning of the game
     "icon": "image_file_name.png",
     "unlocksMilestone": "FoundCoconut", // possessing the item will unlock this milestone

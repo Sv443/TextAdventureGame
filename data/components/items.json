@@ -1,8 +1,8 @@
 {
     "armyknife": {
-        "name": "Army Knife",
+        "displayName": "Army Knife",
+        "description": "\"Don't eat\" is printed on the backside",
         "type": "tool",
-        "tooltip": "\"Don't eat\" is printed on the backside",
         "fromStart": true,
         "icon": "armyknife.png",
         "unlocksMilestone": "",
@@ -15,9 +15,9 @@
         "stackSize": 1
     },
     "coconut": {
-        "name": "Coconut",
+        "displayName": "Coconut",
+        "description": "Tom Hanks loves these",
         "type": "consumable",
-        "tooltip": "Tom Hanks loves these",
         "fromStart": false,
         "icon": "coconut.png",
         "unlocksMilestone": "FoundCoconut",
@@ -41,9 +41,9 @@
         "stackSize": 4
     },
     "vine": {
-        "name": "Vine",
+        "displayName": "Vine",
+        "description": "Maybe you could craft something with this, Tarzan",
         "type": "ingredient",
-        "tooltip": "Maybe you could craft something with this, Tarzan",
         "fromStart": false,
         "icon": "vine.png",
         "unlocksMilestone": "FoundVine",
@@ -59,9 +59,9 @@
         "stackSize": 8
     },
     "vinerope": {
-        "name": "Vine Rope",
+        "displayName": "Vine Rope",
+        "description": "A primitive way to tie things together",
         "type": "tool",
-        "tooltip": "A primitive way to tie things together",
         "fromStart": false,
         "icon": "vinerope.png",
         "unlocksMilestone": "FoundVineRope",
@@ -80,9 +80,9 @@
         "stackSize": 2
     },
     "flint": {
-        "name": "Flint",
+        "displayName": "Flint",
+        "description": "MISSING_DESCRIPTION",
         "type": "ingredient",
-        "tooltip": "MISSING_TOOLTIP",
         "fromStart": false,
         "icon": "flint.png",
         "unlocksMilestone": "FoundFlint",
@@ -98,9 +98,9 @@
         "stackSize": 2
     },
     "hatchet": {
-        "name": "Hatchet",
+        "displayName": "Hatchet",
+        "description": "Not quite an axe, but It'll be good enough",
         "type": "tool",
-        "tooltip": "Not quite an axe, but It'll be good enough",
         "fromStart": false,
         "icon": "hatchet.png",
         "unlocksMilestone": "FoundHatchet",

@@ -1,6 +1,6 @@
 let x = {
-    "name": "Name of the structure - gets displayed in the UI",
-    "tooltip": "Tooltip / description",
+    "displayName": "Name of the structure - gets displayed in the UI",
+    "description": "Tooltip / description",
     "fromStart": false, // whether the structure is available to the player from the start
     "icon": "image_file_name.png",
     "crafting": {

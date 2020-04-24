@@ -1,7 +1,7 @@
 {
     "basicshelter": {
-        "name": "Basic Shelter",
-        "tooltip": "A very basic shelter that will provide you with a warm place to sleep",
+        "displayName": "Basic Shelter",
+        "description": "A very basic shelter that will provide you with a warm place to sleep",
         "fromStart": false,
         "icon": "basicshelter.png",
         "crafting": {
@@ -20,8 +20,8 @@
         }
     },
     "shipwreck": {
-        "name": "Shipwreck",
-        "tooltip": "The wreck of an old yacht. Maybe they have something on board that could be useful?",
+        "displayName": "Shipwreck",
+        "description": "The wreck of an old yacht. Maybe they have something on board that could be useful?",
         "fromStart": false,
         "icon": "shipwreck.png",
         "crafting": {

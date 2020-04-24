@@ -7,7 +7,8 @@ Planned for the next releases:
     - Add modding support
         - Load mods from a folder
         - Mod API with functions to register items, structures, effects, scenes, dialogue, etc.
-    - Add pets
+    - Add pets (Toucan, Chimp, Frog, Seagull)
 
 
 > [CURRENT: 0.1.0]
+    - Two locations (Sunny Beach and Sunny Fields)

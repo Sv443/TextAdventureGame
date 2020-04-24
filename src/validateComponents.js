@@ -36,11 +36,11 @@ function validateComponents(components)
                 let obj = components[compType][objKey];
 
                 //#SECTION shared properties:
-                if(check(obj, "name", "string"))
-                    addWrong(compType, `"${objKey}" doesn't have a "name" property or it is of the wrong type`);
+                if(check(obj, "displayName", "string"))
+                    addWrong(compType, `"${objKey}" doesn't have a "displayName" property or it is of the wrong type`);
 
-                if(check(obj, "tooltip", "string"))
-                    addWrong(compType, `"${objKey}" doesn't have a "tooltip" property or it is of the wrong type`);
+                if(check(obj, "description", "string"))
+                    addWrong(compType, `"${objKey}" doesn't have a "description" property or it is of the wrong type`);
 
                 if(check(obj, "fromStart", "boolean"))
                     addWrong(compType, `"${objKey}" doesn't have a "fromStart" property or it is of the wrong type`);
