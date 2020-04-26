@@ -20,7 +20,7 @@ html, body {
 }
 
 html, button, input[type="checkbox"] {
-    /* cursor: var(--custom-cursor), auto; */
+    cursor: var(--custom-cursor), auto;
 }
 
 body:not(.transparent) {
