@@ -1,6 +1,7 @@
 const electron = require("electron");
 const path = require("path");
 const fs = require("fs");
+const jsl = require("svjsl");
 
 const settings = require("../settings");
 const debug = require("./debug");
@@ -84,8 +85,21 @@ function get(section, key)
     }
     else
     {
-        debug("UserSettings", "Get", `Loaded value "${userSettings[section][key]}" (from "${section}.${key}")`);
-        return userSettings[section][key];
+        let jsonified = "";
+        try
+        {
+            jsonified = JSON.stringify(userSettings[section][key]);
+
+            debug("UserSettings", "Get", `Loaded value "${jsonified}" (from "${section}.${key}")`);
+            return userSettings[section][key];
+        }
+        catch(err)
+        {
+            jsl.unused(err);
+
+            debug("UserSettings", "Get", `Loaded value "${userSettings[section][key]}" (from "${section}.${key}")`);
+            return userSettings[section][key];
+        }
     }
 }
 

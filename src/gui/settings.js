@@ -2,6 +2,7 @@ const { ipcRenderer, shell, remote } = require("electron");
 // const settings = require("../../settings");
 
 const userSettings = require("../userSettings");
+const HotkeyButton = require("./classes/HotkeyButton");
 
 let unsavedSettings = false; // TODO: implement settings cache
 
@@ -44,6 +45,8 @@ document.addEventListener("DOMContentLoaded", () => {
         ipcRenderer.send("setBounds", d.bounds);
         userSettings.set("general", "displayID", d.id);
     });
+
+    registerHotkeyButtons();
 });
 
 function switchTab(tabName)
@@ -85,6 +88,23 @@ function populateDisplayList()
 
         document.getElementById("displayList").appendChild(opt);
     });
+}
+
+function registerHotkeyButtons()
+{
+    let kb = {};
+
+    kb.openMap = new HotkeyButton(document.getElementById("keybindOpenMap"), {
+        key: (userSettings.get("keybinds", "openMap") || {key: "M"}).key
+    }, function(hotkey) {
+        userSettings.set("keybinds", "openMap", hotkey);
+    }, "openMap");
+
+    kb.openInventory = new HotkeyButton(document.getElementById("keybindOpenInventory"), {
+        key: (userSettings.get("keybinds", "openInventory") || {key: "I"}).key
+    }, function(hotkey) {
+        userSettings.set("keybinds", "openInventory", hotkey);
+    }, "openInventory");
 }
 
 module.exports = { meta };

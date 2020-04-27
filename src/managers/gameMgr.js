@@ -37,7 +37,7 @@ function isPaused()
 /**
  * Sets the pause state of the game.
  * Setting the game to paused will pause all events on the game window and main game process
- * @param {Boolean} paused 
+ * @param {Boolean} [paused=true] If left out or not a boolean, this will default to `true`
  * @returns {Boolean} Returns true, if the pause state was set, false if not
  */
 function setPaused(paused)
