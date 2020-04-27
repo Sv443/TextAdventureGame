@@ -38,6 +38,7 @@
   "dependencies": {
     "discord-game": "^0.1.1",
     "electron": "^8.2.3",
+    "node-machine-id": "^1.1.12",
     "semver": "^7.3.2",
     "svjsl": "^1.9.4",
     "xmlhttprequest": "^1.8.0"

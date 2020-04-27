@@ -10,6 +10,7 @@ const debug = require("./debug");
 const displayMgr = require("./managers/displayMgr");
 const updateCheck = require("./updateCheck");
 const rpcMgr = require("./managers/rpcMgr");
+const saveMgr = require("./managers/saveMgr");
 
 const settings = require("../settings");
 
@@ -19,6 +20,13 @@ const comp = Object.freeze({
     effects: require("../data/components/effects.json")
 });
 const inDebugger = jsl.inDebugger();
+
+
+if(!app)
+{
+    console.log(`\n\n${col.red}This is an Electron project${col.rst}\nAs such, you need to use "electron ." or "npm start" to start this app.\n\n`);
+    process.exit(1);
+}
 
 
 //#MARKER init
@@ -78,7 +86,7 @@ function init()
             let scr = new Object(screen);
             displayMgr.listDisplays(scr).forEach(d => {
                 if(d.id == dispID)
-                    displayMgr.setDisplay(dispID, scr);
+                    displayMgr.setDisplay(dispID, scr, win);
             });
         }
         catch(err)
@@ -131,6 +139,7 @@ function initAll()
                     debug("InitAll", "UpdateCheck", `${col.green}${settings.info.name} is up to date${col.rst} - Message: ${updateInfo.message}`);
 
                 refreshDisplays();
+                saveMgr.init();
                 return init();
             })/*.catch(err => initError("UpdateCheck", err))*/;
         })/*.catch(err => initError("ElectronInit", err))*/;
@@ -160,7 +169,7 @@ function refreshDisplays()
 //#MARKER IPC
 
 ipcMain.on("exit", () => {
-    debug("IpcMain", "Exit", "IpcMain got exit command - exiting application...");
+    debug("IpcMain", "Exit", "Got exit command - exiting application...");
     if(process.platform !== "darwin")
         return app.quit();
 });
