@@ -9,14 +9,18 @@ const meta = {
     windowName: "Game"
 };
 
-window.domWasLoaded = false;
+
+if(remote == undefined) // if not in renderer process, cancel loading
+    return;
+
+document.domWasLoaded = false;
 
 document.addEventListener("DOMContentLoaded", () => {
     debug("Game", "Init", `Loading from context ${remote ? "Renderer" : "Main"}`);
     
-    if(window.domWasLoaded) // event was firing twice for some reason and this is only a very crude workaround
+    if(document.domWasLoaded) // event was firing twice for some reason and this is only a very crude workaround
         return;
-    window.domWasLoaded = true;
+    document.domWasLoaded = true;
 
     debug("Game", "DOM", "DOM is ready");
     

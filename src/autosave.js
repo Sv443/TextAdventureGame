@@ -1,5 +1,5 @@
 const jsl = require("svjsl");
-const save = require("./save");
+const saveMgr = require("./managers/saveMgr");
 
 /**
  * Creates an autosave and saves it to save slot 0
@@ -7,8 +7,10 @@ const save = require("./save");
 function create()
 {
     return new Promise((resolve, reject) => {
+        jsl.unused(reject);
+
         let saveData = {};
-        save.save(0, saveData);
+        saveMgr.save(0, saveData);
 
         return resolve();
     });
@@ -17,7 +19,9 @@ function create()
 function load()
 {
     return new Promise((resolve, reject) => {
-        let loadData = save.load(0);
+        jsl.unused(reject);
+
+        let loadData = saveMgr.load(0);
         jsl.unused(loadData);
 
         return resolve();

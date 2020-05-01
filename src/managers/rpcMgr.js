@@ -1,3 +1,4 @@
+const jsl = require("svjsl");
 // const Discord = require("discord-game");
 
 // const settings = require("../../settings");
@@ -41,7 +42,7 @@ function init()
  */
 function update(data)
 {
-
+    jsl.unused(data);
 }
 
 module.exports = { init, update };

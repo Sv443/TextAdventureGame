@@ -1,5 +1,5 @@
 const jsl = require("svjsl");
-const componentMgr = require("../componentMgr");
+const componentMgr = require("../managers/componentMgr");
 
 const Item = require("./Item");
 
